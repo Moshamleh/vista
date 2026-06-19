@@ -4,7 +4,7 @@ import Image from "next/image"
 import { motion } from "framer-motion"
 import { ArrowDown } from "lucide-react"
 
-const words = ["Clay", "is", "a", "global", "branding", "and", "UX", "design", "agency"]
+const words = ["Vista", "is", "a", "global", "branding", "and", "UX", "design", "agency"]
 
 export function Hero() {
   return (

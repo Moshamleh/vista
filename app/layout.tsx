@@ -13,9 +13,9 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: 'Clay — Global Branding & UX Design Agency',
+  title: 'Vista — Global Branding & UX Design Agency',
   description:
-    'Clay is a global branding and UX design agency. We build transformative digital experiences for the world’s leading brands by blending AI, design, and technology.',
+    'Vista is a global branding and UX design agency. We build transformative digital experiences for the world’s leading brands by blending AI, design, and technology.',
   generator: 'v0.app',
   icons: {
     icon: [

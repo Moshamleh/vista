@@ -24,16 +24,16 @@ export function SiteFooter() {
                 <span className="absolute inset-0 rounded-full border-2 border-foreground" />
                 <span className="absolute inset-0 rounded-full bg-foreground [clip-path:inset(0_50%_0_0)]" />
               </span>
-              <span className="font-heading text-2xl font-medium tracking-tight text-foreground">clay</span>
+              <span className="font-heading text-2xl font-medium tracking-tight text-foreground">vista</span>
             </div>
             <p className="mt-6 max-w-xs text-base leading-relaxed text-muted-foreground">
               A global branding and UX design agency building transformative digital experiences.
             </p>
             <a
-              href="mailto:hello@clay.global"
+              href="mailto:hello@vista.global"
               className="mt-6 inline-block font-heading text-lg font-medium text-foreground underline-offset-4 hover:underline"
             >
-              hello@clay.global
+              hello@vista.global
             </a>
           </div>
 
@@ -61,7 +61,7 @@ export function SiteFooter() {
         </div>
 
         <div className="mt-16 flex flex-col items-start justify-between gap-4 border-t border-border pt-8 text-sm text-muted-foreground sm:flex-row sm:items-center">
-          <p>© {new Date().getFullYear()} Clay Global. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Vista Global. All rights reserved.</p>
           <div className="flex gap-6">
             <a href="#" className="hover:text-foreground">
               Privacy

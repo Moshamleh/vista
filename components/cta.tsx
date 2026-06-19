@@ -35,7 +35,7 @@ export function CTA() {
         </p>
         <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
           <a
-            href="mailto:hello@clay.global"
+            href="mailto:hello@vista.global"
             className="inline-flex items-center gap-2 rounded-full bg-foreground px-8 py-4 text-base font-medium text-background transition-transform hover:scale-[1.03]"
           >
             Start a project
