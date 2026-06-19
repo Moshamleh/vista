@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Menu, X } from "lucide-react"
+import { TypewriterWordmark } from "./typewriter-wordmark"
 
 const NAV = [
   { label: "Work", href: "#work" },
@@ -19,9 +20,7 @@ function Logo() {
         <span className="absolute inset-0 rounded-full border-2 border-foreground" />
         <span className="absolute inset-0 rounded-full bg-foreground [clip-path:inset(0_50%_0_0)]" />
       </span>
-      <span className="font-heading text-2xl font-medium tracking-tight text-foreground">
-        vista <span className="text-muted-foreground">by lara</span>
-      </span>
+      <TypewriterWordmark />
     </a>
   )
 }
