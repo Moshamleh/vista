@@ -31,17 +31,26 @@ function Strip() {
 
 export function Clients() {
   return (
-    <section id="clients" className="border-y border-border bg-card py-20 sm:py-24">
+    <section
+      id="clients"
+      aria-labelledby="clients-heading"
+      className="border-y border-border bg-card py-20 sm:py-24"
+    >
       <Reveal className="mx-auto max-w-7xl px-5 sm:px-8">
-        <p className="text-center text-sm font-medium uppercase tracking-[0.2em] text-muted-foreground">
+        <h2
+          id="clients-heading"
+          className="text-center text-sm font-medium uppercase tracking-[0.2em] text-muted-foreground"
+        >
           Trusted by category leaders
-        </p>
+        </h2>
       </Reveal>
 
       <div className="relative mt-12 overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
         <div className="flex w-max animate-marquee">
           <Strip />
-          <Strip />
+          <div aria-hidden>
+            <Strip />
+          </div>
         </div>
       </div>
 

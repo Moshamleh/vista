@@ -51,7 +51,7 @@ export function SiteHeader() {
       >
         <Logo />
 
-        <nav className="hidden items-center gap-9 md:flex">
+        <nav aria-label="Primary" className="hidden items-center gap-9 md:flex">
           {NAV.map((item) => (
             <a
               key={item.label}
@@ -84,6 +84,7 @@ export function SiteHeader() {
       <AnimatePresence>
         {open && (
           <motion.nav
+            aria-label="Mobile"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}

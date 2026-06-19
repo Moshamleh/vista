@@ -2,6 +2,7 @@ import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
 import { Space_Grotesk, Inter } from 'next/font/google'
 import { siteConfig } from '@/lib/site'
+import { StructuredData } from '@/components/structured-data'
 import './globals.css'
 
 const spaceGrotesk = Space_Grotesk({
@@ -103,6 +104,9 @@ export default function RootLayout({
       lang="en"
       className={`${spaceGrotesk.variable} ${inter.variable} bg-background`}
     >
+      <head>
+        <StructuredData />
+      </head>
       <body className="font-sans antialiased">
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}
