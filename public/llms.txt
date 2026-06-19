@@ -1,39 +1,30 @@
-# Vista
+# llms.txt - Vista by Lara
+# https://vistabylara.com/llms.txt
 
-> Vista is a Dubai-based branding and UX design agency. We build transformative digital experiences for ambitious businesses across the UAE, Saudi Arabia, and the wider GCC by blending strategy, design, engineering, and AI.
-
-Vista partners with regional teams from first principles through launch, and stays close afterward to refine experiences with data and craft. Strategy, design, and engineering live under one roof.
-
-- Founded: 2011
-- Type: Branding and UX design agency (professional service)
-- Location: Dubai, United Arab Emirates
-- Markets served: UAE, Saudi Arabia, Qatar, Kuwait, Bahrain, Oman
-- Contact: hello@vista.global
+## About
+Vista by Lara is a Dubai-based digital growth agency founded by Dr. Lara Eros Farbactian in 2020. We specialize in AEO (Answer Engine Optimization), Shopify ecommerce development, and lead generation for UAE businesses. We are the first AEO agency in Dubai, making brands appear in ChatGPT, Perplexity, and Gemini search answers - not just traditional Google rankings.
 
 ## Services
-
-- [Branding](https://vista.global/#services): Brand strategy, identity systems, naming, and visual languages that make category leaders unmistakable.
-- [Digital Products](https://vista.global/#services): End-to-end product design — research, UX, and polished UI for apps used by millions.
-- [Websites](https://vista.global/#services): Editorial, conversion-driven marketing sites and immersive web experiences.
-- [Development](https://vista.global/#services): Production-grade engineering across web and mobile on a modern, scalable stack.
-- [Content](https://vista.global/#services): Story, copy, and art direction that give brands a distinct, consistent voice.
-- [Generative AI](https://vista.global/#services): Blending AI into design and product workflows to build smarter, more adaptive experiences.
-
-## Selected Work
-
-- [Oasis Living](https://vista.global/#work): Brand identity and e-commerce experience for a Dubai home and lifestyle brand.
-- [Al Safa Grill](https://vista.global/#work): Brand identity and ordering app for a Dubai Marina restaurant.
-- [Palm Horizon Properties](https://vista.global/#work): Web platform for a Business Bay real estate agency.
-- [Arabian Cloud Solutions](https://vista.global/#work): Product design for a Dubai Internet City cloud technology company.
+- AEO (Answer Engine Optimization) for AI search platforms
+- Shopify store development and conversion optimization
+- SEO and GEO (Generative Engine Optimization)
+- Lead generation for medical, fashion, interior design, and consumer brands
+- Bilingual Arabic and English content strategy
+- Google Business Profile optimization
 
 ## Key Facts
-
-- 14+ years crafting digital products.
-- 320+ projects shipped across the region.
-- 48 awards for design and innovation.
-- 60M+ people reached by Vista's work.
+- Location: Dubai, UAE (Emirates Tower)
+- Founded: 2020
+- Team size: 10-49
+- Pricing: $100-$149/hour, projects from $5,000
+- Clients: Medical clinics, fashion brands, interior designers, consumer product companies
+- Recognition: Noble Business Winner 2025, featured in MENAFN, Tech Africa News, Zawya, International Business Magazine, Yahoo Finance
 
 ## Contact
+- Email: solution@vistabylara.com
+- Phone/WhatsApp: +971 50 799 4292
+- Instagram: @vistabylara
+- Website: https://vistabylara.com
 
-- Email: hello@vista.global
-- Start a project: https://vista.global/#contact
+## Founder's Bio
+Dr. Lara Eros Farbactian is an AI strategist and digital integrity advocate. She has been featured in MENAFN, Tech Africa News, Zawya, and International Business Magazine for her work on ethical AI-driven growth and AEO for UAE businesses. Dr. Lara specializes in building trust-based digital frameworks that replace manipulative SEO with sustainable revenue growth.
