@@ -4,14 +4,18 @@ import { Reveal } from "@/components/reveal"
 import { ArrowRight } from "lucide-react"
 
 const CLIENTS = [
-  "coinbase",
-  "Uber",
-  "SONY",
-  "slack",
-  "amazon",
-  "Pinterest",
-  "Mastercard",
-  "Spotify",
+  "Al Safa Grill",
+  "Falcon Gulf Logistics",
+  "Al Zahra Legal",
+  "Najd Construction",
+  "Palm Horizon Properties",
+  "Al Noor Family Clinic",
+  "Desert Pearl Interiors",
+  "Elite Auto Care",
+  "Sapphire Beauty Lounge",
+  "Oasis Living",
+  "Crescent Financial",
+  "Arabian Cloud Solutions",
 ]
 
 function Strip() {
@@ -20,7 +24,7 @@ function Strip() {
       {CLIENTS.map((name) => (
         <span
           key={name}
-          className="font-heading text-2xl font-semibold tracking-tight text-muted-foreground/60 sm:text-3xl"
+          className="whitespace-nowrap font-heading text-2xl font-semibold tracking-tight text-muted-foreground/60 sm:text-3xl"
         >
           {name}
         </span>

@@ -14,17 +14,17 @@ export const FAQS: FaqItem[] = [
   {
     question: "What does Vista do?",
     answer:
-      "Vista is a global branding and UX design agency. We offer brand strategy and identity, digital product design, website design, software development, content and motion, and generative AI — combining design and engineering under one roof.",
+      "Vista is a Dubai-based branding and UX design agency. We offer brand strategy and identity, digital product design, website design, software development, content and motion, and generative AI — combining design and engineering under one roof.",
   },
   {
     question: "Who does Vista work with?",
     answer:
-      "We partner with early-stage startups, growth-stage companies, and large enterprises worldwide, across fintech, e-commerce, SaaS, and consumer brands. Engagements range from focused project sprints to ongoing retainers.",
+      "We partner with startups, growth-stage companies, and established enterprises across the UAE, Saudi Arabia, and the wider GCC — spanning hospitality, real estate, healthcare, logistics, professional services, retail, and technology. Engagements range from focused project sprints to ongoing retainers.",
   },
   {
     question: "Where is Vista located?",
     answer:
-      "Vista is a remote-first, globally distributed agency. Our teams collaborate across North America, Europe, and Asia-Pacific, so we can work alongside clients in nearly any time zone.",
+      "Vista is based in Dubai, United Arab Emirates, and works with clients across the UAE, Saudi Arabia, and the wider GCC. Our team collaborates in-region and remotely, so we stay aligned with your timeline and time zone.",
   },
   {
     question: "How much does a project with Vista cost?",

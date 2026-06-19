@@ -41,14 +41,21 @@ const SERVICES = [
 ]
 
 const WORK = [
-  { name: "Meem Banking", description: "Fintech product design for a digital banking experience." },
-  { name: "Joe Coffee", description: "Branding and loyalty app design for a specialty coffee brand." },
-  { name: "Atelier Mode", description: "E-commerce web design for a fashion house." },
-  { name: "Northwind Analytics", description: "SaaS design system and product design for an analytics platform." },
+  { name: "Oasis Living", description: "Brand identity and e-commerce experience for a Dubai home and lifestyle brand." },
+  { name: "Al Safa Grill", description: "Brand identity and ordering app for a Dubai Marina restaurant." },
+  {
+    name: "Palm Horizon Properties",
+    description: "Web platform and product design for a Business Bay real estate agency.",
+  },
+  {
+    name: "Arabian Cloud Solutions",
+    description: "Product design for a Dubai Internet City cloud technology company.",
+  },
 ]
 
 export function StructuredData() {
-  const { url, name, legalName, description, shortDescription, email, foundingYear, sameAs, ogImage } = siteConfig
+  const { url, name, legalName, description, shortDescription, email, foundingYear, sameAs, ogImage, address, areaServed } =
+    siteConfig
 
   const orgId = `${url}/#organization`
   const siteId = `${url}/#website`
@@ -83,10 +90,13 @@ export function StructuredData() {
           "Design Systems",
           "Generative AI",
         ],
-        areaServed: {
-          "@type": "Place",
-          name: "Worldwide",
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: address.locality,
+          addressRegion: address.region,
+          addressCountry: address.countryCode,
         },
+        areaServed: areaServed.map((a) => ({ "@type": "Country", name: a })),
         contactPoint: {
           "@type": "ContactPoint",
           email,

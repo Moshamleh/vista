@@ -9,13 +9,22 @@ export const siteConfig = {
   legalName: "Vista Global",
   // Canonical production URL. Override via NEXT_PUBLIC_SITE_URL in your env.
   url: (process.env.NEXT_PUBLIC_SITE_URL ?? "https://vista.global").replace(/\/$/, ""),
-  shortDescription: "Global branding and UX design agency.",
+  shortDescription: "Dubai-based branding and UX design agency serving the UAE and GCC.",
   description:
-    "Vista is a global branding and UX design agency. We build transformative digital experiences for the world's leading brands by blending strategy, design, engineering, and AI.",
-  tagline: "Branding, UX & technology for the world's leading brands",
+    "Vista is a Dubai-based branding and UX design agency. We build transformative digital experiences for ambitious businesses across the UAE, Saudi Arabia, and the wider GCC by blending strategy, design, engineering, and AI.",
+  tagline: "Branding, UX & technology for the region's most ambitious brands",
   email: "hello@vista.global",
-  locale: "en_US",
+  locale: "en_AE",
   foundingYear: 2011,
+  // Primary studio location — strengthens local SEO and entity recognition.
+  address: {
+    locality: "Dubai",
+    region: "Dubai",
+    country: "United Arab Emirates",
+    countryCode: "AE",
+  },
+  // Markets served, used for areaServed in structured data.
+  areaServed: ["United Arab Emirates", "Saudi Arabia", "Qatar", "Kuwait", "Bahrain", "Oman"],
   // Reachable from the same legal entity — strengthens entity recognition for GEO.
   sameAs: [
     "https://www.linkedin.com/company/vista-global",
@@ -26,16 +35,16 @@ export const siteConfig = {
   ],
   twitterHandle: "@vistaglobal",
   keywords: [
-    "branding agency",
-    "UX design agency",
-    "product design agency",
-    "digital design studio",
-    "web design agency",
-    "design and development agency",
-    "generative AI design",
-    "brand strategy",
+    "branding agency Dubai",
+    "UX design agency UAE",
+    "web design agency Dubai",
+    "product design agency UAE",
+    "digital agency Abu Dhabi",
+    "design and development agency GCC",
+    "brand strategy Dubai",
     "design systems",
-    "enterprise UX",
+    "generative AI design",
+    "Saudi Arabia design agency",
   ],
   ogImage: "/og-image.png",
 } as const

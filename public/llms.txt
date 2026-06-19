@@ -1,12 +1,13 @@
 # Vista
 
-> Vista is a global branding and UX design agency. We build transformative digital experiences for the world's leading brands by blending strategy, design, engineering, and AI.
+> Vista is a Dubai-based branding and UX design agency. We build transformative digital experiences for ambitious businesses across the UAE, Saudi Arabia, and the wider GCC by blending strategy, design, engineering, and AI.
 
-Vista partners with ambitious teams from first principles through launch, and stays close afterward to refine experiences with data and craft. Strategy, design, and engineering live under one roof.
+Vista partners with regional teams from first principles through launch, and stays close afterward to refine experiences with data and craft. Strategy, design, and engineering live under one roof.
 
 - Founded: 2011
 - Type: Branding and UX design agency (professional service)
-- Reach: Global
+- Location: Dubai, United Arab Emirates
+- Markets served: UAE, Saudi Arabia, Qatar, Kuwait, Bahrain, Oman
 - Contact: hello@vista.global
 
 ## Services
@@ -20,15 +21,15 @@ Vista partners with ambitious teams from first principles through launch, and st
 
 ## Selected Work
 
-- [Meem Banking](https://vista.global/#work): Fintech product design.
-- [Joe Coffee](https://vista.global/#work): Branding and loyalty app.
-- [Atelier Mode](https://vista.global/#work): E-commerce web experience.
-- [Northwind Analytics](https://vista.global/#work): SaaS design system.
+- [Oasis Living](https://vista.global/#work): Brand identity and e-commerce experience for a Dubai home and lifestyle brand.
+- [Al Safa Grill](https://vista.global/#work): Brand identity and ordering app for a Dubai Marina restaurant.
+- [Palm Horizon Properties](https://vista.global/#work): Web platform for a Business Bay real estate agency.
+- [Arabian Cloud Solutions](https://vista.global/#work): Product design for a Dubai Internet City cloud technology company.
 
 ## Key Facts
 
 - 14+ years crafting digital products.
-- 320+ projects shipped worldwide.
+- 320+ projects shipped across the region.
 - 48 awards for design and innovation.
 - 60M+ people reached by Vista's work.
 

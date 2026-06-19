@@ -7,27 +7,27 @@ import { Reveal } from "@/components/reveal"
 
 const WORK = [
   {
-    title: "Meem Banking",
-    category: "Fintech · Product Design",
-    image: "/work-fintech.png",
+    title: "Oasis Living",
+    category: "E-commerce · Brand & Web · Dubai",
+    image: "/work-oasis.png",
     span: "lg:col-span-7",
   },
   {
-    title: "Joe Coffee",
-    category: "Branding · Loyalty App",
-    image: "/work-loyalty.png",
+    title: "Al Safa Grill",
+    category: "Hospitality · Brand & App · Dubai Marina",
+    image: "/work-restaurant.png",
     span: "lg:col-span-5",
   },
   {
-    title: "Atelier Mode",
-    category: "E-commerce · Web",
-    image: "/work-ecommerce.png",
+    title: "Palm Horizon Properties",
+    category: "Real Estate · Web Platform · Business Bay",
+    image: "/work-realestate.png",
     span: "lg:col-span-5",
   },
   {
-    title: "Northwind Analytics",
-    category: "SaaS · Design System",
-    image: "/work-saas.png",
+    title: "Arabian Cloud Solutions",
+    category: "Technology · Product Design · Dubai Internet City",
+    image: "/work-cloud.png",
     span: "lg:col-span-7",
   },
 ]

@@ -17,7 +17,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: `${siteConfig.name} — Global Branding & UX Design Agency`,
+    default: `${siteConfig.name} — Dubai Branding & UX Design Agency`,
     template: `%s — ${siteConfig.name}`,
   },
   description: siteConfig.description,
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     locale: siteConfig.locale,
     url: siteConfig.url,
     siteName: siteConfig.name,
-    title: `${siteConfig.name} — Global Branding & UX Design Agency`,
+    title: `${siteConfig.name} — Dubai Branding & UX Design Agency`,
     description: siteConfig.description,
     images: [
       {
@@ -60,7 +60,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: `${siteConfig.name} — Global Branding & UX Design Agency`,
+    title: `${siteConfig.name} — Dubai Branding & UX Design Agency`,
     description: siteConfig.description,
     site: siteConfig.twitterHandle,
     creator: siteConfig.twitterHandle,

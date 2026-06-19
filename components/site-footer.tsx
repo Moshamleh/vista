@@ -27,7 +27,7 @@ export function SiteFooter() {
               <span className="font-heading text-2xl font-medium tracking-tight text-foreground">vista</span>
             </div>
             <p className="mt-6 max-w-xs text-base leading-relaxed text-muted-foreground">
-              A global branding and UX design agency building transformative digital experiences.
+              A Dubai-based branding and UX design agency building transformative digital experiences across the UAE and GCC.
             </p>
             <a
               href="mailto:hello@vista.global"
