@@ -14,12 +14,14 @@ const NAV = [
 
 function Logo() {
   return (
-    <a href="#top" className="flex items-center gap-2.5" aria-label="Vista home">
+    <a href="#top" className="flex items-center gap-2.5" aria-label="Vista by Lara home">
       <span className="relative inline-flex h-7 w-7 items-center justify-center">
         <span className="absolute inset-0 rounded-full border-2 border-foreground" />
         <span className="absolute inset-0 rounded-full bg-foreground [clip-path:inset(0_50%_0_0)]" />
       </span>
-      <span className="font-heading text-2xl font-medium tracking-tight text-foreground">vista</span>
+      <span className="font-heading text-2xl font-medium tracking-tight text-foreground">
+        vista <span className="text-muted-foreground">by lara</span>
+      </span>
     </a>
   )
 }

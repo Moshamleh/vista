@@ -14,7 +14,6 @@ const STATS = [
   { value: 14, suffix: "+", label: "Years crafting digital products" },
   { value: 320, suffix: "+", label: "Projects shipped worldwide" },
   { value: 6, suffix: " mo", label: "To measurable results" },
-  { value: 60, suffix: "M+", label: "People reached by our work" },
 ]
 
 function Counter({ value, suffix }: { value: number; suffix: string }) {

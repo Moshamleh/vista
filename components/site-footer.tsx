@@ -24,7 +24,9 @@ export function SiteFooter() {
                 <span className="absolute inset-0 rounded-full border-2 border-foreground" />
                 <span className="absolute inset-0 rounded-full bg-foreground [clip-path:inset(0_50%_0_0)]" />
               </span>
-              <span className="font-heading text-2xl font-medium tracking-tight text-foreground">vista</span>
+              <span className="font-heading text-2xl font-medium tracking-tight text-foreground">
+                vista <span className="text-muted-foreground">by lara</span>
+              </span>
             </div>
             <p className="mt-6 max-w-xs text-base leading-relaxed text-muted-foreground">
               A Dubai-based branding and UX design agency building transformative digital experiences across the UAE and GCC.

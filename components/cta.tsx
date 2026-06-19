@@ -36,9 +36,9 @@ export function CTA() {
         <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
           <a
             href="mailto:hello@vista.global"
-            className="inline-flex items-center gap-2 rounded-full bg-foreground px-8 py-4 text-base font-medium text-background transition-transform hover:scale-[1.03]"
+            className="inline-flex items-center gap-2 rounded-full bg-emerald-600 px-8 py-4 text-base font-medium text-white transition-transform hover:scale-[1.03] hover:bg-emerald-700"
           >
-            Start a project
+            Start today
             <ArrowRight className="h-4 w-4" />
           </a>
           <a
