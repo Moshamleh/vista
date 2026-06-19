@@ -9,12 +9,12 @@ import { FAQS } from "@/lib/faq"
 function FaqRow({ question, answer, defaultOpen }: { question: string; answer: string; defaultOpen: boolean }) {
   const [open, setOpen] = useState(defaultOpen)
   return (
-    <div className="border-t border-border last:border-b">
+    <div className="border-t border-border/20 last:border-b">
       <h3>
         <button
           type="button"
           onClick={() => setOpen((v) => !v)}
-          className="flex w-full items-center justify-between gap-6 py-6 text-left"
+          className="flex w-full items-center justify-between gap-6 py-8 text-left"
           aria-expanded={open}
         >
           <span className="font-heading text-xl font-medium tracking-tight text-foreground sm:text-2xl">
@@ -38,7 +38,7 @@ function FaqRow({ question, answer, defaultOpen }: { question: string; answer: s
             transition={{ duration: 0.4, ease: "easeInOut" }}
             className="overflow-hidden"
           >
-            <p className="max-w-2xl pb-6 text-lg leading-relaxed text-muted-foreground">{answer}</p>
+            <p className="max-w-2xl pb-6 text-lg leading-relaxed text-muted-foreground/80">{answer}</p>
           </motion.div>
         )}
       </AnimatePresence>
@@ -48,19 +48,19 @@ function FaqRow({ question, answer, defaultOpen }: { question: string; answer: s
 
 export function Faq() {
   return (
-    <section id="faq" aria-labelledby="faq-heading" className="mx-auto max-w-7xl px-5 py-24 sm:px-8 sm:py-32">
+    <section id="faq" aria-labelledby="faq-heading" className="mx-auto max-w-7xl px-5 py-28 sm:px-8 sm:py-36">
       <div className="grid gap-12 lg:grid-cols-[0.9fr_1.4fr] lg:gap-20">
         <Reveal>
-          <p className="text-sm font-medium uppercase tracking-[0.2em] text-muted-foreground">FAQ</p>
+          <p className="text-sm font-medium uppercase tracking-[0.2em] text-accent">FAQ</p>
           <h2
             id="faq-heading"
-            className="mt-6 font-heading text-3xl font-medium leading-tight tracking-tight text-balance text-foreground sm:text-5xl"
+            className="mt-6 font-heading text-3xl font-medium leading-tight tracking-tight text-foreground sm:text-5xl"
           >
             Questions, answered
           </h2>
-          <p className="mt-6 max-w-md text-lg leading-relaxed text-muted-foreground">
+          <p className="mt-6 max-w-md text-lg leading-relaxed text-muted-foreground/80">
             The essentials about working with Vista. Have something else in mind?{" "}
-            <a href="mailto:hello@vista.global" className="text-foreground underline underline-offset-4">
+            <a href="mailto:hello@vista.global" className="text-accent underline underline-offset-4 hover:text-accent/90">
               Ask us directly
             </a>
             .

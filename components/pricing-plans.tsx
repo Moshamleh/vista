@@ -78,7 +78,7 @@ function PlanCard({ plan, annual }: { plan: (typeof PLANS)[number]; annual: bool
       <div
         className={`relative flex h-full flex-col rounded-3xl border p-8 transition-shadow duration-300 hover:shadow-lg sm:p-10 ${
           plan.highlight
-            ? "border-foreground bg-foreground text-background"
+            ? "border-accent bg-accent text-background shadow-[0_30px_80px_-50px_rgba(87,217,255,0.35)]"
             : "border-border bg-card text-foreground"
         }`}
       >
@@ -134,7 +134,7 @@ function PlanCard({ plan, annual }: { plan: (typeof PLANS)[number]; annual: bool
           className={`mt-10 inline-flex w-full items-center justify-center rounded-full px-7 py-3.5 text-base font-medium transition-transform hover:scale-[1.02] ${
             plan.highlight
               ? "bg-background text-foreground hover:bg-background/90"
-              : "bg-foreground text-background"
+              : "bg-accent text-background hover:bg-accent/90"
           }`}
         >
           {plan.cta}
@@ -175,13 +175,13 @@ export function PricingPlans() {
                 aria-checked={annual}
                 onClick={() => setAnnual((v) => !v)}
                 className={`relative inline-flex h-6 w-11 items-center rounded-full border transition-colors ${
-                  annual ? "border-foreground bg-foreground" : "border-border bg-secondary"
+                  annual ? "border-accent bg-accent/20" : "border-border bg-[#101526]"
                 }`}
               >
                 <motion.span
                   layout
                   transition={{ type: "spring", stiffness: 500, damping: 35 }}
-                  className={`inline-block h-4 w-4 rounded-full ${annual ? "bg-background" : "bg-foreground"}`}
+                  className={`inline-block h-4 w-4 rounded-full ${annual ? "bg-accent" : "bg-accent/70"}`}
                   style={{ marginLeft: annual ? "calc(100% - 1.25rem)" : "0.125rem" }}
                 />
               </button>
@@ -212,14 +212,14 @@ export function PricingPlans() {
       </Reveal>
 
       <Reveal delay={0.1}>
-        <div className="mt-10 divide-y divide-border rounded-3xl border border-border bg-card overflow-hidden">
+        <div className="mt-10 divide-y divide-border rounded-3xl border border-border bg-[#0d111f] overflow-hidden">
           {ADDONS.map((addon) => (
             <div
               key={addon.name}
-              className="flex items-center justify-between gap-6 px-8 py-5 transition-colors hover:bg-secondary/50"
+              className="flex items-center justify-between gap-6 px-8 py-5 transition-colors hover:bg-[#101526]"
             >
               <span className="font-medium text-foreground">{addon.name}</span>
-              <span className="shrink-0 rounded-full border border-border px-4 py-1.5 text-sm font-medium text-muted-foreground">
+              <span className="shrink-0 rounded-full border border-accent/15 bg-[#0c1221] px-4 py-1.5 text-sm font-medium text-accent">
                 {addon.price}
               </span>
             </div>

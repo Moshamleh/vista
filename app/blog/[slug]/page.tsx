@@ -58,12 +58,12 @@ export default async function BlogArticlePage({ params }: BlogArticlePageProps) 
         <article className="mx-auto max-w-7xl px-5 pb-20 pt-32 sm:px-8 sm:pb-28 sm:pt-40">
           <div className="grid gap-12 lg:grid-cols-[0.32fr_0.68fr]">
             <aside className="lg:sticky lg:top-28 lg:h-fit">
-              <a href="/blog" className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground">
+              <a href="/blog" className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-accent">
                 <ArrowLeft className="h-4 w-4" />
                 Back to blog
               </a>
-              <div className="mt-10 rounded-3xl border border-border bg-card p-6">
-                <p className="text-sm font-medium uppercase tracking-[0.2em] text-muted-foreground">Article</p>
+              <div className="mt-10 rounded-3xl border border-accent/15 bg-[#0d111f] p-6">
+                <p className="text-sm font-medium uppercase tracking-[0.2em] text-accent">Article</p>
                 <dl className="mt-6 space-y-5 text-sm">
                   <div>
                     <dt className="text-muted-foreground">Category</dt>
@@ -76,7 +76,7 @@ export default async function BlogArticlePage({ params }: BlogArticlePageProps) 
                   <div>
                     <dt className="text-muted-foreground">Reading time</dt>
                     <dd className="mt-1 inline-flex items-center gap-2 font-medium text-foreground">
-                      <Clock className="h-4 w-4" />
+                      <Clock className="h-4 w-4 text-accent" />
                       {post.readTime}
                     </dd>
                   </div>
@@ -87,7 +87,7 @@ export default async function BlogArticlePage({ params }: BlogArticlePageProps) 
             <div>
               <header>
                 <div className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
-                  <span className="rounded-full border border-border bg-card px-4 py-1.5 text-foreground">{post.category}</span>
+                  <span className="rounded-full border border-accent/20 bg-[#0f1321] px-4 py-1.5 text-accent">{post.category}</span>
                   <span>{post.date}</span>
                 </div>
                 <h1 className="mt-8 max-w-4xl font-heading text-5xl font-medium leading-tight tracking-tight text-balance text-foreground sm:text-7xl">
@@ -98,7 +98,7 @@ export default async function BlogArticlePage({ params }: BlogArticlePageProps) 
 
               {post.image && (
                 <figure className="mt-12">
-                  <div className="relative aspect-[2/1] overflow-hidden rounded-3xl border border-border bg-card">
+                  <div className="relative aspect-[2/1] overflow-hidden rounded-3xl border border-accent/10 bg-[#0d111f] shadow-[0_30px_70px_-48px_rgba(87,217,255,0.25)]">
                     <Image
                       src={post.image}
                       alt={post.imageAlt ?? post.title}
@@ -112,7 +112,7 @@ export default async function BlogArticlePage({ params }: BlogArticlePageProps) 
                 </figure>
               )}
 
-              <div className="mt-14 rounded-3xl border border-border bg-card p-7 sm:p-10">
+              <div className="mt-14 rounded-3xl border border-accent/10 bg-[#0d111f] p-7 sm:p-10 shadow-[0_30px_70px_-48px_rgba(87,217,255,0.18)]">
                 <div className="space-y-7 text-lg leading-relaxed text-foreground/85 sm:text-xl">
                   {post.body.map((block, index) => {
                     if (typeof block === "string") return <p key={`${index}-${block}`}>{block}</p>

@@ -11,7 +11,7 @@ export function RadialPattern() {
     <section aria-labelledby="radial-pattern-heading" className="overflow-hidden">
       <div className="relative h-[420px] w-full sm:h-[560px] lg:h-[720px]">
         <div className="pointer-events-none absolute inset-x-0 top-10 z-10 px-5 text-center text-white mix-blend-difference sm:top-14 sm:px-8">
-          <p className="mb-3 text-xs font-medium uppercase tracking-[0.25em] sm:text-sm">
+          <p className="mb-3 text-xs font-medium uppercase tracking-[0.25em] text-accent sm:text-sm">
             Interactive design
           </p>
           <h2

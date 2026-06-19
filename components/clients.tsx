@@ -24,7 +24,7 @@ function Strip() {
       {CLIENTS.map((name) => (
         <span
           key={name}
-          className="whitespace-nowrap font-heading text-2xl font-semibold tracking-tight text-muted-foreground/60 sm:text-3xl"
+          className="whitespace-nowrap font-heading text-2xl font-semibold tracking-tight text-muted-foreground/70 sm:text-3xl"
         >
           {name}
         </span>
@@ -38,12 +38,12 @@ export function Clients() {
     <section
       id="clients"
       aria-labelledby="clients-heading"
-      className="border-y border-border bg-card py-20 sm:py-24"
+      className="border-y border-border/20 bg-[#0d111f] py-28 sm:py-32"
     >
       <Reveal className="mx-auto max-w-7xl px-5 sm:px-8">
         <h2
           id="clients-heading"
-          className="text-center text-sm font-medium uppercase tracking-[0.2em] text-muted-foreground"
+          className="text-center text-sm font-medium uppercase tracking-[0.2em] text-accent"
         >
           Trusted by category leaders
         </h2>
@@ -58,12 +58,12 @@ export function Clients() {
         </div>
       </div>
 
-      <div className="mt-12 text-center">
+      <div className="mt-14 text-center">
         <a
           href="#work"
-          className="inline-flex items-center gap-2 text-base font-medium text-foreground"
+          className="inline-flex items-center gap-2 text-base font-medium text-accent transition-colors hover:text-accent/90"
         >
-          <span className="border-b border-foreground/30 pb-0.5 transition-colors hover:border-foreground">
+          <span className="border-b border-accent/30 pb-0.5 transition-colors hover:border-accent">
             View all clients
           </span>
           <ArrowRight className="h-4 w-4" />

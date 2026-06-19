@@ -90,9 +90,9 @@ export function PricingFaq() {
           >
             Everything about our fees
           </h2>
-          <p className="mt-6 max-w-md text-lg leading-relaxed text-muted-foreground">
+          <p className="mt-6 max-w-md text-lg leading-relaxed text-muted-foreground/80">
             Still have questions?{" "}
-            <a href="mailto:hello@vista.global" className="text-foreground underline underline-offset-4">
+            <a href="mailto:hello@vista.global" className="text-accent underline underline-offset-4 hover:text-accent/90">
               Email us directly
             </a>
             .

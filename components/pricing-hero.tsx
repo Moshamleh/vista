@@ -12,7 +12,7 @@ export function PricingHero() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="mb-8 flex items-center gap-3 text-sm font-medium uppercase tracking-[0.2em] text-muted-foreground"
+          className="mb-8 flex items-center gap-3 text-sm font-medium uppercase tracking-[0.2em] text-accent"
         >
           <span className="inline-block h-2 w-2 rounded-full bg-accent" />
           Pricing · Plans · Value
@@ -49,12 +49,12 @@ export function PricingHero() {
         >
           <a
             href="#plans"
-            className="inline-flex items-center gap-2 rounded-full bg-foreground px-7 py-3.5 text-base font-medium text-background transition-transform hover:scale-[1.03]"
+            className="inline-flex items-center gap-2 rounded-full bg-accent px-7 py-3.5 text-base font-medium text-background shadow-[0_24px_80px_-40px_rgba(87,217,255,0.5)] transition-transform hover:scale-[1.03] hover:bg-accent/90"
           >
             See plans
           </a>
-          <a href="#contact" className="inline-flex items-center gap-2 text-base font-medium text-foreground">
-            <span className="border-b border-foreground/30 pb-0.5 transition-colors hover:border-foreground">
+          <a href="#contact" className="inline-flex items-center gap-2 text-base font-medium text-foreground/80 transition-colors hover:text-accent">
+            <span className="border-b border-accent/30 pb-0.5 transition-colors hover:border-accent">
               Talk to us first
             </span>
           </a>

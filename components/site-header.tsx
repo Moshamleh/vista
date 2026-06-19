@@ -44,7 +44,7 @@ export function SiteHeader() {
       <div
         className={`mx-auto flex max-w-7xl items-center justify-between px-5 transition-all duration-300 sm:px-8 ${
           scrolled
-            ? "my-3 rounded-full border border-border/70 bg-background/80 py-2.5 backdrop-blur-xl"
+            ? "my-3 rounded-full border border-accent/20 bg-background/80 py-2.5 backdrop-blur-2xl shadow-[0_24px_80px_-54px_rgba(87,217,255,0.28)]"
             : "py-5"
         }`}
       >
@@ -55,7 +55,7 @@ export function SiteHeader() {
             <a
               key={item.label}
               href={item.href}
-              className="text-sm font-medium text-foreground/80 transition-colors hover:text-foreground"
+              className="text-sm font-medium text-foreground/70 transition-colors hover:text-accent"
             >
               {item.label}
             </a>
@@ -65,7 +65,7 @@ export function SiteHeader() {
         <div className="flex items-center gap-2">
           <a
             href="/#contact"
-            className="hidden rounded-full bg-foreground px-6 py-2.5 text-sm font-medium text-background transition-transform hover:scale-[1.03] md:inline-flex"
+            className="hidden rounded-full bg-accent px-6 py-2.5 text-sm font-medium text-background transition-transform hover:scale-[1.03] hover:bg-accent/90 md:inline-flex"
           >
             Contact
           </a>
@@ -87,7 +87,7 @@ export function SiteHeader() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="mx-4 overflow-hidden rounded-3xl border border-border bg-background/95 backdrop-blur-xl md:hidden"
+            className="mx-4 overflow-hidden rounded-3xl border border-accent/20 bg-[#0b1020]/95 backdrop-blur-2xl md:hidden"
           >
             <div className="flex flex-col p-4">
               {NAV.map((item) => (
@@ -95,7 +95,7 @@ export function SiteHeader() {
                   key={item.label}
                   href={item.href}
                   onClick={() => setOpen(false)}
-                  className="rounded-xl px-4 py-3 text-base font-medium text-foreground/80 hover:bg-secondary hover:text-foreground"
+                  className="rounded-xl px-4 py-3 text-base font-medium text-foreground/80 transition-colors hover:bg-accent/10 hover:text-accent"
                 >
                   {item.label}
                 </a>
@@ -103,7 +103,7 @@ export function SiteHeader() {
               <a
                 href="/#contact"
                 onClick={() => setOpen(false)}
-                className="mt-2 rounded-full bg-foreground px-6 py-3 text-center text-base font-medium text-background"
+                className="mt-2 rounded-full bg-accent px-6 py-3 text-center text-base font-medium text-background shadow-[0_20px_60px_-48px_rgba(87,217,255,0.55)]"
               >
                 Contact
               </a>

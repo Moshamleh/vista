@@ -13,7 +13,7 @@ const TRUST = [
 
 export function PricingCta() {
   return (
-    <section id="contact" className="relative overflow-hidden bg-foreground text-background px-5 py-28 sm:px-8 sm:py-40">
+    <section id="contact" className="relative overflow-hidden bg-[#0b1020] text-foreground px-5 py-28 sm:px-8 sm:py-40">
       {/* Floating orbs — same pattern as main CTA */}
       <motion.div
         aria-hidden
@@ -33,11 +33,11 @@ export function PricingCta() {
       </motion.div>
 
       <Reveal className="relative mx-auto max-w-4xl text-center">
-        <p className="text-sm font-medium uppercase tracking-[0.2em] text-background/60">Let&apos;s build</p>
+        <p className="text-sm font-medium uppercase tracking-[0.2em] text-accent">Let&apos;s build</p>
         <h2 className="mt-6 font-heading text-5xl font-medium leading-[1.02] tracking-tight text-balance sm:text-7xl">
           Not sure which plan fits?
         </h2>
-        <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-background/70">
+        <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground/80">
           Tell us what you&apos;re building. We&apos;ll recommend the right engagement and send a tailored proposal within 24 hours.
         </p>
 
@@ -47,7 +47,7 @@ export function PricingCta() {
             <Reveal key={item.label} delay={i * 0.08}>
               <div className="text-center">
                 <p className="font-heading text-4xl font-medium tracking-tight">{item.value}</p>
-                <p className="mt-1 text-sm text-background/60">{item.label}</p>
+                <p className="mt-1 text-sm text-muted-foreground/70">{item.label}</p>
               </div>
             </Reveal>
           ))}
@@ -56,14 +56,14 @@ export function PricingCta() {
         <div className="mt-12 flex flex-col items-center justify-center gap-4 sm:flex-row">
           <a
             href="mailto:hello@vista.global"
-            className="inline-flex items-center gap-2 rounded-full bg-background px-8 py-4 text-base font-medium text-foreground transition-transform hover:scale-[1.03]"
+            className="inline-flex items-center gap-2 rounded-full bg-accent px-8 py-4 text-base font-medium text-background transition-transform hover:scale-[1.03] hover:bg-accent/90"
           >
             Get a custom quote
             <ArrowRight className="h-4 w-4" />
           </a>
           <a
             href="/"
-            className="inline-flex items-center gap-2 rounded-full border border-background/20 px-8 py-4 text-base font-medium text-background transition-colors hover:bg-background/10"
+            className="inline-flex items-center gap-2 rounded-full border border-accent/30 px-8 py-4 text-base font-medium text-accent transition-colors hover:bg-accent/10"
           >
             Back to home
           </a>

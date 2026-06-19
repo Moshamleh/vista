@@ -24,7 +24,7 @@ const WORK = [
     title: "Palm Horizon Properties",
     category: "Real Estate · Web Platform · Business Bay",
     image: "/work-realestate.png",
-    imageClassName: "bg-white object-contain p-6 sm:p-10",
+    imageClassName: "bg-[#0f1321] object-contain p-6 sm:p-10",
     span: "lg:col-span-5",
   },
   {
@@ -42,7 +42,7 @@ function WorkCard({ item, index }: { item: (typeof WORK)[number]; index: number 
       <motion.a
         href="#work"
         whileHover="hover"
-        className="group block overflow-hidden rounded-3xl bg-card"
+        className="group block overflow-hidden rounded-[2rem] border border-border/20 bg-[#10131d] transition-all duration-300 hover:-translate-y-1 hover:border-accent/30"
       >
         <div className="relative aspect-[4/3] overflow-hidden">
           <motion.div
@@ -64,11 +64,11 @@ function WorkCard({ item, index }: { item: (typeof WORK)[number]; index: number 
             <h3 className="font-heading text-2xl font-medium tracking-tight text-foreground sm:text-3xl">
               {item.title}
             </h3>
-            <p className="mt-1 text-sm text-muted-foreground">{item.category}</p>
+            <p className="mt-1 text-sm text-muted-foreground/70">{item.category}</p>
           </div>
           <motion.span
             variants={{ hover: { rotate: 45, backgroundColor: "var(--foreground)", color: "var(--background)" } }}
-            className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-border text-foreground"
+            className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-accent/30 text-accent transition-colors duration-300"
           >
             <ArrowUpRight className="h-5 w-5" />
           </motion.span>
@@ -80,11 +80,11 @@ function WorkCard({ item, index }: { item: (typeof WORK)[number]; index: number 
 
 export function FeaturedWork() {
   return (
-    <section id="work" className="mx-auto max-w-7xl px-5 py-24 sm:px-8 sm:py-32">
+    <section id="work" className="mx-auto max-w-7xl px-5 py-28 sm:px-8 sm:py-36">
       <Reveal className="mb-14 flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
         <div>
-          <p className="text-sm font-medium uppercase tracking-[0.2em] text-muted-foreground">Selected work</p>
-          <h2 className="mt-6 max-w-2xl font-heading text-4xl font-medium leading-tight tracking-tight text-balance text-foreground sm:text-6xl">
+          <p className="text-sm font-medium uppercase tracking-[0.2em] text-accent">Selected work</p>
+          <h2 className="mt-6 max-w-2xl font-heading text-4xl font-medium leading-tight tracking-tight text-foreground sm:text-6xl">
             Work that moves brands forward
           </h2>
         </div>

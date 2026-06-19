@@ -35,7 +35,7 @@ const COLUMNS = [
 
 export function SiteFooter() {
   return (
-    <footer className="border-t border-border bg-card">
+    <footer className="border-t border-border/50 bg-[#0b1020]">
       <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-20">
         <div className="grid gap-12 lg:grid-cols-[1.4fr_2fr]">
           <div>
@@ -48,7 +48,7 @@ export function SiteFooter() {
             </p>
             <a
               href="mailto:hello@vista.global"
-              className="mt-6 inline-block font-heading text-lg font-medium text-foreground underline-offset-4 hover:underline"
+              className="mt-6 inline-block font-heading text-lg font-medium text-accent underline-offset-4 hover:text-accent/80 hover:underline"
             >
               hello@vista.global
             </a>
@@ -67,7 +67,7 @@ export function SiteFooter() {
                         href={link.href}
                         target={link.href.startsWith("http") ? "_blank" : undefined}
                         rel={link.href.startsWith("http") ? "noreferrer" : undefined}
-                        className="text-base text-foreground/80 transition-colors hover:text-foreground"
+                        className="text-base text-foreground/70 transition-colors hover:text-accent"
                       >
                         {link.label}
                       </a>

@@ -28,7 +28,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="mb-8 flex items-center gap-3 text-sm font-medium uppercase tracking-[0.2em] text-muted-foreground"
+            className="mb-8 flex items-center gap-3 text-sm font-medium uppercase tracking-[0.2em] text-accent"
           >
             <span className="inline-block h-2 w-2 rounded-full bg-accent" />
             Branding · UX · Technology
@@ -56,12 +56,12 @@ export function Hero() {
           >
             <a
               href="#work"
-              className="inline-flex items-center gap-2 rounded-full bg-foreground px-7 py-3.5 text-base font-medium text-background transition-transform hover:scale-[1.03]"
+              className="inline-flex items-center gap-2 rounded-full bg-accent px-7 py-3.5 text-base font-medium text-background shadow-[0_24px_80px_-40px_rgba(87,217,255,0.5)] transition-transform hover:scale-[1.03] hover:bg-accent/90"
             >
               View our work
             </a>
-            <a href="#services" className="inline-flex items-center gap-2 text-base font-medium text-foreground">
-              <span className="border-b border-foreground/30 pb-0.5 transition-colors hover:border-foreground">
+            <a href="#services" className="inline-flex items-center gap-2 text-base font-medium text-foreground/80 transition-colors hover:text-accent">
+              <span className="border-b border-foreground/30 pb-0.5 transition-colors hover:border-accent">
                 Explore services
               </span>
               <ArrowDown className="h-4 w-4" />
