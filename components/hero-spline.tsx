@@ -23,12 +23,6 @@ export function HeroSpline() {
         className="h-full w-full border-0 bg-transparent"
         style={{ opacity: loaded ? 1 : 0, transition: "opacity 0.6s ease" }}
       />
-
-      {/* Cover the Spline watermark badge in the bottom-right corner */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute bottom-0 right-0 h-14 w-36 bg-background"
-      />
     </div>
   )
 }

@@ -14,15 +14,10 @@ export default function manifest(): MetadataRoute.Manifest {
     categories: ["business", "design", "productivity"],
     icons: [
       {
-        src: "/icon.svg",
-        sizes: "any",
-        type: "image/svg+xml",
-        purpose: "any",
-      },
-      {
-        src: "/apple-icon.png",
-        sizes: "180x180",
+        src: "/vista-logo.png",
+        sizes: "500x500",
         type: "image/png",
+        purpose: "any",
       },
     ],
   }

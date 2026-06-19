@@ -1,5 +1,6 @@
 import { SiteHeader } from "@/components/site-header"
 import { Hero } from "@/components/hero"
+import { RadialPattern } from "@/components/radial-pattern"
 import { Services } from "@/components/services"
 import { Clients } from "@/components/clients"
 import { FeaturedWork } from "@/components/featured-work"
@@ -20,6 +21,7 @@ export default function Page() {
       <SiteHeader />
       <main id="main">
         <Hero />
+        <RadialPattern />
         <Clients />
         <Services />
         <FeaturedWork />

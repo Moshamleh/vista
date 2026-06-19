@@ -75,7 +75,7 @@ export function StructuredData() {
         foundingDate: String(foundingYear),
         logo: {
           "@type": "ImageObject",
-          url: `${url}/icon.svg`,
+          url: `${url}/vista-logo.png`,
         },
         image: `${url}${ogImage}`,
         sameAs: [...sameAs],

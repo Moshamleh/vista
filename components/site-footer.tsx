@@ -1,31 +1,46 @@
+import { BrandMark } from "./brand-mark"
 import { TypewriterWordmark } from "./typewriter-wordmark"
 
 const COLUMNS = [
   {
     title: "Services",
-    links: ["Branding", "Digital Products", "Websites", "Development", "Generative AI"],
+    links: [
+      { label: "Branding", href: "/#services" },
+      { label: "Digital Products", href: "/#services" },
+      { label: "Websites", href: "/#services" },
+      { label: "Development", href: "/#services" },
+      { label: "Generative AI", href: "/#services" },
+    ],
   },
   {
     title: "Company",
-    links: ["About", "Work", "Clients", "Blog", "Careers"],
+    links: [
+      { label: "About", href: "/#about" },
+      { label: "Work", href: "/#work" },
+      { label: "Clients", href: "/#clients" },
+      { label: "Careers", href: "mailto:hello@vista.global?subject=Careers%20at%20Vista" },
+    ],
   },
   {
     title: "Connect",
-    links: ["Instagram", "LinkedIn", "Dribbble", "X / Twitter", "Behance"],
+    links: [
+      { label: "Instagram", href: "https://www.instagram.com/vista.global" },
+      { label: "LinkedIn", href: "https://www.linkedin.com/company/vista-global" },
+      { label: "Dribbble", href: "https://dribbble.com/vista" },
+      { label: "X / Twitter", href: "https://twitter.com/vistaglobal" },
+      { label: "Behance", href: "https://www.behance.net/vista" },
+    ],
   },
 ]
 
 export function SiteFooter() {
   return (
-    <footer id="blog" className="border-t border-border bg-card">
+    <footer className="border-t border-border bg-card">
       <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-20">
         <div className="grid gap-12 lg:grid-cols-[1.4fr_2fr]">
           <div>
             <div className="flex items-center gap-2.5">
-              <span className="relative inline-flex h-7 w-7 items-center justify-center">
-                <span className="absolute inset-0 rounded-full border-2 border-foreground" />
-                <span className="absolute inset-0 rounded-full bg-foreground [clip-path:inset(0_50%_0_0)]" />
-              </span>
+              <BrandMark />
               <TypewriterWordmark />
             </div>
             <p className="mt-6 max-w-xs text-base leading-relaxed text-muted-foreground">
@@ -47,12 +62,14 @@ export function SiteFooter() {
                 </h3>
                 <ul className="mt-4 space-y-3">
                   {col.links.map((link) => (
-                    <li key={link}>
+                    <li key={link.label}>
                       <a
-                        href="#"
+                        href={link.href}
+                        target={link.href.startsWith("http") ? "_blank" : undefined}
+                        rel={link.href.startsWith("http") ? "noreferrer" : undefined}
                         className="text-base text-foreground/80 transition-colors hover:text-foreground"
                       >
-                        {link}
+                        {link.label}
                       </a>
                     </li>
                   ))}
@@ -64,16 +81,10 @@ export function SiteFooter() {
 
         <div className="mt-16 flex flex-col items-start justify-between gap-4 border-t border-border pt-8 text-sm text-muted-foreground sm:flex-row sm:items-center">
           <p>© {new Date().getFullYear()} Vista Global. All rights reserved.</p>
-          <div className="flex gap-6">
-            <a href="#" className="hover:text-foreground">
-              Privacy
-            </a>
-            <a href="#" className="hover:text-foreground">
-              Terms
-            </a>
-            <a href="#" className="hover:text-foreground">
-              Cookies
-            </a>
+          <div className="flex gap-6" aria-label="Legal information">
+            <span>Privacy</span>
+            <span>Terms</span>
+            <span>Cookies</span>
           </div>
         </div>
       </div>
