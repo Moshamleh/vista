@@ -1,42 +1,92 @@
 "use client"
 
 import { Suspense, useRef, useState } from "react"
-import { Canvas, useFrame } from "@react-three/fiber"
-import { Environment, Float, PresentationControls, MeshDistortMaterial } from "@react-three/drei"
-import type { Mesh } from "three"
+import { Canvas, useFrame, type ThreeEvent } from "@react-three/fiber"
+import { Environment, MeshDistortMaterial } from "@react-three/drei"
+import type { Group } from "three"
 
 function Bubble() {
-  const mesh = useRef<Mesh>(null)
+  const group = useRef<Group>(null)
   const [hovered, setHovered] = useState(false)
 
-  // Smoothly ease the scale toward its target on hover/press for a tactile feel.
+  // Drag + spin state kept in refs so it survives frames without re-rendering.
+  const dragging = useRef(false)
+  const lastPointer = useRef({ x: 0, y: 0 })
+  const velocity = useRef({ x: 0, y: 0 })
+  const scale = useRef(1)
+
+  const onPointerDown = (e: ThreeEvent<PointerEvent>) => {
+    e.stopPropagation()
+    dragging.current = true
+    lastPointer.current = { x: e.clientX, y: e.clientY }
+    // Capture the pointer so dragging continues smoothly off the mesh.
+    ;(e.target as Element).setPointerCapture?.(e.pointerId)
+  }
+
+  const onPointerMove = (e: ThreeEvent<PointerEvent>) => {
+    if (!dragging.current) return
+    const dx = e.clientX - lastPointer.current.x
+    const dy = e.clientY - lastPointer.current.y
+    lastPointer.current = { x: e.clientX, y: e.clientY }
+    // Convert pixel drag into rotation and remember it as spin velocity.
+    velocity.current.y = dx * 0.005
+    velocity.current.x = dy * 0.005
+    if (group.current) {
+      group.current.rotation.y += velocity.current.y
+      group.current.rotation.x += velocity.current.x
+    }
+  }
+
+  const endDrag = (e: ThreeEvent<PointerEvent>) => {
+    dragging.current = false
+    ;(e.target as Element).releasePointerCapture?.(e.pointerId)
+  }
+
   useFrame((_, delta) => {
-    if (!mesh.current) return
-    const target = hovered ? 1.08 : 1
-    const s = mesh.current.scale.x
-    const next = s + (target - s) * Math.min(1, delta * 6)
-    mesh.current.scale.setScalar(next)
+    if (!group.current) return
+
+    if (!dragging.current) {
+      // Momentum: keep spinning after release, easing out via friction.
+      group.current.rotation.y += velocity.current.y
+      group.current.rotation.x += velocity.current.x
+      velocity.current.y *= 0.94
+      velocity.current.x *= 0.94
+
+      // Gentle idle auto-spin once momentum has settled.
+      if (Math.abs(velocity.current.y) < 0.0008 && Math.abs(velocity.current.x) < 0.0008) {
+        group.current.rotation.y += delta * 0.25
+      }
+    }
+
+    // Smooth scale toward hover target for a tactile feel.
+    const target = hovered ? 1.06 : 1
+    scale.current += (target - scale.current) * Math.min(1, delta * 6)
+    group.current.scale.setScalar(scale.current)
   })
 
   return (
-    <mesh
-      ref={mesh}
-      onPointerOver={() => setHovered(true)}
-      onPointerOut={() => setHovered(false)}
-    >
-      {/* High-subdivision sphere so the morphing surface stays smooth */}
-      <icosahedronGeometry args={[1.25, 64]} />
-      <MeshDistortMaterial
-        color="#f6f5f7"
-        distort={hovered ? 0.45 : 0.32}
-        speed={hovered ? 3 : 1.8}
-        roughness={0.08}
-        metalness={0.12}
-        clearcoat={1}
-        clearcoatRoughness={0.15}
-        envMapIntensity={1.2}
-      />
-    </mesh>
+    <group ref={group}>
+      <mesh
+        onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
+        onPointerUp={endDrag}
+        onPointerOver={() => setHovered(true)}
+        onPointerOut={() => setHovered(false)}
+      >
+        {/* High-subdivision sphere so the morphing surface stays smooth */}
+        <icosahedronGeometry args={[1.25, 64]} />
+        <MeshDistortMaterial
+          color="#f6f5f7"
+          distort={hovered ? 0.4 : 0.28}
+          speed={hovered ? 2.6 : 1.4}
+          roughness={0.08}
+          metalness={0.12}
+          clearcoat={1}
+          clearcoatRoughness={0.15}
+          envMapIntensity={1.2}
+        />
+      </mesh>
+    </group>
   )
 }
 
@@ -53,19 +103,7 @@ export function HeroBubble() {
       {/* Warm accent light to echo the brand's orange glow */}
       <pointLight position={[-3, -2, 2]} intensity={2.4} color="#ff7a45" />
       <Suspense fallback={null}>
-        <PresentationControls
-          global
-          cursor
-          snap
-          speed={1.4}
-          polar={[-0.5, 0.5]}
-          azimuth={[-0.9, 0.9]}
-          config={{ mass: 1, tension: 180, friction: 26 }}
-        >
-          <Float speed={2.2} rotationIntensity={0.5} floatIntensity={1.4}>
-            <Bubble />
-          </Float>
-        </PresentationControls>
+        <Bubble />
         <Environment preset="studio" />
       </Suspense>
     </Canvas>
