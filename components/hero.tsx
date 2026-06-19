@@ -1,35 +1,28 @@
 "use client"
 
 import Image from "next/image"
+import dynamic from "next/dynamic"
 import { motion } from "framer-motion"
 import { ArrowDown } from "lucide-react"
+
+// 3D canvas is client-only and lazy-loaded so it never blocks first paint.
+const HeroBubble = dynamic(() => import("./hero-bubble").then((m) => m.HeroBubble), {
+  ssr: false,
+})
 
 const words = ["Vista", "is", "a", "Dubai", "branding", "and", "UX", "design", "agency"]
 
 export function Hero() {
   return (
     <section id="top" className="relative overflow-hidden pt-36 pb-20 sm:pt-44 sm:pb-28">
-      {/* Floating abstract form */}
+      {/* Interactive 3D glass bubble — drag to spin, hover to react */}
       <motion.div
-        aria-hidden
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 1.2, ease: "easeOut" }}
-        className="pointer-events-none absolute -right-24 top-10 hidden h-[640px] w-[640px] select-none lg:block"
+        className="absolute -right-24 top-10 hidden h-[640px] w-[640px] cursor-grab select-none active:cursor-grabbing lg:block"
       >
-        <motion.div
-          animate={{ y: [0, -22, 0] }}
-          transition={{ duration: 9, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
-          className="h-full w-full"
-        >
-          <Image
-            src="/abstract-form.png"
-            alt=""
-            fill
-            priority
-            className="object-contain"
-          />
-        </motion.div>
+        <HeroBubble />
       </motion.div>
 
       {/* Orbs */}
