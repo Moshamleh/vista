@@ -3,24 +3,21 @@
 import { useEffect, useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Menu, X } from "lucide-react"
+import { BrandMark } from "./brand-mark"
 import { TypewriterWordmark } from "./typewriter-wordmark"
 
 const NAV = [
-  { label: "Work", href: "#work" },
-  { label: "Clients", href: "#clients" },
-  { label: "Services", href: "#services" },
+  { label: "Work", href: "/#work" },
+  { label: "Clients", href: "/#clients" },
+  { label: "Services", href: "/#services" },
   { label: "Pricing", href: "/pricing" },
-  { label: "About", href: "#about" },
-  { label: "Blog", href: "#blog" },
+  { label: "About", href: "/#about" },
 ]
 
 function Logo() {
   return (
-    <a href="#top" className="flex items-center gap-2.5" aria-label="Vista by Lara home">
-      <span className="relative inline-flex h-7 w-7 items-center justify-center">
-        <span className="absolute inset-0 rounded-full border-2 border-foreground" />
-        <span className="absolute inset-0 rounded-full bg-foreground [clip-path:inset(0_50%_0_0)]" />
-      </span>
+    <a href="/" className="flex items-center gap-2.5" aria-label="Vista by Lara home">
+      <BrandMark priority />
       <TypewriterWordmark />
     </a>
   )
@@ -67,7 +64,7 @@ export function SiteHeader() {
 
         <div className="flex items-center gap-2">
           <a
-            href="#contact"
+            href="/#contact"
             className="hidden rounded-full bg-foreground px-6 py-2.5 text-sm font-medium text-background transition-transform hover:scale-[1.03] md:inline-flex"
           >
             Contact
@@ -104,7 +101,7 @@ export function SiteHeader() {
                 </a>
               ))}
               <a
-                href="#contact"
+                href="/#contact"
                 onClick={() => setOpen(false)}
                 className="mt-2 rounded-full bg-foreground px-6 py-3 text-center text-base font-medium text-background"
               >

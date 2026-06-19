@@ -9,25 +9,29 @@ const WORK = [
   {
     title: "Oasis Living",
     category: "E-commerce · Brand & Web · Dubai",
-    image: "/work-oasis.png",
+    image: "/work-oasis.jpg",
+    imageClassName: "object-cover",
     span: "lg:col-span-7",
   },
   {
     title: "Al Safa Grill",
     category: "Hospitality · Brand & App · Dubai Marina",
     image: "/work-restaurant.png",
+    imageClassName: "object-cover",
     span: "lg:col-span-5",
   },
   {
     title: "Palm Horizon Properties",
     category: "Real Estate · Web Platform · Business Bay",
     image: "/work-realestate.png",
+    imageClassName: "bg-white object-contain p-6 sm:p-10",
     span: "lg:col-span-5",
   },
   {
     title: "Arabian Cloud Solutions",
     category: "Technology · Product Design · Dubai Internet City",
     image: "/work-cloud.png",
+    imageClassName: "object-cover",
     span: "lg:col-span-7",
   },
 ]
@@ -50,7 +54,7 @@ function WorkCard({ item, index }: { item: (typeof WORK)[number]; index: number 
               src={item.image || "/placeholder.svg"}
               alt={item.title}
               fill
-              className="object-cover"
+              className={item.imageClassName}
               sizes="(max-width: 1024px) 100vw, 50vw"
             />
           </motion.div>
