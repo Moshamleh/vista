@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import { Plus } from "lucide-react"
 import { Reveal } from "@/components/reveal"
 import { FAQS } from "@/lib/faq"
+import { siteConfig } from "@/lib/site"
 
 function FaqRow({ question, answer, defaultOpen }: { question: string; answer: string; defaultOpen: boolean }) {
   const [open, setOpen] = useState(defaultOpen)
@@ -60,7 +61,7 @@ export function Faq() {
           </h2>
           <p className="mt-6 max-w-md text-lg leading-relaxed text-muted-foreground/80">
             The essentials about working with Vista. Have something else in mind?{" "}
-            <a href="mailto:hello@vista.global" className="text-accent underline underline-offset-4 hover:text-accent/90">
+            <a href={`mailto:${siteConfig.email}`} className="text-accent underline underline-offset-4 hover:text-accent/90">
               Ask us directly
             </a>
             .

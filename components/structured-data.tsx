@@ -1,56 +1,40 @@
-import { siteConfig } from "@/lib/site"
 import { FAQS } from "@/lib/faq"
-
-/**
- * Centralized JSON-LD structured data using a linked @graph.
- * Entities reference each other by @id so search and answer engines
- * can resolve Vista as a single, well-defined organization with a
- * site, services, portfolio, and FAQ. Powers rich results (SEO),
- * answer extraction (AEO), and entity grounding for LLMs (GEO).
- */
+import { jsonLd } from "@/lib/json-ld"
+import { siteConfig } from "@/lib/site"
 
 const SERVICES = [
   {
     name: "Brand Strategy & Identity",
-    description:
-      "Brand strategy, identity systems, naming, and visual languages that make category leaders unmistakable.",
+    url: "/services/branding",
+    description: "Brand strategy, identity systems, naming, and visual languages for premium UAE brands.",
   },
   {
     name: "Digital Product Design",
-    description:
-      "End-to-end product design — research, UX, and polished UI for apps that millions of people love to use.",
+    url: "/services/digital-products",
+    description: "UX/UI design for apps, platforms, and SaaS products built for UAE and GCC users.",
   },
   {
     name: "Website Design & Development",
-    description:
-      "Editorial, conversion-driven marketing sites and immersive web experiences built to perform.",
+    url: "/services/websites",
+    description: "Cinematic, high-performance websites that convert visitors into clients across Dubai and the GCC.",
   },
   {
     name: "Software Development",
-    description: "Production-grade engineering across web and mobile, shipped fast on a modern, scalable stack.",
-  },
-  {
-    name: "Content & Motion",
-    description: "Story, copy, art direction, and motion that give your brand a distinct, consistent voice.",
+    url: "/services/development",
+    description: "Full-stack engineering, custom platforms, and scalable digital infrastructure for UAE businesses.",
   },
   {
     name: "Generative AI",
-    description:
-      "AI woven into design and product workflows to build smarter, more adaptive experiences.",
+    url: "/services/generative-ai",
+    description: "AI-powered creative workflows, design automation, and intelligent digital experiences for Dubai brands.",
   },
 ]
 
 const WORK = [
   { name: "Oasis Living", description: "Brand identity and e-commerce experience for a Dubai home and lifestyle brand." },
   { name: "Al Safa Grill", description: "Brand identity and ordering app for a Dubai Marina restaurant." },
-  {
-    name: "Palm Horizon Properties",
-    description: "Web platform and product design for a Business Bay real estate agency.",
-  },
-  {
-    name: "Arabian Cloud Solutions",
-    description: "Product design for a Dubai Internet City cloud technology company.",
-  },
+  { name: "Palm Horizon Properties", description: "Web platform and product design for a Business Bay real estate agency." },
+  { name: "Arabian Cloud Solutions", description: "Product design for a Dubai Internet City cloud technology company." },
 ]
 
 export function StructuredData() {
@@ -64,15 +48,19 @@ export function StructuredData() {
     "@context": "https://schema.org",
     "@graph": [
       {
-        "@type": ["Organization", "ProfessionalService"],
+        "@type": "ProfessionalService",
         "@id": orgId,
         name,
         legalName,
         url,
-        description,
+        description: `${description} AI-Integrated Digital Innovation Studio specializing in e-commerce strategy, Shopify optimization, AEO, GEO, and premium UAE digital growth.`,
         slogan: siteConfig.tagline,
         email,
+        telephone: siteConfig.phone,
         foundingDate: String(foundingYear),
+        foundingLocation: "Dubai, UAE",
+        award: ["Noble Business Winner 2025 - Business Innovation", "Top 3 Agency by AI Mode"],
+        serviceType: ["Branding", "UX Design", "Website Design", "Web Development", "Generative AI", "Digital Products"],
         logo: {
           "@type": "ImageObject",
           url: `${url}/vista-logo.png`,
@@ -89,28 +77,40 @@ export function StructuredData() {
           "Software Development",
           "Design Systems",
           "Generative AI",
+          "AI-Integrated Digital Innovation",
+          "E-commerce Strategy",
+          "Shopify Optimization Dubai",
+          "Answer Engine Optimization",
+          "Generative Engine Optimization",
         ],
         address: {
           "@type": "PostalAddress",
+          streetAddress: address.streetAddress,
           addressLocality: address.locality,
           addressRegion: address.region,
           addressCountry: address.countryCode,
         },
-        areaServed: areaServed.map((a) => ({ "@type": "Country", name: a })),
+        areaServed: areaServed.map((a) => ({ "@type": "Place", name: a })),
         contactPoint: {
           "@type": "ContactPoint",
           email,
+          telephone: siteConfig.phone,
           contactType: "New business",
-          availableLanguage: ["English"],
+          availableLanguage: ["English", "Arabic"],
         },
-        makesOffer: SERVICES.map((s) => ({
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Service",
-            name: s.name,
-            description: s.description,
-          },
-        })),
+        hasOfferCatalog: {
+          "@type": "OfferCatalog",
+          name: "Vista by Lara Services",
+          itemListElement: SERVICES.map((service) => ({
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: service.name,
+              url: `${url}${service.url}`,
+              description: service.description,
+            },
+          })),
+        },
       },
       {
         "@type": "WebSite",
@@ -119,7 +119,12 @@ export function StructuredData() {
         name,
         description: shortDescription,
         publisher: { "@id": orgId },
-        inLanguage: "en",
+        inLanguage: ["en-AE", "ar-AE"],
+        potentialAction: {
+          "@type": "SearchAction",
+          target: `${url}/?s={search_term_string}`,
+          "query-input": "required name=search_term_string",
+        },
       },
       {
         "@type": "FAQPage",
@@ -150,11 +155,5 @@ export function StructuredData() {
     ],
   }
 
-  return (
-    <script
-      type="application/ld+json"
-      // JSON-LD is static and trusted; this is the standard Next.js pattern.
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(graph) }}
-    />
-  )
+  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(graph) }} />
 }

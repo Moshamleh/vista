@@ -7,9 +7,10 @@ import { PricingFaq } from "@/components/pricing-faq"
 import { PricingCta } from "@/components/pricing-cta"
 
 export const metadata: Metadata = {
-  title: "Pricing",
+  title: "Pricing in AED | Branding & Web Design Dubai",
   description:
-    "Transparent pricing for branding, UX design, and web development. Starter, Growth, and Enterprise plans for ambitious businesses in Dubai, UAE, and the GCC.",
+    "Transparent AED pricing for branding, UX design, and web development plans for ambitious businesses in Dubai, UAE, and the GCC.",
+  alternates: { canonical: "https://www.vistabylara.com/pricing" },
 }
 
 export default function PricingPage() {

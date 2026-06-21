@@ -4,12 +4,13 @@ import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Plus } from "lucide-react"
 import { Reveal } from "@/components/reveal"
+import { siteConfig } from "@/lib/site"
 
 const FAQS = [
   {
     question: "Can I customise a plan for my project?",
     answer:
-      "Absolutely. Our packages are starting points, not rigid boxes. We scope every project individually — so if you need a subset of a plan or something that spans multiple packages, we'll put together a bespoke proposal.",
+      "Absolutely. Our packages are starting points, not rigid boxes. We scope every project individually - so if you need a subset of a plan or something that spans multiple packages, we'll put together a bespoke proposal in AED.",
   },
   {
     question: "Do you work on a retainer basis?",
@@ -19,33 +20,34 @@ const FAQS = [
   {
     question: "What currencies do you accept?",
     answer:
-      "We invoice in AED, USD, EUR, and GBP. Wire transfers, credit cards, and Stripe are all supported. For enterprise clients we can accommodate purchase orders.",
+      "Our UAE website prices are shown in AED. We primarily invoice in UAE dirhams, with wire transfers, credit cards, and Stripe supported. International clients can request an approved equivalent currency during scoping.",
   },
   {
     question: "How long does a typical project take?",
     answer:
-      "Starter engagements typically run 4–6 weeks. Growth projects run 8–14 weeks. Enterprise timelines are agreed during scoping. We'll give you a clear milestone plan before any work begins.",
+      "Starter engagements typically run 4-6 weeks. Growth projects run 8-14 weeks. Enterprise timelines are agreed during scoping. We'll give you a clear milestone plan before any work begins.",
   },
   {
     question: "What happens after the project is delivered?",
     answer:
-      "Every plan includes a post-launch support window (14 days for Starter, 60 days for Growth). After that, you can move to a retainer or purchase ad-hoc support blocks. We're invested in your long-term success.",
+      "Every plan includes a post-launch support window: 14 days for Starter and 60 days for Growth. After that, you can move to a retainer or purchase ad-hoc support blocks. We're invested in your long-term success.",
   },
   {
     question: "Do prices include VAT?",
     answer:
-      "All prices shown are exclusive of UAE VAT (5%). A compliant tax invoice will be issued for every payment.",
+      "All prices shown are exclusive of UAE VAT, currently 5%. A compliant tax invoice will be issued for every payment where VAT applies.",
   },
 ]
 
 function FaqRow({ question, answer, defaultOpen }: { question: string; answer: string; defaultOpen: boolean }) {
   const [open, setOpen] = useState(defaultOpen)
+
   return (
     <div className="border-t border-border last:border-b">
       <h3>
         <button
           type="button"
-          onClick={() => setOpen((v) => !v)}
+          onClick={() => setOpen((value) => !value)}
           className="flex w-full items-center justify-between gap-6 py-6 text-left"
           aria-expanded={open}
         >
@@ -88,11 +90,11 @@ export function PricingFaq() {
             id="pricing-faq-heading"
             className="mt-6 font-heading text-3xl font-medium leading-tight tracking-tight text-balance text-foreground sm:text-5xl"
           >
-            Everything about our fees
+            Everything about our AED fees
           </h2>
           <p className="mt-6 max-w-md text-lg leading-relaxed text-muted-foreground/80">
             Still have questions?{" "}
-            <a href="mailto:hello@vista.global" className="text-accent underline underline-offset-4 hover:text-accent/90">
+            <a href={`mailto:${siteConfig.email}`} className="text-accent underline underline-offset-4 hover:text-accent/90">
               Email us directly
             </a>
             .
@@ -101,8 +103,8 @@ export function PricingFaq() {
 
         <Reveal delay={0.1}>
           <div>
-            {FAQS.map((faq, i) => (
-              <FaqRow key={faq.question} question={faq.question} answer={faq.answer} defaultOpen={i === 0} />
+            {FAQS.map((faq, index) => (
+              <FaqRow key={faq.question} question={faq.question} answer={faq.answer} defaultOpen={index === 0} />
             ))}
           </div>
         </Reveal>

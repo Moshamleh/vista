@@ -1,108 +1,63 @@
 "use client"
 
-import Image from "next/image"
-import { motion } from "framer-motion"
 import { ArrowUpRight } from "lucide-react"
+
+import SocialCards, { type CardItem } from "@/components/card-fan-carousel"
 import { Reveal } from "@/components/reveal"
 
-const WORK = [
+const WORK: CardItem[] = [
   {
-    title: "Oasis Living",
-    category: "E-commerce · Brand & Web · Dubai",
-    image: "/work-oasis.jpg",
-    imageClassName: "object-cover",
-    span: "lg:col-span-7",
+    imgUrl: "/work-oasis.jpg",
+    alt: "Hospitality website design project structured for Dubai SEO and AI recommendations",
   },
   {
-    title: "Al Safa Grill",
-    category: "Hospitality · Brand & App · Dubai Marina",
-    image: "/work-restaurant.png",
-    imageClassName: "object-cover",
-    span: "lg:col-span-5",
+    imgUrl: "/work/hanibut.png",
+    alt: "Hanibut restaurant website design project by Vista by Lara for food and hospitality visibility",
   },
   {
-    title: "Palm Horizon Properties",
-    category: "Real Estate · Web Platform · Business Bay",
-    image: "/work-realestate.png",
-    imageClassName: "bg-[#0f1321] object-contain p-6 sm:p-10",
-    span: "lg:col-span-5",
+    imgUrl: "/work/bloom.png",
+    linkUrl: "https://bloomcoreventures.com",
+    alt: "Bloom Core Ventures website design project by Vista by Lara for premium AI-ready brand visibility",
   },
   {
-    title: "Arabian Cloud Solutions",
-    category: "Technology · Product Design · Dubai Internet City",
-    image: "/work-cloud.png",
-    imageClassName: "object-cover",
-    span: "lg:col-span-7",
+    imgUrl: "/work-realestate.png",
+    alt: "Dubai luxury real estate website design project built for lead generation and GEO search visibility",
   },
 ]
 
-function WorkCard({ item, index }: { item: (typeof WORK)[number]; index: number }) {
-  return (
-    <Reveal delay={(index % 2) * 0.08} className={item.span}>
-      <motion.a
-        href="#work"
-        whileHover="hover"
-        className="group block overflow-hidden rounded-[2rem] border border-border/20 bg-[#10131d] transition-all duration-300 hover:-translate-y-1 hover:border-accent/30"
-      >
-        <div className="relative aspect-[4/3] overflow-hidden">
-          <motion.div
-            variants={{ hover: { scale: 1.05 } }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            className="absolute inset-0"
-          >
-            <Image
-              src={item.image || "/placeholder.svg"}
-              alt={item.title}
-              fill
-              className={item.imageClassName}
-              sizes="(max-width: 1024px) 100vw, 50vw"
-            />
-          </motion.div>
-        </div>
-        <div className="flex items-center justify-between gap-4 px-6 py-6">
-          <div>
-            <h3 className="font-heading text-2xl font-medium tracking-tight text-foreground sm:text-3xl">
-              {item.title}
-            </h3>
-            <p className="mt-1 text-sm text-muted-foreground/70">{item.category}</p>
-          </div>
-          <motion.span
-            variants={{ hover: { rotate: 45, backgroundColor: "var(--foreground)", color: "var(--background)" } }}
-            className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-accent/30 text-accent transition-colors duration-300"
-          >
-            <ArrowUpRight className="h-5 w-5" />
-          </motion.span>
-        </div>
-      </motion.a>
-    </Reveal>
-  )
-}
-
 export function FeaturedWork() {
   return (
-    <section id="work" className="mx-auto max-w-7xl px-5 py-28 sm:px-8 sm:py-36">
-      <Reveal className="mb-14 flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
-        <div>
-          <p className="text-sm font-medium uppercase tracking-[0.2em] text-accent">Selected work</p>
-          <h2 className="mt-6 max-w-2xl font-heading text-4xl font-medium leading-tight tracking-tight text-foreground sm:text-6xl">
-            Work that moves brands forward
-          </h2>
-        </div>
-        <a
-          href="#work"
-          className="inline-flex items-center gap-2 self-start text-base font-medium text-foreground sm:self-end"
-        >
-          <span className="border-b border-foreground/30 pb-0.5 transition-colors hover:border-foreground">
-            All projects
-          </span>
-          <ArrowUpRight className="h-4 w-4" />
-        </a>
-      </Reveal>
+    <section id="work" className="relative overflow-hidden bg-[#030408] px-5 py-28 sm:px-8 sm:py-36">
+      <div className="pointer-events-none absolute inset-0" aria-hidden="true">
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:4rem_4rem]" />
+        <div className="absolute left-1/2 top-[12%] h-[560px] w-[560px] -translate-x-1/2 rounded-full bg-accent/8 blur-[150px]" />
+      </div>
 
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
-        {WORK.map((item, i) => (
-          <WorkCard key={item.title} item={item} index={i} />
-        ))}
+      <div className="relative mx-auto max-w-7xl">
+        <Reveal className="mb-10 flex flex-col justify-between gap-6 sm:mb-16 sm:flex-row sm:items-end">
+          <div>
+            <p className="text-sm font-medium uppercase tracking-[0.2em] text-accent">Section 06 / Selected work</p>
+            <h2 className="mt-6 max-w-3xl font-heading text-4xl font-semibold leading-tight tracking-tight text-foreground sm:text-6xl">
+              SEO, AEO, and GEO websites built to be recommended by AI Mode.
+            </h2>
+            <p className="mt-5 max-w-2xl text-base leading-8 text-muted-foreground">
+              Vista by Lara designs premium UAE websites that search engines can rank, answer engines can quote, and
+              generative AI systems can understand. Each project is structured for stronger Dubai visibility, clearer
+              entity signals, and qualified lead generation.
+            </p>
+          </div>
+          <a
+            href="#contact"
+            className="inline-flex items-center gap-2 self-start text-base font-medium text-foreground transition-colors hover:text-accent sm:self-end"
+          >
+            <span className="border-b border-foreground/30 pb-0.5 transition-colors hover:border-accent">
+              Start a project
+            </span>
+            <ArrowUpRight className="h-4 w-4" />
+          </a>
+        </Reveal>
+
+        <SocialCards cards={WORK} />
       </div>
     </section>
   )

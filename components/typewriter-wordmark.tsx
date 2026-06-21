@@ -20,9 +20,12 @@ export function TypewriterWordmark({ className = "" }: { className?: string }) {
     // Respect users who prefer reduced motion — show the full word and stop.
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       reduced.current = true
-      setCount(FULL.length)
-      return
+      setTimeout(() => setCount(FULL.length), 0)
     }
+  }, [])
+
+  useEffect(() => {
+    if (reduced.current) return
 
     let timeout: ReturnType<typeof setTimeout>
 

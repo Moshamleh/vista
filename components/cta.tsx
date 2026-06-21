@@ -4,6 +4,7 @@ import Image from "next/image"
 import { motion } from "framer-motion"
 import { ArrowRight } from "lucide-react"
 import { Reveal } from "@/components/reveal"
+import { siteConfig } from "@/lib/site"
 
 export function CTA() {
   return (
@@ -35,7 +36,9 @@ export function CTA() {
         </p>
         <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
           <a
-            href="mailto:hello@vista.global"
+            href={siteConfig.whatsapp}
+            target="_blank"
+            rel="noopener"
             className="inline-flex items-center gap-2 rounded-full bg-accent px-8 py-4 text-base font-medium text-background transition-transform hover:scale-[1.03] hover:bg-accent/90"
           >
             Start today

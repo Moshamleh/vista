@@ -7,6 +7,8 @@ export type BlogPost = {
   metaTitle: string
   metaDescription: string
   category: string
+  tags?: string[]
+  content?: string
   readTime: string
   date: string
   featured?: boolean
@@ -16,7 +18,7 @@ export type BlogPost = {
   body: BlogBlock[]
 }
 
-export const blogPosts: BlogPost[] = [
+export const seedBlogPosts: BlogPost[] = [
   {
     slug: "best-profound-aeo-alternatives-2026",
     title: "10 Best Profound AEO Alternatives for 2026",
@@ -100,6 +102,52 @@ export const blogPosts: BlogPost[] = [
   }
 ]
 
-export function getBlogPost(slug: string) {
-  return blogPosts.find((post) => post.slug === slug)
+export const blogPosts = seedBlogPosts
+
+type ApiBlogPost = Omit<BlogPost, "body"> & {
+  content?: string
+  body?: BlogBlock[]
+}
+
+function getBlogApiUrl() {
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.vistabylara.com"
+  return `${siteUrl.replace(/\/$/, "")}/api/blog`
+}
+
+function normalizeApiPost(post: ApiBlogPost): BlogPost {
+  return {
+    ...post,
+    body: Array.isArray(post.body) && post.body.length > 0 ? post.body : [post.content || post.excerpt],
+  }
+}
+
+export async function getBlogPosts() {
+  try {
+    const response = await fetch(getBlogApiUrl(), {
+      next: { revalidate: 60 },
+    })
+
+    if (!response.ok) return seedBlogPosts
+
+    const data = (await response.json()) as { posts?: ApiBlogPost[] }
+    const kvPosts = Array.isArray(data.posts) ? data.posts.map(normalizeApiPost) : []
+    const merged = new Map(seedBlogPosts.map((post) => [post.slug, post]))
+
+    kvPosts.forEach((post) => {
+      if (post.slug) merged.set(post.slug, post)
+    })
+
+    return Array.from(merged.values()).sort((a, b) => {
+      if (a.featured && !b.featured) return -1
+      if (!a.featured && b.featured) return 1
+      return b.date.localeCompare(a.date)
+    })
+  } catch {
+    return seedBlogPosts
+  }
+}
+
+export async function getBlogPost(slug: string) {
+  const posts = await getBlogPosts()
+  return posts.find((post) => post.slug === slug)
 }

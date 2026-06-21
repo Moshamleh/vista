@@ -3,6 +3,10 @@ import type { Metadata, Viewport } from 'next'
 import { Space_Grotesk, Inter } from 'next/font/google'
 import { siteConfig } from '@/lib/site'
 import { StructuredData } from '@/components/structured-data'
+import { GsapScrollEffects } from '@/components/gsap-scroll-effects'
+import { VercelSpeedInsights } from '@/components/vercel-speed-insights'
+import { VistaLeadQualifier } from '@/components/vista-lead-qualifier'
+import { TrackedWhatsappLinks } from '@/components/tracked-whatsapp-links'
 import './globals.css'
 
 const spaceGrotesk = Space_Grotesk({
@@ -17,7 +21,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: `${siteConfig.name} — Dubai Branding & UX Design Agency`,
+    default: `${siteConfig.name} — ${siteConfig.tagline}`,
     template: `%s — ${siteConfig.name}`,
   },
   description: siteConfig.description,
@@ -42,12 +46,23 @@ export const metadata: Metadata = {
       'max-video-preview': -1,
     },
   },
+  other: {
+    'geo.region': 'AE-DU',
+    'geo.placename': 'Dubai',
+    'geo.position': '25.2048;55.2708',
+    ICBM: '25.2048, 55.2708',
+    'content-language': 'en-AE, ar-AE',
+    language: 'English',
+    'language:alternate': 'Arabic',
+    author: siteConfig.name,
+    publisher: siteConfig.name,
+  },
   openGraph: {
     type: 'website',
     locale: siteConfig.locale,
     url: siteConfig.url,
     siteName: siteConfig.name,
-    title: `${siteConfig.name} — Dubai Branding & UX Design Agency`,
+    title: `${siteConfig.name} — ${siteConfig.tagline}`,
     description: siteConfig.description,
     images: [
       {
@@ -60,7 +75,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: `${siteConfig.name} — Dubai Branding & UX Design Agency`,
+    title: `${siteConfig.name} — ${siteConfig.tagline}`,
     description: siteConfig.description,
     site: siteConfig.twitterHandle,
     creator: siteConfig.twitterHandle,
@@ -94,9 +109,13 @@ export default function RootLayout({
       <head>
         <StructuredData />
       </head>
-      <body className="font-sans antialiased">
+      <body className="tactile-brutalist font-sans antialiased">
+        <GsapScrollEffects />
         {children}
+        <TrackedWhatsappLinks />
+        <VistaLeadQualifier />
         {process.env.NODE_ENV === 'production' && <Analytics />}
+        {process.env.NODE_ENV === 'production' && <VercelSpeedInsights />}
       </body>
     </html>
   )
