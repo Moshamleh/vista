@@ -1,0 +1,13 @@
+name: Daily Vista Guardian
+
+on:
+  schedule:
+    - cron: "0 5 * * *"
+  workflow_dispatch:
+
+jobs:
+  ping-worker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Worker
+        run: curl -X POST https://vista-automation-engine.vistabylara.workers.dev/automation
