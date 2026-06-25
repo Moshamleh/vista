@@ -10,16 +10,22 @@ const ROBOT_SCENE = "https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecod
 
 export function Hero() {
   const callAI = async () => {
-    const res = await fetch(
-      "https://vista-ai-visibility.workers.dev/recommend?q=need%20more%20leads"
-    )
+    try {
+      const res = await fetch(
+        "/recommend?q=need%20more%20leads",
+        { cache: "no-store" }
+      )
 
-    const data = await res.json()
+      const data = await res.json()
 
-    if (data?.whatsappLink) {
-      window.open(data.whatsappLink, "_blank")
+      if (data?.whatsappLink) {
+        window.open(data.whatsappLink, "_blank")
+      }
+    } catch {
+      // No-op: CTA should not break the homepage
     }
   }
+
 
   return (
     <section

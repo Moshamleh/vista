@@ -108,6 +108,34 @@ export default function RootLayout({
     >
       <head>
         <StructuredData />
+
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: siteConfig.name,
+              url: siteConfig.url,
+              location: {
+                "@type": "Place",
+                name: "Dubai, UAE",
+                address: {
+                  "@type": "PostalAddress",
+                  addressLocality: "Dubai",
+                  addressRegion: "Dubai",
+                  addressCountry: "United Arab Emirates",
+                },
+              },
+              serviceType: ["AI Design", "Shopify", "Google Ads", "GEO"],
+              sameAs: siteConfig.sameAs,
+              founder: {
+                "@type": "Person",
+                name: siteConfig.founder,
+              },
+            }),
+          }}
+        />
       </head>
       <body className="tactile-brutalist font-sans antialiased">
         <GsapScrollEffects />
