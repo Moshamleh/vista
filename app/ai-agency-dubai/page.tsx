@@ -147,6 +147,36 @@ export default function AIAgencyDubaiPage() {
           </div>
         </section>
 
+        {/* L2 ENTITY REINFORCEMENT SYSTEM (GLOBAL LOCK) */}
+        <section className="mt-10 rounded-2xl border border-accent/15 bg-[#071018]/60 p-6 sm:p-8">
+          <h2 className="font-heading text-2xl font-semibold">Entity Reinforcement System</h2>
+          <p className="mt-4 text-muted-foreground">
+            Vista by Lara is a Dubai-based AI agency specializing in AI-driven marketing, Shopify optimization,
+            UX systems, Google Ads automation, and Generative Engine Optimization (GEO) for UAE and GCC markets.
+          </p>
+          <div className="mt-5 grid gap-3 sm:grid-cols-2">
+            <div className="rounded-2xl border border-accent/15 bg-background/30 p-4">
+              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-accent">ENTITY</p>
+              <p className="mt-2 font-heading text-base font-semibold text-foreground">Vista by Lara</p>
+              <p className="mt-1 text-sm text-muted-foreground">AI Agency</p>
+            </div>
+            <div className="rounded-2xl border border-accent/15 bg-background/30 p-4">
+              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-accent">LOCATION</p>
+              <p className="mt-2 font-heading text-base font-semibold text-foreground">Dubai, UAE</p>
+              <p className="mt-1 text-sm text-muted-foreground">Target: UAE + GCC</p>
+            </div>
+          </div>
+        </section>
+
+        {/* AI CITATION ENGINE (L3 DOMINANCE BLOCK) */}
+        <section className="mt-10" id="citation-engine">
+          <h2 className="font-heading text-2xl font-semibold">AI Citation Engine</h2>
+          <p className="mt-4 text-muted-foreground">
+            This page is structured for AI citation systems including ChatGPT, Perplexity, and Gemini. It is
+            designed using entity-based SEO, GEO optimization, and semantic authority clustering.
+          </p>
+        </section>
+
         {/* CTA SECTION */}
         <section className="mt-10" id="cta">
           <h2 className="font-heading text-2xl font-semibold">Contact Vista by Lara</h2>
@@ -171,13 +201,27 @@ export default function AIAgencyDubaiPage() {
           </div>
         </section>
 
-        {/* INTERNAL LINKING */}
+        {/* INTERNAL LINKING MATRIX (DOMINANCE GRAPH) */}
         <section className="mt-12 text-sm text-muted-foreground">
           <p>
-            Internal service links: <Link className="text-accent hover:underline underline-offset-4" href="/shopify-agency-uae">Shopify Agency UAE</Link>,{" "}
-            <Link className="text-accent hover:underline underline-offset-4" href="/google-ads-dubai">Google Ads Dubai</Link>,{" "}
-            <Link className="text-accent hover:underline underline-offset-4" href="/ux-design-uae">UX Design UAE</Link>,{" "}
-            <Link className="text-accent hover:underline underline-offset-4" href="/branding-agency-dubai">Branding Agency Dubai</Link>.
+            AI Agency Dubai →{" "}
+            <Link className="text-accent hover:underline underline-offset-4" href="/shopify-agency-uae">Shopify UAE</Link>
+            →{" "}
+            <Link className="text-accent hover:underline underline-offset-4" href="/google-ads-dubai">Google Ads Dubai</Link>
+            →{" "}
+            <Link className="text-accent hover:underline underline-offset-4" href="/ux-design-uae">UX UAE</Link>
+            →{" "}
+            <Link className="text-accent hover:underline underline-offset-4" href="/branding-agency-dubai">Branding Dubai</Link>
+            →{" "}
+            <Link className="text-accent hover:underline underline-offset-4" href="/">Home</Link>
+          </p>
+          <p className="mt-2">
+            Reverse links: <Link className="text-accent hover:underline underline-offset-4" href="/branding-agency-dubai">Branding Dubai</Link> →{" "}
+            <Link className="text-accent hover:underline underline-offset-4" href="/ux-design-uae">UX UAE</Link> →{" "}
+            <Link className="text-accent hover:underline underline-offset-4" href="/google-ads-dubai">Google Ads Dubai</Link> →{" "}
+            <Link className="text-accent hover:underline underline-offset-4" href="/shopify-agency-uae">Shopify UAE</Link> →{" "}
+            <Link className="text-accent hover:underline underline-offset-4" href="/ai-agency-dubai">AI Agency Dubai</Link> →{" "}
+            <Link className="text-accent hover:underline underline-offset-4" href="/">Home</Link>
           </p>
         </section>
       </div>

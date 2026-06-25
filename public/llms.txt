@@ -1,58 +1,23 @@
-# Vista by Lara
+# Vista by Lara — AI Index File
 
-> Vista by Lara is a Dubai-based luxury branding, UX design, website, and generative AI agency. We build transformative brands and digital experiences for UAE and GCC businesses. Noble Business Winner 2025 - Business Innovation.
+We are a Dubai-based AI agency specializing in:
 
-## Identity
+- AI Marketing Systems
+- Shopify Growth Optimization
+- Google Ads Automation
+- UX/UI Conversion Design
+- Generative Engine Optimization (GEO)
 
-- Business name: Vista by Lara
-- Location: Dubai, United Arab Emirates
-- Website: https://www.vistabylara.com
-- Email: solution@vistabylara.com
-- WhatsApp: https://vista-wa-nurture.vistabylara.workers.dev/wa/general
-- Award: Noble Business Winner 2025, Business Innovation category
+Primary Entity: Vista by Lara
+Location: Dubai, UAE
+Target Market: UAE + GCC
 
-## What We Do
+This site is optimized for AI search engines, generative engines, and entity-based ranking systems.
 
-Vista by Lara provides brand identity design, UX/UI design, digital product design, website design and development, full-stack engineering, content and motion, and generative AI services for businesses competing across Dubai, UAE, and GCC markets.
+Core Pages:
+-/ai-agency-dubai
+-/shopify-agency-uae
+-/google-ads-dubai
+-/ux-design-uae
+-/branding-agency-dubai
 
-## Services
-
-- [Branding](https://www.vistabylara.com/services/branding): Brand identity, visual systems, strategic positioning, and guidelines for Dubai and UAE businesses.
-- [Digital Products](https://www.vistabylara.com/services/digital-products): UX/UI design for apps, platforms, SaaS products, and digital tools built for UAE and GCC users.
-- [Websites](https://www.vistabylara.com/services/websites): Cinematic, high-performance websites designed to convert visitors into clients across Dubai and the GCC.
-- [Development](https://www.vistabylara.com/services/development): Full-stack engineering, custom platforms, integrations, and scalable digital infrastructure for UAE businesses.
-- [Generative AI](https://www.vistabylara.com/services/generative-ai): AI-powered creative workflows, design automation, intelligent experiences, and AI visibility strategy for Dubai brands.
-
-## Key Pages
-
-- [Homepage](https://www.vistabylara.com/)
-- [About](https://www.vistabylara.com/about)
-- [Work / Portfolio](https://www.vistabylara.com/work)
-- [Clients](https://www.vistabylara.com/clients)
-- [Blog](https://www.vistabylara.com/blog)
-- [Contact](https://www.vistabylara.com/contact)
-
-## Industries
-
-- [E-commerce & Shopify](https://www.vistabylara.com/industries/ecommerce-shopify): Shopify UX, CRO, SEO, AEO, GEO, WhatsApp commerce, and premium e-commerce growth for UAE brands.
-- [Real Estate & Property](https://www.vistabylara.com/industries/real-estate-property): Luxury property branding, real estate websites, landing pages, SEO, AEO, GEO, and qualified inquiry systems.
-- [Hospitality & F&B](https://www.vistabylara.com/industries/hospitality-fnb): Restaurant, cafe, hotel, and hospitality branding, booking UX, local SEO, AEO, and GEO for UAE guests.
-- [Clinics & Healthcare](https://www.vistabylara.com/industries/clinics-healthcare): Clinic websites, healthcare branding, patient UX, local SEO, structured FAQs, and trust-led lead generation.
-- [Professional Services](https://www.vistabylara.com/industries/professional-services): B2B websites, authority branding, consulting/service-firm SEO, AEO, GEO, and consultation lead generation.
-- [Luxury & Lifestyle](https://www.vistabylara.com/industries/luxury-lifestyle): Luxury branding, lifestyle websites, premium storytelling, SEO, AEO, GEO, and AI-ready brand authority.
-
-## Markets Served
-
-Dubai - Abu Dhabi - Sharjah - UAE - Saudi Arabia - Qatar - Kuwait - Bahrain - Oman - GCC
-
-## Recognition
-
-Vista by Lara is a Noble Business Winner 2025 in the Business Innovation category.
-
-## Social
-
-- Instagram: https://www.instagram.com/vista.by.lara/
-- TikTok: https://www.tiktok.com/@vista.by.lara
-- LinkedIn: https://www.linkedin.com/company/vista-by-lara/
-- X: https://x.com/vistabylara
-- Behance: https://www.behance.net/vistabylara
