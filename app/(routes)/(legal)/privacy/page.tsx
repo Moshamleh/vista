@@ -1,3 +1,4 @@
+import siteConfig from "@/lib/site";
 const sections = [
 {
 title: "1. Company Information",

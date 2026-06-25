@@ -9,6 +9,18 @@ import { siteConfig } from "@/lib/site"
 const ROBOT_SCENE = "https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
 
 export function Hero() {
+  const callAI = async () => {
+    const res = await fetch(
+      "https://vista-ai-visibility.workers.dev/recommend?q=need%20more%20leads"
+    )
+
+    const data = await res.json()
+
+    if (data?.whatsappLink) {
+      window.open(data.whatsappLink, "_blank")
+    }
+  }
+
   return (
     <section
       id="top"
@@ -80,6 +92,12 @@ export function Hero() {
               Speak to an expert
               <ArrowRight className="h-4 w-4" />
             </a>
+            <button
+              onClick={callAI}
+              className="bg-black text-white border border-yellow-500 px-6 py-3 rounded-lg hover:opacity-80 transition"
+            >
+              Get AI Growth Plan
+            </button>
             <a
               href="#automation-growth"
               className="inline-flex min-h-14 items-center justify-center gap-2 rounded-full border border-white/10 bg-white/[0.025] px-8 text-base font-semibold text-foreground/82 backdrop-blur-md transition-colors hover:border-accent/35 hover:bg-accent/10 hover:text-accent"
