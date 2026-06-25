@@ -62,7 +62,7 @@ export function GlobeCdn({
   const thetaOffsetRef = useRef(0)
   const isPausedRef = useRef(false)
   const [traffic, setTraffic] = useState(() =>
-    defaultArcs.map((arc, index) => ({ id: arc.id, value: [88, 76, 64, 52, 49, 42, 38][index] || 30 }))
+    arcs.map((arc, index) => ({ id: arc.id, value: [88, 76, 64, 52, 49, 42, 38][index] || 30 }))
   )
 
   useEffect(() => {

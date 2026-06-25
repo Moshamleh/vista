@@ -43,30 +43,47 @@ export function VistaLeadQualifier() {
         const response = await fetch(WORKER_URL, {
           method: "POST",
           headers: { "content-type": "application/json" },
-          body: JSON.stringify({ message: msg, history: history.slice(-6) }),
+          body: JSON.stringify({ message: msg, history: history.length ? history : [] }),
         })
-        const data = (await response.json()) as { reply?: string; whatsapp?: string }
-        const reply = data.reply || "Thanks. Please continue on WhatsApp so our Dubai team can help you faster."
+
+        const data = (await response.json()) as {
+          reply?: string
+          qualified?: boolean
+          whatsapp?: string
+        }
 
         typing.style.display = "none"
-        addMsg(reply, "bot")
-        history.push({ role: "assistant", content: reply })
 
-        if (data.whatsapp) {
+        const replyText = data.reply
+        if (!replyText) {
+          // No fabricated/fallback AI content
+          return
+        }
+
+        addMsg(replyText, "bot")
+        history.push({ role: "assistant", content: replyText })
+
+        // Recommend WhatsApp directly when qualified
+        if (data.qualified) {
+          const candidate = data.whatsapp || WHATSAPP_GENERAL
+          const wa = /^https:\/\/(wa\.me|api\.whatsapp\.com)\//.test(candidate)
+            ? candidate
+            : WHATSAPP_GENERAL
           const link = document.createElement("a")
           link.className = "vlq-wa"
-          link.href = data.whatsapp.startsWith("https://vista-wa-nurture.vistabylara.workers.dev/")
-            ? data.whatsapp
-            : WHATSAPP_GENERAL
+          link.href = wa
           link.target = "_blank"
           link.rel = "noopener"
           link.textContent = "💬 Continue on WhatsApp →"
           msgs.appendChild(link)
         }
+
       } catch {
         typing.style.display = "none"
-        addMsg("Sorry, something went wrong. Please email solution@vistabylara.com", "bot")
+        // Minimal non-AI error message (no hardcoded assistant reply)
+        addMsg("Could not reach the assistant right now. Please try again.", "bot")
       }
+
 
       msgs.scrollTop = msgs.scrollHeight
     }

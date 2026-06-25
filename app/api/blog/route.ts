@@ -67,10 +67,14 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
-  const expectedToken = "vista-blog-secret-2026"
+  const expectedToken = process.env.BLOG_ADMIN_TOKEN
   const token = request.headers.get("x-auth-token")
 
-  if (!expectedToken || token !== expectedToken) {
+  if (!expectedToken) {
+    return NextResponse.json({ error: "Blog publishing is not configured." }, { status: 503 })
+  }
+
+  if (token !== expectedToken) {
     return NextResponse.json({ error: "Unauthorized." }, { status: 401 })
   }
 

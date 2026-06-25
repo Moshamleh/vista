@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import Script from "next/script"
 import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
+import { VistaLeadQualifier } from "@/components/vista-lead-qualifier"
 import { jsonLd } from "@/lib/json-ld"
 import { siteConfig } from "@/lib/site"
 
@@ -211,8 +212,10 @@ export default function ContactPage() {
         </section>
       </main>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(schema) }} />
+
       <SiteFooter />
-      <Script src="https://vista-lead-qualifier.vistabylara.workers.dev/chat" strategy="afterInteractive" />
+
+      {/* <Script src="https://vista-lead-qualifier.vistabylara.workers.dev/chat" strategy="afterInteractive" /> */}
     </div>
   )
 }

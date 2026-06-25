@@ -1,155 +1,180 @@
-import type { Metadata } from "next"
-import { SiteHeader } from "@/components/site-header"
-import { SiteFooter } from "@/components/site-footer"
-import { jsonLd } from "@/lib/json-ld"
-import { siteConfig } from "@/lib/site"
-
-const pageUrl = `${siteConfig.url}/privacy`
-const updated = "20 June 2026"
-
-export const metadata: Metadata = {
-  title: "Privacy Policy | Vista by Lara",
-  description:
-    "Privacy Policy for Vista by Lara in Dubai, UAE, covering website inquiries, project communications, analytics, cookies, and UAE data protection rights.",
-  alternates: { canonical: pageUrl },
-  robots: { index: false, follow: true },
-  openGraph: {
-    title: "Privacy Policy | Vista by Lara",
-    description:
-      "Privacy Policy for Vista by Lara, a Dubai-based branding, UX, website, and generative AI agency.",
-    url: pageUrl,
-    type: "website",
-    siteName: siteConfig.name,
-    locale: "en_AE",
-  },
-}
-
 const sections = [
-  {
-    title: "1. Who We Are",
-    body: [
-      `${siteConfig.name} is a Dubai-based branding, UX design, website development, and generative AI agency serving clients across the UAE and GCC.`,
-      `For privacy questions, contact us at ${siteConfig.email} or WhatsApp ${siteConfig.phone}.`,
-    ],
-  },
-  {
-    title: "2. Information We Collect",
-    body: [
-      "We collect information you submit through forms, email, WhatsApp, calls, project briefs, consultation bookings, and proposal requests. This may include your name, company, email address, phone number, location, service interest, budget range, project details, and files you choose to share.",
-      "We may also collect technical information such as IP address, device type, browser, referring page, pages visited, approximate location, and analytics events.",
-    ],
-  },
-  {
-    title: "3. How We Use Your Information",
-    body: [
-      "We use your information to respond to inquiries, prepare proposals, deliver services, manage projects, improve the website, measure marketing performance, prevent misuse, meet legal obligations, and maintain business records.",
-      "We do not sell your personal information.",
-    ],
-  },
-  {
-    title: "4. Legal Basis and UAE Compliance",
-    body: [
-      "We process personal data where it is necessary to respond to your request, perform a contract, pursue legitimate business interests, comply with UAE legal requirements, or where you have given consent.",
-      "We aim to handle personal data in line with applicable UAE data protection principles, including transparency, purpose limitation, data minimisation, security, and retention only for as long as needed.",
-    ],
-  },
-  {
-    title: "5. Cookies, Analytics, and Advertising",
-    body: [
-      "We may use cookies and similar technologies to operate the website, understand traffic, improve content, remember preferences, and measure campaign performance.",
-      "You can control cookies through your browser settings. Some features may not work correctly if cookies are disabled.",
-    ],
-  },
-  {
-    title: "6. Service Providers",
-    body: [
-      "We may share limited information with trusted providers who help us operate the website, host content, process forms, manage analytics, deliver email, support payments, or provide project tools.",
-      "These providers are only given information needed to perform their services.",
-    ],
-  },
-  {
-    title: "7. International Transfers",
-    body: [
-      "Some technology providers may process data outside the UAE. Where this happens, we use reasonable safeguards and work with reputable providers that maintain security and privacy controls.",
-    ],
-  },
-  {
-    title: "8. Data Retention",
-    body: [
-      "Inquiry and project records are kept only as long as needed for communication, service delivery, legal, accounting, tax, security, and legitimate business purposes.",
-      "If a lead does not become a client, we may retain inquiry records for a reasonable period to manage follow-ups and avoid duplicate requests.",
-    ],
-  },
-  {
-    title: "9. Your Rights",
-    body: [
-      "You may request access, correction, deletion, restriction, or withdrawal of consent where applicable. You may also ask us to stop marketing communications.",
-      `Send requests to ${siteConfig.email}. We may need to verify your identity before acting on a request.`,
-    ],
-  },
-  {
-    title: "10. Security",
-    body: [
-      "We use reasonable technical and organisational measures to protect personal data. No online system is completely secure, so please avoid sending highly sensitive information through website forms unless requested through an agreed secure channel.",
-    ],
-  },
-  {
-    title: "11. Children",
-    body: ["Our website and services are intended for business users and are not directed to children."],
-  },
-  {
-    title: "12. Updates",
-    body: [
-      "We may update this Privacy Policy when our services, legal requirements, or website technologies change. The latest version will be posted on this page.",
-    ],
-  },
+{
+title: "1. Company Information",
+body: [
+`${siteConfig.name} ("Vista by Lara", "we", "our", or "us") is a Dubai, United Arab Emirates based digital growth agency providing branding, website development, Shopify solutions, UX design, conversion optimisation, paid advertising, search marketing, generative engine optimisation (GEO), artificial intelligence implementation, automation, and consulting services.`,
+`For privacy-related enquiries, data requests, or compliance questions, contact us at ${siteConfig.email} or ${siteConfig.phone}.`,
+"This Privacy Policy explains how we collect, use, disclose, store, transfer, and protect personal information when you visit our website, communicate with us, engage our services, use our AI-powered tools, or interact with our marketing campaigns.",
+],
+},
+
+{
+title: "2. Categories of Personal Information We Collect",
+body: [
+"We may collect identity information including name, company name, job title, business information, and professional details.",
+"We may collect contact information including email address, phone number, WhatsApp details, social media profiles, billing information, and communication preferences.",
+"We may collect project-related information including business goals, service requirements, budgets, uploaded documents, creative assets, website credentials, marketing data, analytics access, and campaign information provided by you.",
+"We may automatically collect technical information including IP address, browser type, operating system, device identifiers, session information, referral sources, website usage behaviour, location indicators, and performance data.",
+],
+},
+
+{
+title: "3. How We Collect Information",
+body: [
+"Information may be collected directly through website forms, contact forms, lead generation forms, WhatsApp conversations, email communications, consultations, contracts, project onboarding processes, newsletter subscriptions, chatbot interactions, and customer support requests.",
+"Information may also be collected through cookies, analytics technologies, server-side tracking, advertising platforms, CRM systems, social media platforms, publicly available sources, and trusted business partners.",
+],
+},
+
+{
+title: "4. Purposes of Processing",
+body: [
+"We process personal information to respond to enquiries, prepare proposals, deliver services, manage projects, provide customer support, process transactions, maintain client relationships, improve website performance, and fulfil contractual obligations.",
+"Information may also be used for business analytics, service improvement, fraud prevention, cybersecurity monitoring, legal compliance, marketing performance measurement, conversion tracking, and operational management.",
+"We do not sell personal information.",
+],
+},
+
+{
+title: "5. Legal Basis for Processing",
+body: [
+"Where required by applicable law, personal information is processed based on consent, contractual necessity, legitimate business interests, legal obligations, protection of rights, fraud prevention, security requirements, and operational business purposes.",
+"You may withdraw consent at any time where processing relies on consent.",
+],
+},
+
+{
+title: "6. Cookies, Pixels and Similar Technologies",
+body: [
+"Our website may use cookies, pixels, tags, local storage technologies, scripts, SDKs, session identifiers, and similar technologies.",
+"These technologies help operate the website, improve user experience, understand website performance, remember preferences, measure marketing effectiveness, prevent abuse, and optimise advertising campaigns.",
+"Cookie categories may include essential cookies, analytics cookies, preference cookies, advertising cookies, security cookies, and performance cookies.",
+],
+},
+
+{
+title: "7. Analytics, Tracking and Advertising Platforms",
+body: [
+"We may use Google Analytics, Google Ads, Google Tag Manager, Google Search Console, Meta Ads technologies, LinkedIn Ads, Microsoft Clarity, server-side tracking solutions, conversion APIs, remarketing technologies, and attribution tools.",
+"These systems help us understand website traffic, visitor behaviour, campaign effectiveness, conversion performance, and business demand.",
+"Where applicable, data may be aggregated, pseudonymised, or processed for reporting and optimisation purposes.",
+],
+},
+
+{
+title: "8. Artificial Intelligence and Automated Technologies",
+body: [
+"Our services may utilise artificial intelligence systems, large language models, chatbots, AI assistants, recommendation systems, workflow automations, generative AI tools, and machine-learning technologies.",
+"Information submitted to AI-powered systems may be processed to provide requested functionality, automate workflows, generate responses, analyse information, improve user experiences, and support business operations.",
+"No solely automated decision producing significant legal effects is intentionally made based solely on website interactions.",
+],
+},
+
+{
+title: "9. WhatsApp, Email and Communication Services",
+body: [
+"If you communicate with us through WhatsApp, email, phone calls, video meetings, messaging platforms, or social media channels, we may retain communication records to manage enquiries, support requests, proposals, projects, and business relationships.",
+"Communication records may be retained for compliance, quality assurance, dispute resolution, and legitimate business purposes.",
+],
+},
+
+{
+title: "10. Sharing Information with Service Providers",
+body: [
+"We may share information with carefully selected service providers including cloud hosting providers, website platforms, analytics providers, payment processors, communication platforms, CRM systems, AI providers, legal advisers, accountants, cybersecurity providers, and regulatory authorities where required.",
+"Service providers only receive information reasonably necessary to perform their services.",
+],
+},
+
+{
+title: "11. International Transfers",
+body: [
+"Because we use international technology platforms and cloud services, personal information may be processed outside the United Arab Emirates.",
+"Where transfers occur, we implement reasonable organisational, contractual, and technical safeguards designed to protect personal information.",
+],
+},
+
+{
+title: "12. Security Measures",
+body: [
+"We maintain technical and organisational safeguards including encrypted communications, secure hosting environments, access controls, role-based permissions, monitoring systems, backups, cybersecurity protections, and operational security procedures.",
+"While we take reasonable steps to protect personal information, no system can guarantee absolute security.",
+],
+},
+
+{
+title: "13. Data Retention",
+body: [
+"Contact enquiries may be retained for up to 24 months.",
+"Client records, contracts, invoices, and accounting documentation may be retained for up to 7 years or longer where required by law.",
+"Analytics information, website logs, and security monitoring records may be retained according to operational and legal requirements.",
+"Retention periods may vary depending on legal, contractual, accounting, security, and business obligations.",
+],
+},
+
+{
+title: "14. Your Privacy Rights",
+body: [
+"Subject to applicable law, you may request access, correction, deletion, restriction of processing, withdrawal of consent, objection to certain processing activities, and information regarding how your personal information is used.",
+`Requests may be submitted to ${siteConfig.email}.`,
+"Identity verification may be required before processing requests.",
+],
+},
+
+{
+title: "15. Marketing Communications",
+body: [
+"We may send newsletters, educational content, service announcements, event invitations, industry updates, and promotional communications where permitted by law.",
+"You may unsubscribe from marketing communications at any time.",
+],
+},
+
+{
+title: "16. Business Transfers",
+body: [
+"In connection with a merger, acquisition, restructuring, financing transaction, business transfer, investment activity, or asset sale, personal information may be transferred subject to applicable legal requirements and confidentiality obligations.",
+],
+},
+
+{
+title: "17. Third-Party Services and Websites",
+body: [
+"Our website may contain links to third-party websites, software, platforms, services, and external resources.",
+"We are not responsible for the privacy practices, content, or policies of third parties.",
+],
+},
+
+{
+title: "18. Children and Minors",
+body: [
+"Our services are intended for business users and professional audiences.",
+"We do not knowingly collect personal information from children under the age of 18.",
+],
+},
+
+{
+title: "19. Security Incidents and Breach Response",
+body: [
+"If we become aware of a security incident affecting personal information, we will take appropriate actions consistent with applicable legal obligations, contractual commitments, and industry practices.",
+],
+},
+
+{
+title: "20. Changes to This Policy",
+body: [
+"We may update this Privacy Policy periodically to reflect legal developments, service changes, technology updates, operational requirements, or business practices.",
+"The most recent version will always be available on this page.",
+],
+},
+
+{
+title: "21. Contact Information",
+body: [
+`${siteConfig.name}`,
+"Dubai, United Arab Emirates",
+`Email: ${siteConfig.email}`,
+`Phone: ${siteConfig.phone}`,
+`Website: ${siteConfig.url}`,
+],
+},
 ]
-
-const schema = {
-  "@context": "https://schema.org",
-  "@type": "WebPage",
-  "@id": `${pageUrl}#webpage`,
-  url: pageUrl,
-  name: "Privacy Policy",
-  isPartOf: { "@id": `${siteConfig.url}/#website` },
-  about: { "@id": `${siteConfig.url}/#organization` },
-  dateModified: "2026-06-20",
-  inLanguage: "en-AE",
-}
-
-export default function PrivacyPage() {
-  return (
-    <div className="min-h-screen bg-background">
-      <SiteHeader />
-      <main className="mx-auto max-w-5xl px-5 py-28 sm:px-8 sm:py-36">
-        <div className="rounded-3xl border border-accent/10 bg-[#0d111f] p-6 shadow-[0_30px_80px_-64px_rgba(87,217,255,0.24)] sm:p-10">
-          <p className="text-sm font-medium uppercase tracking-[0.22em] text-accent">Legal</p>
-          <h1 className="mt-5 font-heading text-4xl font-semibold tracking-tight text-foreground sm:text-6xl">
-            Privacy Policy
-          </h1>
-          <p className="mt-5 max-w-3xl text-base leading-7 text-muted-foreground">
-            Last updated: {updated}. This policy explains how Vista by Lara collects, uses, protects, and retains
-            personal information from website visitors, leads, clients, suppliers, and business contacts in Dubai,
-            the UAE, and GCC markets.
-          </p>
-          <div className="mt-10 space-y-9">
-            {sections.map((section) => (
-              <section key={section.title} className="border-t border-border/60 pt-7">
-                <h2 className="font-heading text-2xl font-semibold text-foreground">{section.title}</h2>
-                <div className="mt-4 space-y-4">
-                  {section.body.map((paragraph) => (
-                    <p key={paragraph} className="text-base leading-7 text-muted-foreground">
-                      {paragraph}
-                    </p>
-                  ))}
-                </div>
-              </section>
-            ))}
-          </div>
-        </div>
-      </main>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(schema) }} />
-      <SiteFooter />
-    </div>
-  )
-}

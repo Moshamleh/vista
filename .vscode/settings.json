@@ -1,3 +1,8 @@
 {
-    "Codegeex.SidebarUI.LanguagePreference": "English"
+    "Codegeex.SidebarUI.LanguagePreference": "English",
+    "python.testing.pytestArgs": [
+        "."
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true
 }
