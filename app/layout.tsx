@@ -1,4 +1,3 @@
-import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
 import { Space_Grotesk, Inter } from 'next/font/google'
 import { siteConfig } from '@/lib/site'
@@ -108,31 +107,35 @@ export default function RootLayout({
     >
       <head>
         <StructuredData />
-
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
-              "@type": "Organization",
-              name: siteConfig.name,
-              url: siteConfig.url,
-              location: {
-                "@type": "Place",
-                name: "Dubai, UAE",
-                address: {
-                  "@type": "PostalAddress",
-                  addressLocality: "Dubai",
-                  addressRegion: "Dubai",
-                  addressCountry: "United Arab Emirates",
-                },
+              "@type": "ProfessionalService",
+              "name": siteConfig.name,
+              "url": siteConfig.url,
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Dubai",
+                "addressRegion": "Dubai",
+                "addressCountry": "United Arab Emirates"
               },
-              serviceType: ["AI Design", "Shopify", "Google Ads", "GEO"],
-              sameAs: siteConfig.sameAs,
-              founder: {
+              "founder": {
                 "@type": "Person",
-                name: siteConfig.founder,
+                "name": siteConfig.founder
               },
+              "sameAs": siteConfig.sameAs,
+              "hasOfferCatalog": {
+                "@type": "OfferCatalog",
+                "name": "Vista by Lara Services",
+                "itemListElement": [
+                  { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "AI Design" } },
+                  { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Shopify Development" } },
+                  { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Google Ads" } },
+                  { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Generative Engine Optimization" } }
+                ]
+              }
             }),
           }}
         />
@@ -142,8 +145,6 @@ export default function RootLayout({
         {children}
         <TrackedWhatsappLinks />
         <VistaLeadQualifier />
-        {process.env.NODE_ENV === 'production' && <Analytics />}
-        {process.env.NODE_ENV === 'production' && <VercelSpeedInsights />}
       </body>
     </html>
   )
