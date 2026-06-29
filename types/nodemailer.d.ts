@@ -12,7 +12,7 @@ declare module "nodemailer" {
     sendMail: (options: SendMailOptions) => Promise<unknown>
   }
 
-  export default {
+  const nodemailer: {
     createTransport(options: {
       service: string
       auth: {
@@ -21,4 +21,6 @@ declare module "nodemailer" {
       }
     }): Transporter
   }
+
+  export default nodemailer
 }

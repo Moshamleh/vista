@@ -1,11 +1,6 @@
 import { Redis } from "@upstash/redis"
 import { NextResponse } from "next/server"
 
-const redis = new Redis({
-  url: process.env.UPSTASH_REDIS_REST_URL!,
-  token: process.env.UPSTASH_REDIS_REST_TOKEN!,
-})
-
 type BlogPost = {
   slug: string
   title: string
@@ -17,6 +12,15 @@ type BlogPost = {
   readTime: string
   metaTitle: string
   metaDescription: string
+}
+
+function getRedis() {
+  const url = process.env.UPSTASH_REDIS_REST_URL
+  const token = process.env.UPSTASH_REDIS_REST_TOKEN
+
+  if (!url || !token) return null
+
+  return new Redis({ url, token })
 }
 
 function clean(value: unknown) {
@@ -59,10 +63,14 @@ function validatePost(value: unknown): BlogPost | { error: string } {
 
 export async function GET() {
   try {
+    const redis = getRedis()
+    if (!redis) return NextResponse.json({ posts: [] })
+
     const posts = (await redis.get<BlogPost[]>("blog_posts")) || []
     return NextResponse.json({ posts })
-  } catch (e: any) {
-    return NextResponse.json({ error: e.message }, { status: 500 })
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "Failed to load blog posts."
+    return NextResponse.json({ error: message }, { status: 500 })
   }
 }
 
@@ -84,6 +92,12 @@ export async function POST(request: Request) {
   if ("error" in post) {
     return NextResponse.json({ error: post.error }, { status: 400 })
   }
+
+  const redis = getRedis()
+  if (!redis) {
+    return NextResponse.json({ error: "Blog storage is not configured." }, { status: 503 })
+  }
+
   const posts = (await redis.get<BlogPost[]>("blog_posts")) || []
   const existing = posts.findIndex((item) => item.slug === post.slug)
 

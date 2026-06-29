@@ -17,7 +17,7 @@ export function TypewriterWordmark({ className = "" }: { className?: string }) {
   const reduced = useRef(false)
 
   useEffect(() => {
-    // Respect users who prefer reduced motion — show the full word and stop.
+    // Respect users who prefer reduced motion: show the full word and stop.
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       reduced.current = true
       setTimeout(() => setCount(FULL.length), 0)
@@ -52,10 +52,17 @@ export function TypewriterWordmark({ className = "" }: { className?: string }) {
 
   return (
     <span
-      className={`font-heading text-2xl font-medium tracking-tight text-foreground ${className}`}
+      className={`relative inline-block shrink-0 whitespace-nowrap font-heading text-2xl font-medium tracking-tight text-foreground ${className}`}
       aria-label={FULL}
     >
-      <span aria-hidden="true">
+      <span aria-hidden="true" className="invisible">
+        {FULL}
+        <span
+          className="ml-0.5 inline-block w-[2px] -translate-y-0.5 self-center align-middle"
+          style={{ height: "1em" }}
+        />
+      </span>
+      <span aria-hidden="true" className="absolute inset-0">
         {main}
         <span className="text-muted-foreground">{muted}</span>
         <span

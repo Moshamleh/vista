@@ -551,7 +551,7 @@ export default function BrandingPage() {
         <section className="branding-award-grain relative overflow-hidden border-t border-white/10 py-28 text-center md:py-40">
           <div className="pointer-events-none absolute left-1/2 top-1/2 h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/10 blur-[130px]" />
           <div className="relative z-10 mx-auto max-w-[1320px] px-5 md:px-8">
-            <p className="text-[12px] font-semibold uppercase tracking-[0.25em] text-accent">(Let's build / 08)</p>
+            <p className="text-[12px] font-semibold uppercase tracking-[0.25em] text-accent">(Let&apos;s build / 08)</p>
             <h2 className="branding-display mx-auto mt-6 max-w-[13ch] text-[clamp(3rem,12vw,10rem)] text-foreground">
               Got a brand to <span className="text-accent">launch?</span>
             </h2>

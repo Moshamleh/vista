@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
-import gsap from "gsap";
+import Image from "next/image";
 
 export interface CardItem {
   imgUrl: string;
@@ -75,10 +75,23 @@ export default function SocialCards({ cards }: SocialCardsProps) {
   const hasEntered = useRef(false);
   const directionRef = useRef<"left" | "right" | null>(null);
   const prevVisible = useRef<Set<number>>(new Set());
+  const [gsapApi, setGsapApi] = useState<Awaited<typeof import("gsap")>["gsap"] | null>(null);
 
   const totalCards = cards.length;
   const needsPagination = totalCards > MAX_VISIBLE;
   const [centerIndex, setCenterIndex] = useState(needsPagination ? HALF : totalCards >> 1);
+
+  useEffect(() => {
+    let mounted = true;
+
+    import("gsap").then(({ gsap }) => {
+      if (mounted) setGsapApi(gsap);
+    });
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
 
   const getVisibleMap = useCallback((center: number) => {
     const map = new Map<number, number>();
@@ -102,6 +115,9 @@ export default function SocialCards({ cards }: SocialCardsProps) {
   }, [totalCards, needsPagination]);
 
   useEffect(() => {
+    const gsap = gsapApi;
+    if (!gsap) return;
+
     const container = containerRef.current;
     if (!container || !totalCards) return;
 
@@ -247,7 +263,7 @@ export default function SocialCards({ cards }: SocialCardsProps) {
       window.removeEventListener("resize", onResize);
       if (leaveTimer) clearTimeout(leaveTimer);
     };
-  }, [centerIndex, totalCards, getVisibleMap, needsPagination]);
+  }, [centerIndex, totalCards, getVisibleMap, needsPagination, gsapApi]);
 
   if (!totalCards) return null;
 
@@ -264,7 +280,13 @@ export default function SocialCards({ cards }: SocialCardsProps) {
           {cards.map((card, index) => {
             const image = (
               <div className="relative w-full h-full overflow-hidden">
-                <img src={card.imgUrl} loading="lazy" alt={card.alt || `Card ${index}`} className="absolute inset-0 w-full h-full object-cover z-10" />
+                <Image
+                  src={card.imgUrl}
+                  fill
+                  sizes="(max-width: 640px) 78vw, (max-width: 1024px) 50vw, 27rem"
+                  alt={card.alt || `Card ${index}`}
+                  className="absolute inset-0 z-10 object-cover"
+                />
               </div>
             );
             return card.linkUrl ? (

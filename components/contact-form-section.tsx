@@ -96,6 +96,14 @@ export function ContactFormSection() {
           onSubmit={onSubmit}
           className="rounded-[2rem] border border-border/25 bg-[#0b101c]/90 p-5 shadow-[0_40px_140px_-110px_rgba(255,255,255,0.45)] backdrop-blur sm:p-7"
         >
+          <input
+            type="text"
+            name="website"
+            tabIndex={-1}
+            autoComplete="off"
+            className="hidden"
+            aria-hidden="true"
+          />
           <div className="grid gap-4 sm:grid-cols-2">
             <label className="space-y-2">
               <span className="text-sm font-medium text-foreground">Name *</span>

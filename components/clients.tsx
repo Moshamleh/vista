@@ -34,6 +34,7 @@ function PixelCanvas({ colors, gap = 7 }: { colors: string[]; gap?: number }) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
   const pixelsRef = useRef<Pixel[]>([])
   const frameRef = useRef(0)
+  const [isVisible, setIsVisible] = useState(false)
 
   const setup = useCallback(() => {
     const canvas = canvasRef.current
@@ -74,6 +75,33 @@ function PixelCanvas({ colors, gap = 7 }: { colors: string[]; gap?: number }) {
 
   useEffect(() => {
     const canvas = canvasRef.current
+    const parent = canvas?.parentElement
+    if (!parent) return
+
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    if (reducedMotion) return
+
+    if (!("IntersectionObserver" in window)) {
+      const timeout = globalThis.setTimeout(() => setIsVisible(true), 0)
+      return () => globalThis.clearTimeout(timeout)
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(Boolean(entry?.isIntersecting))
+      },
+      { rootMargin: "220px" },
+    )
+
+    observer.observe(parent)
+
+    return () => observer.disconnect()
+  }, [])
+
+  useEffect(() => {
+    if (!isVisible) return
+
+    const canvas = canvasRef.current
     const ctx = canvas?.getContext("2d")
     if (!canvas || !ctx) return
 
@@ -107,7 +135,7 @@ function PixelCanvas({ colors, gap = 7 }: { colors: string[]; gap?: number }) {
       resizeObserver.disconnect()
       window.cancelAnimationFrame(frameRef.current)
     }
-  }, [setup])
+  }, [isVisible, setup])
 
   return <canvas ref={canvasRef} className="absolute inset-0 h-full w-full" aria-hidden="true" />
 }

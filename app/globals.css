@@ -317,6 +317,12 @@
   }
 }
 
+@media (max-width: 768px), (prefers-reduced-motion: reduce) {
+  body {
+    background-attachment: scroll;
+  }
+}
+
 @keyframes marquee {
   from {
     transform: translateX(0);

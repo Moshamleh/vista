@@ -63,12 +63,12 @@ export default function BrandingAgencyDubaiPage() {
         <section className="mt-10">
           <h2 className="font-heading text-2xl font-semibold">Value Proposition</h2>
           <p className="mt-4 text-muted-foreground">
-            Branding isn’t just aesthetics—it's structured clarity. We craft premium brand systems that
+            Branding is not just aesthetics - it is structured clarity. We craft premium brand systems that
             improve conversion and strengthen AI discovery through Generative Engine Optimization (GEO).
           </p>
           <div className="mt-6 grid gap-4 sm:grid-cols-2">
             <div className="rounded-2xl border border-accent/15 bg-card/50 p-5">
-              <h3 className="font-heading text-lg font-semibold">Who it’s for</h3>
+              <h3 className="font-heading text-lg font-semibold">Who it is for</h3>
               <p className="mt-2 text-sm text-muted-foreground">
                 Luxury brands, growing startups, and service businesses in Dubai & UAE.
               </p>

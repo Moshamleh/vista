@@ -47,7 +47,7 @@ export function FeaturedWork() {
             </p>
           </div>
           <a
-            href="#contact"
+            href="#contact-form"
             className="inline-flex items-center gap-2 self-start text-base font-medium text-foreground transition-colors hover:text-accent sm:self-end"
           >
             <span className="border-b border-foreground/30 pb-0.5 transition-colors hover:border-accent">

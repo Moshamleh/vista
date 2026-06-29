@@ -24,11 +24,13 @@ export function TrackedWhatsappLinks() {
     }
 
     updateLinks()
+    const frame = window.requestAnimationFrame(updateLinks)
+    const timeout = window.setTimeout(updateLinks, 300)
 
-    const observer = new MutationObserver(updateLinks)
-    observer.observe(document.body, { childList: true, subtree: true })
-
-    return () => observer.disconnect()
+    return () => {
+      window.cancelAnimationFrame(frame)
+      window.clearTimeout(timeout)
+    }
   }, [pathname])
 
   return null

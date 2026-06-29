@@ -1,12 +1,17 @@
 "use client"
 
-import { useEffect, useState } from "react"
-import Spline from "@splinetool/react-spline"
+import dynamic from "next/dynamic"
+import { useEffect, useRef, useState } from "react"
 
 interface SplineSceneProps {
   scene: string
   className?: string
 }
+
+const Spline = dynamic(() => import("@splinetool/react-spline"), {
+  ssr: false,
+  loading: () => <SplineUnavailable />,
+})
 
 function canCreateWebGLContext() {
   if (typeof window === "undefined") return false
@@ -40,10 +45,63 @@ function SplineUnavailable() {
 
 export function SplineScene({ scene, className }: SplineSceneProps) {
   const [webglAvailable, setWebglAvailable] = useState<boolean | null>(null)
+  const [shouldLoad, setShouldLoad] = useState(false)
+  const containerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    setWebglAvailable(canCreateWebGLContext())
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    const desktop3d = window.matchMedia("(min-width: 1024px) and (pointer: fine)").matches
+    const saveData = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData
+    const available = desktop3d && !reducedMotion && !saveData && canCreateWebGLContext()
+
+    const timeout = window.setTimeout(() => setWebglAvailable(available), 0)
+
+    return () => window.clearTimeout(timeout)
   }, [])
+
+  useEffect(() => {
+    if (webglAvailable !== true) return
+
+    const element = containerRef.current
+    let cancelLoad = () => {}
+
+    const scheduleLoad = () => {
+      const idleWindow = window as Window & {
+        requestIdleCallback?: (callback: IdleRequestCallback, options?: IdleRequestOptions) => number
+        cancelIdleCallback?: (handle: number) => void
+      }
+
+      if (idleWindow.requestIdleCallback && idleWindow.cancelIdleCallback) {
+        const handle = idleWindow.requestIdleCallback(() => setShouldLoad(true), { timeout: 1800 })
+        return () => idleWindow.cancelIdleCallback?.(handle)
+      }
+
+      const timeout = window.setTimeout(() => setShouldLoad(true), 900)
+      return () => window.clearTimeout(timeout)
+    }
+
+    if (!element || !("IntersectionObserver" in window)) {
+      cancelLoad = scheduleLoad()
+      return () => cancelLoad()
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          observer.disconnect()
+          cancelLoad = scheduleLoad()
+        }
+      },
+      { rootMargin: "240px" },
+    )
+
+    observer.observe(element)
+
+    return () => {
+      observer.disconnect()
+      cancelLoad()
+    }
+  }, [webglAvailable])
 
   useEffect(() => {
     const handleWebGLFailure = (event: ErrorEvent | PromiseRejectionEvent) => {
@@ -67,16 +125,24 @@ export function SplineScene({ scene, className }: SplineSceneProps) {
   }, [])
 
   if (webglAvailable === false) {
-    return <SplineUnavailable />
-  }
-
-  if (webglAvailable === null) {
     return (
-      <div className="flex h-full w-full items-center justify-center">
-        <span className="loader h-10 w-10 animate-spin rounded-full border-2 border-accent/20 border-t-accent" />
+      <div ref={containerRef} className={className}>
+        <SplineUnavailable />
       </div>
     )
   }
 
-  return <Spline scene={scene} className={className} />
+  if (webglAvailable === null || !shouldLoad) {
+    return (
+      <div ref={containerRef} className={className}>
+        <SplineUnavailable />
+      </div>
+    )
+  }
+
+  return (
+    <div ref={containerRef} className={className}>
+      <Spline scene={scene} className="h-full w-full" />
+    </div>
+  )
 }

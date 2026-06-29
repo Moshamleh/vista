@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { type FormEvent, useState } from "react"
 
 type Lead = {
   query?: string
@@ -15,40 +15,74 @@ type LeadsResponse = {
 
 export default function CrmPage() {
   const [leads, setLeads] = useState<Lead[]>([])
-  const [loading, setLoading] = useState(true)
+  const [token, setToken] = useState("")
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState("")
 
-  useEffect(() => {
-    let cancelled = false
+  async function loadLeads(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+    if (!token.trim()) return
 
-    async function load() {
-      try {
-        const res = await fetch("/api/leads", { cache: "no-store" })
-        const json = (await res.json()) as LeadsResponse
+    setLoading(true)
+    setError("")
 
-        const nextLeads =
-          Array.isArray(json?.leads) ? json.leads : Array.isArray(json?.data) ? json.data : []
+    try {
+      const res = await fetch("/api/leads", {
+        cache: "no-store",
+        headers: {
+          "x-auth-token": token.trim(),
+        },
+      })
 
-        if (!cancelled) setLeads(nextLeads)
-      } catch {
-        if (!cancelled) setLeads([])
-      } finally {
-        if (!cancelled) setLoading(false)
+      const json = (await res.json()) as LeadsResponse & { error?: string }
+
+      if (!res.ok) {
+        throw new Error(json.error || "Could not load leads.")
       }
-    }
 
-    load()
-    return () => {
-      cancelled = true
+      const nextLeads =
+        Array.isArray(json?.leads) ? json.leads : Array.isArray(json?.data) ? json.data : []
+
+      setLeads(nextLeads)
+    } catch (caught) {
+      setLeads([])
+      setError(caught instanceof Error ? caught.message : "Could not load leads.")
+    } finally {
+      setLoading(false)
     }
-  }, [])
+  }
 
   return (
     <main className="min-h-screen bg-black px-5 py-16 sm:px-8">
       <div className="mx-auto w-full max-w-5xl">
         <h1 className="text-3xl font-bold text-white">AI CRM Leads</h1>
         <p className="mt-2 text-white/70">
-          Stored AI-generated WhatsApp leads (fetched via frontend proxy).
+          Stored AI-generated WhatsApp leads.
         </p>
+
+        <form onSubmit={loadLeads} className="mt-8 flex flex-col gap-3 rounded-lg border border-white/10 bg-white/[0.025] p-5 sm:flex-row">
+          <input
+            value={token}
+            onChange={(event) => setToken(event.target.value)}
+            type="password"
+            autoComplete="off"
+            className="min-h-11 flex-1 rounded-lg border border-white/10 bg-black px-4 text-white outline-none focus:border-green-400"
+            placeholder="Admin token"
+          />
+          <button
+            type="submit"
+            disabled={loading || !token.trim()}
+            className="min-h-11 rounded-lg bg-green-400 px-5 font-semibold text-black disabled:cursor-not-allowed disabled:opacity-50"
+          >
+            {loading ? "Loading..." : "Load leads"}
+          </button>
+        </form>
+
+        {error ? (
+          <div className="mt-4 rounded-lg border border-red-400/20 bg-red-400/10 p-4 text-sm text-red-100">
+            {error}
+          </div>
+        ) : null}
 
         <section className="mt-8">
           {loading ? (

@@ -1,13 +1,33 @@
 "use client"
 
-import { useEffect } from "react"
+import Link from "next/link"
+import { useEffect, useState } from "react"
 import { getWhatsappLink } from "@/lib/site"
 
 const WORKER_URL = "https://vista-lead-qualifier.vistabylara.workers.dev/chat"
 const WHATSAPP_GENERAL = getWhatsappLink("general")
 
 export function VistaLeadQualifier() {
+  const [ready, setReady] = useState(false)
+
   useEffect(() => {
+    const idleWindow = window as Window & {
+      requestIdleCallback?: (callback: IdleRequestCallback, options?: IdleRequestOptions) => number
+      cancelIdleCallback?: (handle: number) => void
+    }
+
+    if (idleWindow.requestIdleCallback && idleWindow.cancelIdleCallback) {
+      const handle = idleWindow.requestIdleCallback(() => setReady(true), { timeout: 3000 })
+      return () => idleWindow.cancelIdleCallback?.(handle)
+    }
+
+    const timeout = window.setTimeout(() => setReady(true), 1800)
+    return () => window.clearTimeout(timeout)
+  }, [])
+
+  useEffect(() => {
+    if (!ready) return
+
     const box = document.getElementById("vlqBox")
     const msgs = document.getElementById("vlqMsgs")
     const input = document.getElementById("vlqInput") as HTMLInputElement | null
@@ -74,7 +94,7 @@ export function VistaLeadQualifier() {
           link.href = wa
           link.target = "_blank"
           link.rel = "noopener"
-          link.textContent = "💬 Continue on WhatsApp →"
+          link.textContent = "Continue on WhatsApp ->"
           msgs.appendChild(link)
         }
 
@@ -114,7 +134,9 @@ export function VistaLeadQualifier() {
       input.removeEventListener("keydown", onKeyDown)
       browseButton.removeEventListener("click", onBrowse)
     }
-  }, [])
+  }, [ready])
+
+  if (!ready) return null
 
   return (
     <>
@@ -169,8 +191,8 @@ export function VistaLeadQualifier() {
           </div>
           <div className="vlq-msgs" id="vlqMsgs">
             <div className="vlq-msg bot">
-              Hi! 👋 I&apos;m Vista&apos;s AI assistant. I&apos;d love to help you start a project. What are you looking
-              to build — a brand, website, app, or something else?
+              Hi! I&apos;m Vista&apos;s AI assistant. I&apos;d love to help you start a project. What are you looking
+              to build - a brand, website, app, or something else?
             </div>
             <div className="vlq-options">
               <a className="vlq-option whatsapp" href={WHATSAPP_GENERAL} target="_blank" rel="noopener">
@@ -180,12 +202,12 @@ export function VistaLeadQualifier() {
                 Browse the website
               </button>
               <div className="vlq-browse" id="vlqBrowseMenu">
-                <a className="vlq-link" href="/services">Services</a>
-                <a className="vlq-link" href="/industries">Industries</a>
-                <a className="vlq-link" href="/work">Work</a>
-                <a className="vlq-link" href="/pricing">Pricing</a>
-                <a className="vlq-link" href="/blog">Blog</a>
-                <a className="vlq-link" href="/contact">Contact</a>
+                <Link className="vlq-link" href="/services">Services</Link>
+                <Link className="vlq-link" href="/industries">Industries</Link>
+                <Link className="vlq-link" href="/work">Work</Link>
+                <Link className="vlq-link" href="/pricing">Pricing</Link>
+                <Link className="vlq-link" href="/blog">Blog</Link>
+                <Link className="vlq-link" href="/contact">Contact</Link>
               </div>
             </div>
             <div className="vlq-typing" id="vlqTyping">
@@ -197,12 +219,12 @@ export function VistaLeadQualifier() {
           <div className="vlq-input-row">
             <input className="vlq-input" id="vlqInput" placeholder="Type your message..." />
             <button className="vlq-send" id="vlqSend" type="button" aria-label="Send message">
-              →
+              -&gt;
             </button>
           </div>
         </div>
         <button className="vlq-btn" id="vlqToggle" type="button" aria-label="Open Vista Assistant">
-          💬
+          AI
         </button>
       </div>
     </>
