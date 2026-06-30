@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server"
 import nodemailer from "nodemailer"
+import { hasAllowedOrigin } from "@/lib/request-security"
+import { rateLimit } from "@/lib/rate-limit"
 
 const RECIPIENT_EMAIL = "vistabylara@gmail.com"
 const MAX_BODY_BYTES = 16_000
@@ -46,12 +48,40 @@ function escapeHtml(value: string) {
 }
 
 export async function POST(request: Request) {
+  if (!hasAllowedOrigin(request)) {
+    return NextResponse.json({ error: "Forbidden." }, { status: 403 })
+  }
+
+  const limited = await rateLimit(request, {
+    scope: "contact",
+    limit: 5,
+    windowSeconds: 10 * 60,
+  })
+
+  if (!limited.allowed) {
+    return NextResponse.json(
+      { error: "Too many inquiries. Please wait a moment and try again." },
+      { status: 429, headers: { "Retry-After": String(limited.retryAfter) } },
+    )
+  }
+
   const contentLength = Number(request.headers.get("content-length") || 0)
   if (contentLength > MAX_BODY_BYTES) {
     return NextResponse.json({ error: "Submission is too large." }, { status: 413 })
   }
 
-  const payload = (await request.json().catch(() => null)) as ContactPayload | null
+  const bodyText = await request.text().catch(() => "")
+  if (!bodyText || bodyText.length > MAX_BODY_BYTES) {
+    return NextResponse.json({ error: "Invalid form submission." }, { status: 400 })
+  }
+
+  const payload = (() => {
+    try {
+      return JSON.parse(bodyText) as ContactPayload | null
+    } catch {
+      return null
+    }
+  })()
 
   if (!payload) {
     return NextResponse.json({ error: "Invalid form submission." }, { status: 400 })
@@ -121,28 +151,33 @@ export async function POST(request: Request) {
     ["Message", message],
   ]
 
-  await transporter.sendMail({
-    from: `"Vista by Lara Website" <${smtpUser}>`,
-    to: RECIPIENT_EMAIL,
-    replyTo: email,
-    subject: `New Vista by Lara project inquiry from ${cleanSingleLine(name)}`,
-    text: rows.map(([label, value]) => `${label}: ${value}`).join("\n\n"),
-    html: `
-      <div style="font-family:Arial,sans-serif;line-height:1.6;color:#111827">
-        <h2 style="margin:0 0 16px">New Vista by Lara project inquiry</h2>
-        ${rows
-          .map(
-            ([label, value]) => `
-              <p style="margin:0 0 12px">
-                <strong>${escapeHtml(label)}:</strong><br />
-                ${escapeHtml(value).replaceAll("\n", "<br />")}
-              </p>
-            `
-          )
-          .join("")}
-      </div>
-    `,
-  })
+  try {
+    await transporter.sendMail({
+      from: `"Vista by Lara Website" <${smtpUser}>`,
+      to: RECIPIENT_EMAIL,
+      replyTo: email,
+      subject: `New Vista by Lara project inquiry from ${cleanSingleLine(name)}`,
+      text: rows.map(([label, value]) => `${label}: ${value}`).join("\n\n"),
+      html: `
+        <div style="font-family:Arial,sans-serif;line-height:1.6;color:#111827">
+          <h2 style="margin:0 0 16px">New Vista by Lara project inquiry</h2>
+          ${rows
+            .map(
+              ([label, value]) => `
+                <p style="margin:0 0 12px">
+                  <strong>${escapeHtml(label)}:</strong><br />
+                  ${escapeHtml(value).replaceAll("\n", "<br />")}
+                </p>
+              `
+            )
+            .join("")}
+        </div>
+      `,
+    })
+  } catch (error) {
+    console.error("Contact email delivery failed", error)
+    return NextResponse.json({ error: "Could not send the inquiry right now." }, { status: 502 })
+  }
 
   return NextResponse.json({ ok: true })
 }

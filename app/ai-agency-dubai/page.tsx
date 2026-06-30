@@ -193,7 +193,7 @@ export default function AIAgencyDubaiPage() {
             <a
               href={siteConfig.whatsapp}
               target="_blank"
-              rel="noopener"
+              rel="noopener noreferrer"
               className="inline-flex items-center justify-center rounded-full bg-accent px-8 py-4 text-base font-medium text-background transition-transform hover:scale-[1.03]"
             >
               WhatsApp

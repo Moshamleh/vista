@@ -110,7 +110,9 @@ type ApiBlogPost = Omit<BlogPost, "body"> & {
 }
 
 function getBlogApiUrl() {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.vistabylara.com"
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL
+  if (!siteUrl) return null
+
   return `${siteUrl.replace(/\/$/, "")}/api/blog`
 }
 
@@ -122,8 +124,11 @@ function normalizeApiPost(post: ApiBlogPost): BlogPost {
 }
 
 export async function getBlogPosts() {
+  const apiUrl = getBlogApiUrl()
+  if (!apiUrl) return seedBlogPosts
+
   try {
-    const response = await fetch(getBlogApiUrl(), {
+    const response = await fetch(apiUrl, {
       next: { revalidate: 60 },
     })
 

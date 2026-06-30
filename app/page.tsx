@@ -1,18 +1,20 @@
 import type { Metadata } from "next"
+import dynamic from "next/dynamic"
 import { SiteHeader } from "@/components/site-header"
 import { Hero } from "@/components/hero"
-import { RadialPattern } from "@/components/radial-pattern"
 import { Services } from "@/components/services"
-import { AutomationStory } from "@/components/automation-story"
-import { Clients } from "@/components/clients"
-import { FeaturedWork } from "@/components/featured-work"
 import { LatestInsights } from "@/components/latest-insights"
-import { Stats } from "@/components/stats"
-import { Faq } from "@/components/faq"
-import { ContactFormSection } from "@/components/contact-form-section"
-import { FooterScrollGlobe } from "@/components/footer-scroll-globe"
 import { SiteFooter } from "@/components/site-footer"
 import { siteConfig } from "@/lib/site"
+
+const RadialPattern = dynamic(() => import("@/components/radial-pattern").then((mod) => mod.RadialPattern))
+const Clients = dynamic(() => import("@/components/clients").then((mod) => mod.Clients))
+const AutomationStory = dynamic(() => import("@/components/automation-story").then((mod) => mod.AutomationStory))
+const FeaturedWork = dynamic(() => import("@/components/featured-work").then((mod) => mod.FeaturedWork))
+const Stats = dynamic(() => import("@/components/stats").then((mod) => mod.Stats))
+const Faq = dynamic(() => import("@/components/faq").then((mod) => mod.Faq))
+const ContactFormSection = dynamic(() => import("@/components/contact-form-section").then((mod) => mod.ContactFormSection))
+const FooterScrollGlobe = dynamic(() => import("@/components/footer-scroll-globe").then((mod) => mod.FooterScrollGlobe))
 
 export const metadata: Metadata = {
   title: "Vista by Lara | Dubai Branding & UX Design Agency UAE",

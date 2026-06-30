@@ -296,7 +296,7 @@ export default function BrandingPage() {
                 <a
                   href={whatsappHref}
                   target="_blank"
-                  rel="noopener"
+                  rel="noopener noreferrer"
                   className="branding-pill inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-white/20 px-6 py-3.5 text-[14px] font-semibold uppercase tracking-wide text-foreground hover:border-accent hover:text-accent"
                 >
                   WhatsApp strategy call
@@ -364,7 +364,7 @@ export default function BrandingPage() {
 
             <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
               {workCards.map((card) => (
-                <a key={card.title} href={whatsappHref} target="_blank" rel="noopener" className="branding-work-card group relative block overflow-hidden rounded-2xl bg-[#111520]">
+                <a key={card.title} href={whatsappHref} target="_blank" rel="noopener noreferrer" className="branding-work-card group relative block overflow-hidden rounded-2xl bg-[#111520]">
                   <div className="relative aspect-[4/3] overflow-hidden">
                     <Image src={card.image} alt={card.alt} fill sizes="(min-width: 768px) 50vw, 100vw" className="branding-card-img object-cover" />
                     <div className="branding-card-meta absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-background/90 via-background/20 to-transparent p-6 opacity-0">
@@ -559,7 +559,7 @@ export default function BrandingPage() {
               Tell us where you want to be in Dubai, UAE, or the GCC. We will map the brand strategy, identity, SEO, AEO, GEO, and conversion path to get you there.
             </p>
             <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <a href={whatsappHref} target="_blank" rel="noopener" className="branding-pill inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-accent px-8 py-4 text-[15px] font-bold uppercase tracking-wide text-background">
+              <a href={whatsappHref} target="_blank" rel="noopener noreferrer" className="branding-pill inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-accent px-8 py-4 text-[15px] font-bold uppercase tracking-wide text-background">
                 WhatsApp branding consultation <ArrowUpRight className="h-4 w-4" />
               </a>
               <a href="/contact" className="branding-pill inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-white/20 px-8 py-4 text-[15px] font-semibold uppercase tracking-wide text-foreground hover:border-accent hover:text-accent">

@@ -5,9 +5,19 @@ on:
     - cron: "0 5 * * *"
   workflow_dispatch:
 
+permissions: {}
+
 jobs:
   ping-worker:
     runs-on: ubuntu-latest
+    timeout-minutes: 2
     steps:
       - name: Ping Worker
-        run: curl -X POST https://vista-automation-engine.vistabylara.workers.dev/automation
+        env:
+          VISTA_AUTOMATION_TOKEN: ${{ secrets.VISTA_AUTOMATION_TOKEN }}
+        run: |
+          test -n "$VISTA_AUTOMATION_TOKEN"
+          curl --fail --show-error --silent \
+            --request POST \
+            --header "Authorization: Bearer $VISTA_AUTOMATION_TOKEN" \
+            https://vista-automation-engine.vistabylara.workers.dev/automation

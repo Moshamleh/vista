@@ -1,5 +1,9 @@
 import { Redis } from "@upstash/redis"
 import { NextResponse } from "next/server"
+import { getRequestToken, hasAllowedOrigin, hasValidToken } from "@/lib/request-security"
+import { rateLimit } from "@/lib/rate-limit"
+
+const MAX_BODY_BYTES = 64_000
 
 type BlogPost = {
   slug: string
@@ -61,7 +65,20 @@ function validatePost(value: unknown): BlogPost | { error: string } {
   return post
 }
 
-export async function GET() {
+export async function GET(request: Request) {
+  const limited = await rateLimit(request, {
+    scope: "blog-read",
+    limit: 180,
+    windowSeconds: 10 * 60,
+  })
+
+  if (!limited.allowed) {
+    return NextResponse.json(
+      { error: "Too many blog requests. Please wait and try again." },
+      { status: 429, headers: { "Retry-After": String(limited.retryAfter) } },
+    )
+  }
+
   try {
     const redis = getRedis()
     if (!redis) return NextResponse.json({ posts: [] })
@@ -69,24 +86,57 @@ export async function GET() {
     const posts = (await redis.get<BlogPost[]>("blog_posts")) || []
     return NextResponse.json({ posts })
   } catch (error) {
-    const message = error instanceof Error ? error.message : "Failed to load blog posts."
-    return NextResponse.json({ error: message }, { status: 500 })
+    console.error("Blog posts load failed", error)
+    return NextResponse.json({ error: "Failed to load blog posts." }, { status: 500 })
   }
 }
 
 export async function POST(request: Request) {
+  if (!hasAllowedOrigin(request)) {
+    return NextResponse.json({ error: "Forbidden." }, { status: 403 })
+  }
+
+  const limited = await rateLimit(request, {
+    scope: "blog-admin",
+    limit: 20,
+    windowSeconds: 10 * 60,
+  })
+
+  if (!limited.allowed) {
+    return NextResponse.json(
+      { error: "Too many publishing attempts. Please wait and try again." },
+      { status: 429, headers: { "Retry-After": String(limited.retryAfter) } },
+    )
+  }
+
   const expectedToken = process.env.BLOG_ADMIN_TOKEN
-  const token = request.headers.get("x-auth-token")
+  const token = getRequestToken(request)
 
   if (!expectedToken) {
     return NextResponse.json({ error: "Blog publishing is not configured." }, { status: 503 })
   }
 
-  if (token !== expectedToken) {
+  if (!hasValidToken(token, expectedToken)) {
     return NextResponse.json({ error: "Unauthorized." }, { status: 401 })
   }
 
-  const body = await request.json().catch(() => null)
+  const contentLength = Number(request.headers.get("content-length") || 0)
+  if (contentLength > MAX_BODY_BYTES) {
+    return NextResponse.json({ error: "Submission is too large." }, { status: 413 })
+  }
+
+  const bodyText = await request.text().catch(() => "")
+  if (!bodyText || bodyText.length > MAX_BODY_BYTES) {
+    return NextResponse.json({ error: "Invalid JSON body." }, { status: 400 })
+  }
+
+  const body = (() => {
+    try {
+      return JSON.parse(bodyText)
+    } catch {
+      return null
+    }
+  })()
   const post = validatePost(body)
 
   if ("error" in post) {
@@ -98,16 +148,21 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Blog storage is not configured." }, { status: 503 })
   }
 
-  const posts = (await redis.get<BlogPost[]>("blog_posts")) || []
-  const existing = posts.findIndex((item) => item.slug === post.slug)
+  try {
+    const posts = (await redis.get<BlogPost[]>("blog_posts")) || []
+    const existing = posts.findIndex((item) => item.slug === post.slug)
 
-  if (existing >= 0) {
-    posts[existing] = post
-  } else {
-    posts.unshift(post)
+    if (existing >= 0) {
+      posts[existing] = post
+    } else {
+      posts.unshift(post)
+    }
+
+    await redis.set("blog_posts", posts)
+  } catch (error) {
+    console.error("Blog post save failed", error)
+    return NextResponse.json({ error: "Failed to save blog post." }, { status: 500 })
   }
-
-  await redis.set("blog_posts", posts)
 
   return NextResponse.json({ ok: true })
 }

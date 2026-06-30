@@ -1,7 +1,6 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
-import { motion, AnimatePresence } from "framer-motion"
 import { ChevronDown, Menu, MessageCircle, X } from "lucide-react"
 import { usePathname } from "next/navigation"
 import Link from "next/link"
@@ -171,7 +170,7 @@ function ServicesMegaMenu({ open }: { open: boolean }) {
           <a
             href={whatsappHref}
             target="_blank"
-            rel="noopener"
+            rel="noopener noreferrer"
             className="mt-6 inline-flex min-h-11 items-center justify-center rounded-full bg-accent px-5 text-sm font-semibold text-background transition-transform hover:scale-[1.02]"
           >
             Plan a Dubai project
@@ -272,12 +271,7 @@ export function SiteHeader() {
   }, [])
 
   return (
-    <motion.header
-      initial={{ y: -80, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
-      className="fixed inset-x-0 top-0 z-50"
-    >
+    <header className="vista-header-in fixed inset-x-0 top-0 z-50">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <div
           className={`mt-3 overflow-visible border transition-all duration-300 ${
@@ -372,7 +366,7 @@ export function SiteHeader() {
                   key={item.href}
                   href={item.href}
                   target={item.href.startsWith("http") ? "_blank" : undefined}
-                  rel={item.href.startsWith("http") ? "noopener" : undefined}
+                  rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
                   className={`text-sm font-semibold transition-colors ${
                     pathname === item.href ? "text-accent" : "text-foreground/72 hover:text-accent"
                   }`}
@@ -386,7 +380,7 @@ export function SiteHeader() {
               <a
                 href={whatsappHref}
                 target="_blank"
-                rel="noopener"
+                rel="noopener noreferrer"
                 className="hidden rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-background transition-transform hover:scale-[1.03] hover:bg-accent/90 sm:inline-flex"
               >
                 Speak to an expert
@@ -404,15 +398,14 @@ export function SiteHeader() {
         </div>
       </div>
 
-      <AnimatePresence>
-        {open && (
-          <motion.nav
-            aria-label="Mobile"
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="mx-4 mt-2 max-h-[calc(100vh-7rem)] overflow-y-auto rounded-3xl border border-accent/20 bg-[#05070d]/96 backdrop-blur-2xl lg:hidden"
-          >
+      <nav
+        aria-label="Mobile"
+        className={`mx-4 mt-2 overflow-hidden rounded-3xl border border-accent/20 bg-[#05070d]/96 backdrop-blur-2xl transition-[max-height,opacity,transform,visibility] duration-200 lg:hidden ${
+          open
+            ? "pointer-events-auto visible max-h-[calc(100vh-7rem)] translate-y-0 overflow-y-auto opacity-100"
+            : "pointer-events-none invisible max-h-0 -translate-y-2 opacity-0"
+        }`}
+      >
             <div className="space-y-6 p-5">
               <div>
                 <p className="text-xs font-semibold uppercase tracking-[0.24em] text-accent">Services</p>
@@ -456,7 +449,7 @@ export function SiteHeader() {
                       key={`${item.href}-mobile`}
                       href={item.href}
                       target={item.href.startsWith("http") ? "_blank" : undefined}
-                      rel={item.href.startsWith("http") ? "noopener" : undefined}
+                      rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
                       onClick={() => setOpen(false)}
                       className={`block rounded-2xl px-4 py-3 text-base font-semibold transition-colors hover:bg-accent/10 hover:text-accent ${
                         pathname === item.href ? "bg-accent/10 text-accent" : "text-foreground/82"
@@ -472,7 +465,7 @@ export function SiteHeader() {
                 <a
                   href={whatsappHref}
                   target="_blank"
-                  rel="noopener"
+                  rel="noopener noreferrer"
                   onClick={() => setOpen(false)}
                   className="inline-flex min-h-12 items-center justify-center rounded-full bg-accent px-5 text-sm font-semibold text-background"
                 >
@@ -486,9 +479,7 @@ export function SiteHeader() {
                 </a>
               </div>
             </div>
-          </motion.nav>
-        )}
-      </AnimatePresence>
-    </motion.header>
+      </nav>
+    </header>
   )
 }

@@ -180,23 +180,6 @@ export function Clients() {
       aria-labelledby="clients-heading"
       className="relative isolate overflow-hidden border-y border-border/40 bg-background px-4 py-24 sm:px-8 sm:py-32"
     >
-      <style>{`
-        .vista-glass-text {
-          color: transparent;
-          background: linear-gradient(135deg, rgba(255,255,255,1) 0%, rgba(255,255,255,.35) 28%, rgba(87,217,255,.92) 50%, rgba(255,255,255,.22) 72%, rgba(255,255,255,1) 100%);
-          background-size: 220% auto;
-          -webkit-background-clip: text;
-          background-clip: text;
-          -webkit-text-stroke: 1px rgba(255,255,255,.16);
-          filter: drop-shadow(0 20px 45px rgba(0,0,0,.5)) drop-shadow(0 0 22px rgba(87,217,255,.12));
-          animation: vista-shimmer 8s linear infinite;
-        }
-        @keyframes vista-shimmer {
-          0% { background-position: 220% center; }
-          100% { background-position: 0% center; }
-        }
-      `}</style>
-
       <div className="pointer-events-none absolute inset-0 z-0">
         <PixelCanvas colors={["rgba(159,161,181,.35)", "rgba(87,217,255,.55)", "rgba(255,255,255,.18)"]} />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(10,10,10,0.62)_48%,var(--background)_100%)]" />

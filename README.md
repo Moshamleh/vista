@@ -1,33 +1,55 @@
-# vista
+# Vista by Lara
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [v0](https://v0.app).
+Next.js website for Vista by Lara, a Dubai branding, UX, web, and AI visibility studio.
 
-## Built with v0
-
-This repository is linked to a [v0](https://v0.app) project. You can continue developing by visiting the link below -- start new chats to make changes, and v0 will push commits directly to this repo. Every merge to `main` will automatically deploy.
-
-[Continue working on v0 →](https://v0.app/chat/projects/prj_vND0YjaJVWkljBqiRCfFaTPZtHUm)
-
-## Getting Started
-
-First, run the development server:
+## Local Development
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+pnpm install
 pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open `http://localhost:3000`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Production Checks
 
-## Learn More
+Run these before shipping:
 
-To learn more, take a look at the following resources:
+```bash
+pnpm lint
+pnpm exec tsc --noEmit
+pnpm audit --prod
+pnpm build
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-- [v0 Documentation](https://v0.app/docs) - learn about v0 and how to use it.
+## Environment Variables
+
+Copy `.env.example` and fill production values in your hosting provider.
+
+- `GMAIL_USER`: Gmail account used by the contact form.
+- `GMAIL_APP_PASSWORD`: Gmail app password for contact-form delivery.
+- `LEADS_ADMIN_TOKEN`: Admin token for `/crm` and `/api/leads`.
+- `BLOG_ADMIN_TOKEN`: Admin token for blog publishing.
+- `UPSTASH_REDIS_REST_URL`: Upstash Redis REST URL for blog/rate-limit storage.
+- `UPSTASH_REDIS_REST_TOKEN`: Upstash Redis REST token.
+- `NEXT_PUBLIC_SITE_URL`: Public site origin, for example `https://www.vistabylara.com`.
+
+## GitHub Secrets
+
+- `VISTA_AUTOMATION_TOKEN`: Sent by the scheduled workflow to the automation worker. The worker must validate this bearer token.
+
+## Security Notes
+
+- Public API routes enforce origin checks and rate limits.
+- `/api/*` and `/crm` are marked `noindex` and `no-store`.
+- Security headers, including CSP and HSTS, are configured in `next.config.mjs`.
+- JSON-LD output must use `jsonLd()` from `lib/json-ld.ts`.
+
+## Deployment
+
+The app is intended to deploy from `main`. After deployment, verify:
+
+- Homepage returns `200`.
+- `/api/contact` rejects invalid JSON with `400`.
+- Cross-site API probes return `403`.
+- Admin routes require their configured tokens.

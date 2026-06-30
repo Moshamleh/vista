@@ -78,7 +78,7 @@ export function ConversionPage({ eyebrow, title, subtitle, problem, solution, ou
             <a
               href={siteConfig.whatsapp}
               target="_blank"
-              rel="noopener"
+              rel="noopener noreferrer"
               className="inline-flex min-h-12 items-center justify-center rounded-full bg-accent px-7 font-semibold text-background transition-transform hover:scale-[1.03]"
             >
               Request Growth Audit

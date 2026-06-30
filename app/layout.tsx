@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { Space_Grotesk, Inter } from 'next/font/google'
 import { siteConfig } from '@/lib/site'
+import { jsonLd } from '@/lib/json-ld'
 import { StructuredData } from '@/components/structured-data'
 import { GsapScrollEffects } from '@/components/gsap-scroll-effects'
 import { VistaLeadQualifier } from '@/components/vista-lead-qualifier'
@@ -24,7 +25,6 @@ export const metadata: Metadata = {
   },
   description: siteConfig.description,
   applicationName: siteConfig.name,
-  generator: 'v0.app',
   keywords: [...siteConfig.keywords],
   authors: [{ name: siteConfig.legalName, url: siteConfig.url }],
   creator: siteConfig.legalName,
@@ -109,7 +109,7 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
+            __html: jsonLd({
               "@context": "https://schema.org",
               "@type": "ProfessionalService",
               "name": siteConfig.name,

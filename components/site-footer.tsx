@@ -84,7 +84,7 @@ export function SiteFooter() {
                 <a
                   href={whatsappHref}
                   target="_blank"
-                  rel="noopener"
+                  rel="noopener noreferrer"
                   className="inline-flex min-h-12 items-center justify-center rounded-lg border border-foreground/25 px-6 font-heading text-sm font-semibold uppercase tracking-[0.04em] text-foreground transition-colors hover:border-accent/60 hover:bg-accent/10 hover:text-accent"
                 >
                   Start a project -&gt;
@@ -92,7 +92,7 @@ export function SiteFooter() {
                 <a
                   href={whatsappHref}
                   target="_blank"
-                  rel="noopener"
+                  rel="noopener noreferrer"
                   className="inline-flex min-h-12 items-center justify-center rounded-lg border border-foreground/20 px-6 font-heading text-sm font-semibold uppercase tracking-[0.04em] text-foreground transition-colors hover:border-accent/60 hover:bg-accent/10 hover:text-accent"
                 >
                   WhatsApp
@@ -105,7 +105,7 @@ export function SiteFooter() {
                     key={link.label}
                     href={link.href}
                     target="_blank"
-                    rel="noopener"
+                    rel="noopener noreferrer"
                     className="rounded-full border border-foreground/10 px-3 py-1.5 text-xs text-muted-foreground transition-colors hover:border-accent/50 hover:text-accent"
                   >
                     {link.label.replace(" (Twitter)", "")}
@@ -131,7 +131,7 @@ export function SiteFooter() {
                             <a
                               href={link.href}
                               target="_blank"
-                              rel="noopener"
+                              rel="noopener noreferrer"
                               className={className}
                             >
                               {link.label}

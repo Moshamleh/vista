@@ -151,7 +151,7 @@ export default function AboutPage() {
                 <a
                   href={whatsappHref}
                   target="_blank"
-                  rel="noopener"
+                  rel="noopener noreferrer"
                   className="inline-flex min-h-12 items-center justify-center rounded-full bg-accent px-7 font-heading text-sm font-semibold uppercase tracking-[0.04em] text-background transition-transform hover:scale-[1.03]"
                 >
                   Start a Dubai project
@@ -159,7 +159,7 @@ export default function AboutPage() {
                 <a
                   href={whatsappHref}
                   target="_blank"
-                  rel="noopener"
+                  rel="noopener noreferrer"
                   className="inline-flex min-h-12 items-center justify-center rounded-full border border-accent/30 px-7 font-heading text-sm font-semibold uppercase tracking-[0.04em] text-accent transition-colors hover:bg-accent/10"
                 >
                   WhatsApp the team

@@ -129,7 +129,7 @@ function PlanCard({ plan, annual }: { plan: (typeof PLANS)[number]; annual: bool
         <a
           href={siteConfig.whatsapp}
           target="_blank"
-          rel="noopener"
+          rel="noopener noreferrer"
           className={`mt-10 inline-flex w-full items-center justify-center rounded-full px-7 py-3.5 text-base font-medium transition-transform hover:scale-[1.02] ${
             plan.highlight ? "bg-background text-foreground hover:bg-background/90" : "bg-accent text-background hover:bg-accent/90"
           }`}

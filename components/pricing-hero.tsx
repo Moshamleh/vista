@@ -58,7 +58,7 @@ export function PricingHero() {
           <a
             href={siteConfig.whatsapp}
             target="_blank"
-            rel="noopener"
+            rel="noopener noreferrer"
             className="inline-flex items-center gap-2 text-base font-medium text-foreground/80 transition-colors hover:text-accent"
           >
             <span className="border-b border-accent/30 pb-0.5 transition-colors hover:border-accent">
