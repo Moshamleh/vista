@@ -60,8 +60,8 @@
   --primary-foreground: #04050b;
   --secondary: #2f3555;
   --secondary-foreground: #c8c6b9;
-  --muted: #5d6284;
-  --muted-foreground: #9fa1b5;
+  --muted: #697092;
+  --muted-foreground: #c9cfdd;
   --accent: #57d9ff;
   --accent-foreground: #04050b;
   --destructive: #ff6b74;
@@ -96,8 +96,8 @@
   --primary-foreground: #04050b;
   --secondary: #2f3555;
   --secondary-foreground: #c8c6b9;
-  --muted: #5d6284;
-  --muted-foreground: #9fa1b5;
+  --muted: #697092;
+  --muted-foreground: #c9cfdd;
   --accent: #57d9ff;
   --accent-foreground: #04050b;
   --destructive: #ff6b74;
@@ -132,8 +132,8 @@
     --primary-foreground: #04050b;
     --secondary: #2f3555;
     --secondary-foreground: #c8c6b9;
-    --muted: #5d6284;
-    --muted-foreground: #9fa1b5;
+    --muted: #697092;
+    --muted-foreground: #c9cfdd;
     --accent: #57d9ff;
     --accent-foreground: #04050b;
     --destructive: #ff6b74;
@@ -163,6 +163,7 @@
 
   html {
     @apply font-sans;
+    scroll-behavior: smooth;
   }
 
   body {
@@ -712,6 +713,35 @@
   }
 }
 
+html[dir="rtl"] .vlq {
+  right: auto;
+  left: 24px;
+  font-family: var(--font-arabic), system-ui, sans-serif;
+}
+
+html[dir="rtl"] .vlq-box {
+  right: auto;
+  left: 0;
+}
+
+html[dir="rtl"] .vlq-msg.bot {
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 4px;
+  align-self: flex-end;
+}
+
+html[dir="rtl"] .vlq-msg.user {
+  border-bottom-right-radius: 12px;
+  border-bottom-left-radius: 4px;
+  align-self: flex-start;
+}
+
+html[dir="rtl"] .vlq-typing {
+  align-self: flex-end;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 4px;
+}
+
 @keyframes branding-reel-scan {
   0% {
     transform: translateX(-115%) skewX(-10deg);
@@ -863,5 +893,171 @@
   .branding-reel-float,
   .branding-marquee {
     animation: none;
+  }
+}
+
+.text-muted-foreground,
+[class*="text-muted-foreground/"] {
+  color: var(--muted-foreground);
+}
+
+html[dir='rtl'] {
+  font-family: var(--font-arabic), var(--font-inter), system-ui, sans-serif;
+}
+
+html[dir='rtl'] body {
+  direction: rtl;
+  text-align: right;
+}
+
+html[dir='rtl'] .font-heading {
+  font-family: var(--font-arabic), var(--font-space-grotesk), system-ui, sans-serif;
+}
+
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #111827 !important;
+  }
+
+  footer,
+  nav,
+  button,
+  [aria-label="Share article"] {
+    display: none !important;
+  }
+
+  a {
+    color: #111827 !important;
+    text-decoration: underline;
+  }
+}
+
+@keyframes shiny-button-sweep {
+  0% {
+    transform: translateX(-140%) skewX(-18deg);
+  }
+  55%,
+  100% {
+    transform: translateX(140%) skewX(-18deg);
+  }
+}
+
+@keyframes shiny-button-glow {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.12) inset,
+      0 18px 52px rgba(87, 217, 255, 0.2),
+      0 0 0 rgba(87, 217, 255, 0);
+  }
+  50% {
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.2) inset,
+      0 22px 68px rgba(87, 217, 255, 0.36),
+      0 0 28px rgba(87, 217, 255, 0.26);
+  }
+}
+
+.shiny-button,
+a[class*="inline-flex"][class*="justify-center"],
+button[class*="inline-flex"][class*="justify-center"]:not([aria-label]),
+.branding-pill,
+.vlq-option,
+.vlq-send,
+.vlq-btn {
+  position: relative !important;
+  isolation: isolate;
+  overflow: hidden !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  background:
+    radial-gradient(100% 180% at 15% 0%, rgba(255, 255, 255, 0.32), transparent 28%),
+    linear-gradient(110deg, #57d9ff 0%, #dff8ff 45%, #57d9ff 100%) !important;
+  color: #031018 !important;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.12) inset,
+    0 18px 52px rgba(87, 217, 255, 0.22) !important;
+  text-decoration: none !important;
+  transform: translateZ(0);
+  transition:
+    transform 220ms ease,
+    border-color 220ms ease,
+    box-shadow 220ms ease,
+    filter 220ms ease !important;
+}
+
+.shiny-button::before,
+a[class*="inline-flex"][class*="justify-center"]::before,
+button[class*="inline-flex"][class*="justify-center"]:not([aria-label])::before,
+.branding-pill::before,
+.vlq-option::before,
+.vlq-send::before,
+.vlq-btn::before {
+  content: "";
+  position: absolute;
+  inset: -35% auto -35% -58%;
+  z-index: -1;
+  width: 48%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.88), transparent);
+  opacity: 0.9;
+  animation: shiny-button-sweep 3.2s ease-in-out infinite;
+}
+
+.shiny-button::after,
+a[class*="inline-flex"][class*="justify-center"]::after,
+button[class*="inline-flex"][class*="justify-center"]:not([aria-label])::after,
+.branding-pill::after,
+.vlq-option::after,
+.vlq-send::after,
+.vlq-btn::after {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  z-index: -2;
+  border-radius: inherit;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.38), rgba(255, 255, 255, 0));
+  pointer-events: none;
+}
+
+.shiny-button:hover,
+a[class*="inline-flex"][class*="justify-center"]:hover,
+button[class*="inline-flex"][class*="justify-center"]:not([aria-label]):hover,
+.branding-pill:hover,
+.vlq-option:hover,
+.vlq-send:hover,
+.vlq-btn:hover {
+  border-color: rgba(255, 255, 255, 0.44) !important;
+  filter: saturate(1.08) brightness(1.04);
+  transform: translateY(-1px) scale(1.015) !important;
+  animation: shiny-button-glow 1.8s ease-in-out infinite;
+}
+
+.shiny-button:disabled,
+button[class*="inline-flex"][class*="justify-center"]:disabled,
+.vlq-send:disabled {
+  cursor: not-allowed;
+  filter: grayscale(0.25);
+  opacity: 0.58 !important;
+  transform: none !important;
+  animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shiny-button,
+  a[class*="inline-flex"][class*="justify-center"],
+  button[class*="inline-flex"][class*="justify-center"]:not([aria-label]),
+  .branding-pill,
+  .vlq-option,
+  .vlq-send,
+  .vlq-btn,
+  .shiny-button::before,
+  a[class*="inline-flex"][class*="justify-center"]::before,
+  button[class*="inline-flex"][class*="justify-center"]:not([aria-label])::before,
+  .branding-pill::before,
+  .vlq-option::before,
+  .vlq-send::before,
+  .vlq-btn::before {
+    animation: none !important;
+    transition: none !important;
   }
 }

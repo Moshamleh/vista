@@ -1,0 +1,28 @@
+{
+  "items": [
+    {
+      "label": "AI Search Authority Engineering",
+      "href": "/ai-search-authority-engineering",
+      "type": "hub",
+      "relationship": "Primary source-of-truth hub"
+    },
+    {
+      "label": "SEO Optimization",
+      "href": "/services/seo-optimization",
+      "type": "service",
+      "relationship": "Related service path"
+    },
+    {
+      "label": "Engineering Registry",
+      "href": "/case-studies",
+      "type": "proof",
+      "relationship": "Technical evidence layer"
+    },
+    {
+      "label": "AI Website Features Dubai Business Guide 2026",
+      "href": "/blog/ai-website-features-dubai-businesses-2026",
+      "type": "guide",
+      "relationship": "Related AI website guide"
+    }
+  ]
+}

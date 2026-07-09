@@ -1,0 +1,58 @@
+{
+  "primaryEntity": "AI visibility for Dubai businesses",
+  "secondaryEntities": [
+    "Answer Engine Optimization",
+    "Generative Engine Optimization",
+    "ChatGPT brand recommendations",
+    "Google AI Overview optimization",
+    "Machine-readable entity proof"
+  ],
+  "organizations": [
+    "Vista by Lara",
+    "Google AI Overviews",
+    "OpenAI",
+    "Perplexity",
+    "Microsoft Bing Copilot"
+  ],
+  "people": [
+    "Lara Eros Farbactian"
+  ],
+  "places": [
+    "Dubai",
+    "Abu Dhabi",
+    "Sharjah",
+    "UAE",
+    "Saudi Arabia",
+    "Qatar",
+    "Kuwait",
+    "Bahrain",
+    "Oman"
+  ],
+  "technologies": [
+    "JSON-LD",
+    "FAQPage schema",
+    "TechArticle schema",
+    "llms.txt",
+    "Next.js",
+    "structured content"
+  ],
+  "services": [
+    "SEO optimization",
+    "Generative AI",
+    "AI search authority engineering",
+    "Technical briefing"
+  ],
+  "products": [],
+  "relatedConcepts": [
+    "Vista Recommendation Confidence Model(TM)",
+    "Vista Entity Confidence Model(TM)",
+    "Vista GEO Pyramid(TM)",
+    "AI-readable authority",
+    "entity graph"
+  ],
+  "relationships": [
+    "Vista by Lara -> Vista Recommendation Confidence Model(TM) -> AI visibility diagnosis",
+    "Dubai business -> service entity proof -> AI recommendation confidence",
+    "FAQPage schema -> answer extraction -> AI search citation"
+  ]
+}

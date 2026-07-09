@@ -4,8 +4,15 @@ import { FormEvent, useState } from "react"
 import { ArrowRight, Mail, MessageSquare, Sparkles } from "lucide-react"
 import { siteConfig } from "@/lib/site"
 
-const services = ["Branding", "Websites", "Digital Products", "Development", "Generative AI", "SEO / AEO / GEO"]
-const budgets = ["AED 18k - 35k", "AED 35k - 75k", "AED 75k+", "Monthly retainer", "Not sure yet"]
+const services = [
+  "Technical Integrity Audit",
+  "Technical Infrastructure Briefing",
+  "Sovereign E-commerce Architecture",
+  "Generative Engine Optimization",
+  "UAE Data Residency & PDPL",
+  "High-Ticket Conversion Engineering",
+]
+const budgets = ["Audit scope only", "Remediation scope required", "Enterprise infrastructure review", "Not defined yet"]
 
 type Status = {
   type: "idle" | "success" | "error"
@@ -40,7 +47,7 @@ export function ContactFormSection() {
       form.reset()
       setStatus({
         type: "success",
-        message: "Thank you. Your project inquiry was sent to Vista by Lara, and we will reply soon.",
+        message: "Your infrastructure enquiry was received. Vista by Lara will review the structural context and respond with the appropriate audit path.",
       })
     } catch (error) {
       setStatus({
@@ -65,14 +72,13 @@ export function ContactFormSection() {
           <div>
             <p className="inline-flex items-center gap-2 text-sm font-medium uppercase tracking-[0.24em] text-accent">
               <Sparkles className="h-4 w-4" />
-              Contact us
+              Request Technical Integrity Audit
             </p>
             <h2 className="mt-6 font-heading text-4xl font-semibold leading-tight tracking-tight text-foreground sm:text-6xl">
-              Tell us what you want to build next.
+              Request a Technical Integrity Audit.
             </h2>
             <p className="mt-6 text-lg leading-8 text-muted-foreground">
-              Share your goals, website, timeline, and target market. Vista by Lara will review your request and reply
-              from the Dubai team with the right next step.
+              Share your primary domain, current stack, API-latency, Schema-markup gap, PDPL-compliance concern, or UAE/GCC market context. Vista by Lara benchmarks the asset against the Vista Engineering Standard before proposing remediation.
             </p>
           </div>
 
@@ -86,8 +92,8 @@ export function ContactFormSection() {
             </div>
             <div className="rounded-2xl border border-accent/12 bg-background/35 p-5">
               <MessageSquare className="h-5 w-5 text-accent" />
-              <p className="mt-3 text-sm text-muted-foreground">Best for</p>
-              <p className="mt-1 font-semibold text-foreground">Brand, website, AI, and growth projects</p>
+              <p className="mt-3 text-sm text-muted-foreground">Protocol</p>
+              <p className="mt-1 font-semibold text-foreground">Technical audit or infrastructure briefing</p>
             </div>
           </div>
         </div>
@@ -147,14 +153,14 @@ export function ContactFormSection() {
               />
             </label>
             <label className="space-y-2">
-              <span className="text-sm font-medium text-foreground">Service</span>
+              <span className="text-sm font-medium text-foreground">Audit path</span>
               <select
                 name="service"
                 className="min-h-12 w-full rounded-2xl border border-white/10 bg-background/55 px-4 text-foreground outline-none transition-colors focus:border-accent"
                 defaultValue=""
               >
                 <option value="" disabled>
-                  Choose a service
+                  Choose audit or briefing path
                 </option>
                 {services.map((service) => (
                   <option key={service} value={service}>
@@ -164,14 +170,14 @@ export function ContactFormSection() {
               </select>
             </label>
             <label className="space-y-2 sm:col-span-2">
-              <span className="text-sm font-medium text-foreground">Budget range</span>
+              <span className="text-sm font-medium text-foreground">Infrastructure scope</span>
               <select
                 name="budget"
                 className="min-h-12 w-full rounded-2xl border border-white/10 bg-background/55 px-4 text-foreground outline-none transition-colors focus:border-accent"
                 defaultValue=""
               >
                 <option value="" disabled>
-                  Select budget range
+                  Select scope
                 </option>
                 {budgets.map((budget) => (
                   <option key={budget} value={budget}>
@@ -181,13 +187,13 @@ export function ContactFormSection() {
               </select>
             </label>
             <label className="space-y-2 sm:col-span-2">
-              <span className="text-sm font-medium text-foreground">Project details *</span>
+              <span className="text-sm font-medium text-foreground">Structural context *</span>
               <textarea
                 name="message"
                 required
                 rows={6}
                 className="w-full resize-none rounded-2xl border border-white/10 bg-background/55 px-4 py-3 text-foreground outline-none transition-colors placeholder:text-muted-foreground/55 focus:border-accent"
-                placeholder="Tell us about your goals, current website, launch date, target audience, and what you need Vista by Lara to create."
+                placeholder="State whether the issue is conversion volume or structural infrastructure stability. Include domain, stack, API-latency, AI-discovery, PDPL, Schema-markup, and UAE/GCC market context."
               />
             </label>
           </div>
@@ -214,7 +220,7 @@ export function ContactFormSection() {
             disabled={isSubmitting}
             className="mt-6 inline-flex min-h-13 w-full items-center justify-center gap-2 rounded-full bg-accent px-7 font-heading text-sm font-semibold uppercase tracking-[0.06em] text-background transition-transform hover:scale-[1.01] disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
           >
-            {isSubmitting ? "Sending..." : "Send project inquiry"}
+            {isSubmitting ? "Sending..." : "Request Technical Integrity Audit"}
             <ArrowRight className="h-4 w-4" />
           </button>
         </form>

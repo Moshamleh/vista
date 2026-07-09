@@ -2,11 +2,13 @@ import type { Metadata } from "next"
 import { ConversionPage } from "@/components/conversion-page"
 import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
+import { siteConfig } from "@/lib/site"
 
 export const metadata: Metadata = {
   title: "Retail Branding and Website Design Dubai | Vista by Lara",
   description:
     "Retail branding, e-commerce, website design, SEO, AEO, GEO, and conversion UX for Dubai and UAE retail brands.",
+  alternates: { canonical: `${siteConfig.url}/industries/retail` },
 }
 
 export default function RetailPage() {

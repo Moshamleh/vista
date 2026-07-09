@@ -1,0 +1,161 @@
+name: Vista AI Authority Engine
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Deployment environment"
+        required: true
+        default: "staging"
+        type: choice
+        options:
+          - staging
+          - production
+      deploy:
+        description: "Deploy to Cloudflare"
+        required: true
+        default: false
+        type: boolean
+  push:
+    branches:
+      - main
+    paths:
+      - "workers/ai-authority-engine/**"
+      - ".github/workflows/ai-authority-engine.yml"
+
+permissions:
+  contents: write
+  deployments: write
+  actions: read
+
+concurrency:
+  group: vista-ai-authority-engine-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  WORKER_DIR: workers/ai-authority-engine
+  NODE_VERSION: "22"
+
+jobs:
+  validate:
+    name: Build, Lint, Test, And Validate
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ${{ env.WORKER_DIR }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Use Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+          cache-dependency-path: ${{ env.WORKER_DIR }}/package-lock.json
+
+      - name: Install
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Format Check
+        run: npm run format:check
+
+      - name: Unit And Integration Tests
+        run: npm run test
+
+      - name: OpenAPI Validation
+        run: npm run test -- --testNamePattern OpenAPI
+
+      - name: Migration Validation
+        run: npm run test -- --testNamePattern migration
+
+      - name: Wrangler Dry Run
+        run: npx wrangler deploy --dry-run --config wrangler.jsonc
+
+      - name: Upload Validation Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: vista-ai-authority-engine-validation
+          path: |
+            ${{ env.WORKER_DIR }}/wrangler.jsonc
+            ${{ env.WORKER_DIR }}/migrations
+            ${{ env.WORKER_DIR }}/docs/production-readiness
+
+  deploy:
+    name: Cloudflare Deploy
+    runs-on: ubuntu-latest
+    needs: validate
+    if: github.event_name == 'workflow_dispatch' && inputs.deploy == true
+    environment: ${{ inputs.environment }}
+    defaults:
+      run:
+        working-directory: ${{ env.WORKER_DIR }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Use Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+          cache-dependency-path: ${{ env.WORKER_DIR }}/package-lock.json
+
+      - name: Install
+        run: npm ci
+
+      - name: Apply D1 Migrations
+        run: npx wrangler d1 migrations apply vista-ai-authority-engine-prod --remote --config wrangler.jsonc
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
+      - name: Deploy Worker
+        id: deploy
+        run: npx wrangler deploy --config wrangler.jsonc
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
+      - name: Post Deploy Smoke Tests
+        run: |
+          test -n "${{ vars.VISTA_AI_AUTHORITY_ENGINE_URL }}"
+          curl --fail --silent --show-error "${{ vars.VISTA_AI_AUTHORITY_ENGINE_URL }}/health"
+          curl --fail --silent --show-error "${{ vars.VISTA_AI_AUTHORITY_ENGINE_URL }}/openapi.json"
+
+      - name: Tag Release
+        if: inputs.environment == 'production'
+        run: |
+          git tag "vista-ai-authority-engine-${{ github.run_number }}"
+          git push origin "vista-ai-authority-engine-${{ github.run_number }}"
+
+      - name: Deployment Summary
+        run: |
+          {
+            echo "## Vista AI Authority Engine Deployment"
+            echo "Environment: ${{ inputs.environment }}"
+            echo "Worker: vista-ai-authority-engine"
+            echo "Run: ${{ github.run_id }}"
+            echo "Rollback: redeploy the previous successful workflow artifact or previous git tag."
+          } >> "$GITHUB_STEP_SUMMARY"
+
+  rollback-guide:
+    name: Rollback Procedure
+    runs-on: ubuntu-latest
+    if: failure()
+    steps:
+      - name: Rollback Summary
+        run: |
+          {
+            echo "## Rollback Required"
+            echo "1. Stop new production deploys."
+            echo "2. Re-run the last successful deployment workflow."
+            echo "3. If migration caused failure, restore D1 snapshot into a new database and switch DB binding."
+            echo "4. Inspect Cloudflare Worker logs and queue dead-letter messages."
+          } >> "$GITHUB_STEP_SUMMARY"

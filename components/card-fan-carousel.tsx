@@ -284,9 +284,10 @@ export default function SocialCards({ cards }: SocialCardsProps) {
                   src={card.imgUrl}
                   fill
                   sizes="(max-width: 640px) 78vw, (max-width: 1024px) 50vw, 27rem"
-                  alt={card.alt || `Card ${index}`}
+                  alt={card.alt || `Vista by Lara showcase card ${index + 1}`}
                   className="absolute inset-0 z-10 object-cover"
                 />
+
               </div>
             );
             return card.linkUrl ? (

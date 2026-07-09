@@ -1,0 +1,9 @@
+node_modules
+dist
+coverage
+.wrangler
+admin-control-center/node_modules
+admin-control-center/dist
+admin-control-center/coverage
+admin-control-center/test-results
+admin-control-center/playwright-report

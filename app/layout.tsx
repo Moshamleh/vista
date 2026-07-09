@@ -1,7 +1,8 @@
 import type { Metadata, Viewport } from 'next'
-import { Space_Grotesk, Inter } from 'next/font/google'
+import Script from 'next/script'
+import { headers } from 'next/headers'
+import { Space_Grotesk, Inter, Noto_Sans_Arabic } from 'next/font/google'
 import { siteConfig } from '@/lib/site'
-import { jsonLd } from '@/lib/json-ld'
 import { StructuredData } from '@/components/structured-data'
 import { GsapScrollEffects } from '@/components/gsap-scroll-effects'
 import { VistaLeadQualifier } from '@/components/vista-lead-qualifier'
@@ -16,12 +17,17 @@ const inter = Inter({
   variable: '--font-inter',
   subsets: ['latin'],
 })
+const notoSansArabic = Noto_Sans_Arabic({
+  variable: '--font-arabic',
+  subsets: ['arabic'],
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: `${siteConfig.name} — ${siteConfig.tagline}`,
-    template: `%s — ${siteConfig.name}`,
+    default: `${siteConfig.name} - ${siteConfig.tagline}`,
+    template: `%s`,
   },
   description: siteConfig.description,
   applicationName: siteConfig.name,
@@ -58,22 +64,21 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: siteConfig.locale,
-    url: siteConfig.url,
     siteName: siteConfig.name,
-    title: `${siteConfig.name} — ${siteConfig.tagline}`,
+    title: `${siteConfig.name} - ${siteConfig.tagline}`,
     description: siteConfig.description,
     images: [
       {
         url: siteConfig.ogImage,
         width: 1200,
         height: 630,
-        alt: `${siteConfig.name} — ${siteConfig.tagline}`,
+        alt: `${siteConfig.name} - ${siteConfig.tagline}`,
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: `${siteConfig.name} — ${siteConfig.tagline}`,
+    title: `${siteConfig.name} - ${siteConfig.tagline}`,
     description: siteConfig.description,
     site: siteConfig.twitterHandle,
     creator: siteConfig.twitterHandle,
@@ -94,52 +99,76 @@ export const viewport: Viewport = {
   ],
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const headerList = await headers()
+  const pathname = headerList.get('x-vista-pathname') || ''
+  const isArabic = pathname === '/ar' || pathname.startsWith('/ar/')
+
   return (
     <html
-      lang="en"
-      className={`${spaceGrotesk.variable} ${inter.variable} bg-background`}
+      lang={isArabic ? 'ar' : 'en'}
+      dir={isArabic ? 'rtl' : 'ltr'}
+      className={`${spaceGrotesk.variable} ${inter.variable} ${notoSansArabic.variable} bg-background`}
     >
       <head>
-        <StructuredData />
-        <script
-          type="application/ld+json"
+        <Script
+          id="google-tag-consent-default"
+          strategy="beforeInteractive"
           dangerouslySetInnerHTML={{
-            __html: jsonLd({
-              "@context": "https://schema.org",
-              "@type": "ProfessionalService",
-              "name": siteConfig.name,
-              "url": siteConfig.url,
-              "address": {
-                "@type": "PostalAddress",
-                "addressLocality": "Dubai",
-                "addressRegion": "Dubai",
-                "addressCountry": "United Arab Emirates"
-              },
-              "founder": {
-                "@type": "Person",
-                "name": siteConfig.founder
-              },
-              "sameAs": siteConfig.sameAs,
-              "hasOfferCatalog": {
-                "@type": "OfferCatalog",
-                "name": "Vista by Lara Services",
-                "itemListElement": [
-                  { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "AI Design" } },
-                  { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Shopify Development" } },
-                  { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Google Ads" } },
-                  { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Generative Engine Optimization" } }
-                ]
-              }
-            }),
+            __html: `
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('consent', 'default', {
+  ad_storage: 'denied',
+  analytics_storage: 'denied',
+  ad_user_data: 'denied',
+  ad_personalization: 'denied',
+  functionality_storage: 'granted',
+  security_storage: 'granted',
+  wait_for_update: 500
+});
+window.dataLayer.push({
+  event: 'gtm.init_consent',
+  ad_storage: 'denied',
+  analytics_storage: 'denied',
+  ad_user_data: 'denied',
+  ad_personalization: 'denied',
+  functionality_storage: 'granted',
+  security_storage: 'granted'
+});
+`,
           }}
         />
+        <Script
+          id="google-tag-manager"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-W34QFG3V');
+`,
+          }}
+        />
+        <StructuredData />
       </head>
       <body className="tactile-brutalist font-sans antialiased">
+        {/* Google Tag Manager (noscript) */}
+        <noscript>
+          <iframe
+            src="https://www.googletagmanager.com/ns.html?id=GTM-W34QFG3V"
+            height="0"
+            width="0"
+            style={{ display: 'none', visibility: 'hidden' }}
+          />
+        </noscript>
+
         <GsapScrollEffects />
         {children}
         <TrackedWhatsappLinks />

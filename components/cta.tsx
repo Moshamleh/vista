@@ -15,7 +15,7 @@ export function CTA() {
         transition={{ duration: 8, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
         className="pointer-events-none absolute left-[10%] top-12 h-20 w-20 sm:h-28 sm:w-28"
       >
-        <Image src="/orb-purple.png" alt="" width={112} height={112} className="h-full w-full object-contain" />
+        <Image src="/orb-purple.png" alt="Purple Vista by Lara brand accent orb" width={112} height={112} className="h-full w-full object-contain" />
       </motion.div>
       <motion.div
         aria-hidden
@@ -23,7 +23,7 @@ export function CTA() {
         transition={{ duration: 7, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut", delay: 0.8 }}
         className="pointer-events-none absolute right-[12%] bottom-16 h-14 w-14 sm:h-20 sm:w-20"
       >
-        <Image src="/orb-orange.png" alt="" width={80} height={80} className="h-full w-full object-contain" />
+        <Image src="/orb-orange.png" alt="Orange Vista by Lara brand accent orb" width={80} height={80} className="h-full w-full object-contain" />
       </motion.div>
 
       <Reveal className="relative mx-auto max-w-4xl text-center">
@@ -45,10 +45,10 @@ export function CTA() {
             <ArrowRight className="h-4 w-4" />
           </a>
           <a
-            href="#work"
+            href="#case-studies"
             className="inline-flex items-center gap-2 rounded-full border border-accent/30 bg-background/60 px-8 py-4 text-base font-medium text-accent transition-colors hover:bg-accent/10"
           >
-            See our work
+            See registry
           </a>
         </div>
       </Reveal>

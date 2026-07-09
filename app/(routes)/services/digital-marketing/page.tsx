@@ -2,11 +2,13 @@ import type { Metadata } from "next"
 import { ConversionPage } from "@/components/conversion-page"
 import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
+import { siteConfig } from "@/lib/site"
 
 export const metadata: Metadata = {
   title: "Digital Marketing Dubai | Vista by Lara",
   description:
     "Digital marketing services in Dubai for premium UAE brands needing strategy, content, SEO, AEO, GEO, websites, and conversion growth.",
+  alternates: { canonical: `${siteConfig.url}/services/digital-marketing` },
 }
 
 export default function DigitalMarketingPage() {

@@ -65,6 +65,7 @@ export function GlobeCdn({
   const thetaOffsetRef = useRef(0)
   const isPausedRef = useRef(false)
   const [isInView, setIsInView] = useState(false)
+  const [globeFailed, setGlobeFailed] = useState(false)
   const [traffic, setTraffic] = useState(() =>
     arcs.map((arc, index) => ({ id: arc.id, value: [88, 76, 64, 52, 49, 42, 38][index] || 30 }))
   )
@@ -164,27 +165,32 @@ export function GlobeCdn({
       const width = canvas.offsetWidth
       if (width === 0 || globe) return
 
-      globe = createGlobe(canvas, {
-        devicePixelRatio: Math.min(window.devicePixelRatio || 1, 2),
-        width,
-        height: width,
-        phi,
-        theta: 0.12,
-        dark: 1,
-        diffuse: 1.35,
-        mapSamples: 18000,
-        mapBrightness: 5,
-        baseColor: [0.1, 0.16, 0.22],
-        markerColor: [0.34, 0.85, 1],
-        glowColor: [0.08, 0.22, 0.32],
-        markerElevation: 0.04,
-        markers: markers.map((marker) => ({ location: marker.location, size: marker.id === "dubai" ? 0.065 : 0.035, id: marker.id })),
-        arcs: arcs.map((arc) => ({ from: arc.from, to: arc.to, id: arc.id })),
-        arcColor: [0.34, 0.85, 1],
-        arcWidth: 0.75,
-        arcHeight: 0.35,
-        opacity: 0.95,
-      })
+      try {
+        globe = createGlobe(canvas, {
+          devicePixelRatio: Math.min(window.devicePixelRatio || 1, 2),
+          width,
+          height: width,
+          phi,
+          theta: 0.12,
+          dark: 1,
+          diffuse: 1.35,
+          mapSamples: 18000,
+          mapBrightness: 5,
+          baseColor: [0.1, 0.16, 0.22],
+          markerColor: [0.34, 0.85, 1],
+          glowColor: [0.08, 0.22, 0.32],
+          markerElevation: 0.04,
+          markers: markers.map((marker) => ({ location: marker.location, size: marker.id === "dubai" ? 0.065 : 0.035, id: marker.id })),
+          arcs: arcs.map((arc) => ({ from: arc.from, to: arc.to, id: arc.id })),
+          arcColor: [0.34, 0.85, 1],
+          arcWidth: 0.75,
+          arcHeight: 0.35,
+          opacity: 0.95,
+        })
+      } catch {
+        setGlobeFailed(true)
+        return
+      }
 
       const animate = () => {
         if (!isPausedRef.current) phi += speed
@@ -227,6 +233,19 @@ export function GlobeCdn({
 
   return (
     <div ref={wrapperRef} className={`relative aspect-square select-none ${className}`}>
+      {globeFailed ? (
+        <div className="absolute inset-0 flex items-center justify-center rounded-full bg-[radial-gradient(circle_at_45%_35%,rgba(87,217,255,0.28),rgba(5,15,26,0.9)_48%,rgba(3,4,8,0.12)_72%)] shadow-[0_0_80px_rgba(87,217,255,0.2)]" aria-hidden="true">
+          <div className="absolute inset-[9%] rounded-full border border-accent/25" />
+          <div className="absolute inset-[21%] rounded-full border border-accent/14" />
+          <div className="absolute left-[18%] right-[18%] top-1/2 h-px bg-accent/35" />
+          <div className="absolute bottom-[18%] left-1/2 top-[18%] w-px bg-accent/30" />
+          <div className="absolute left-[28%] top-[30%] h-2.5 w-2.5 rounded-full bg-accent shadow-[0_0_20px_rgba(87,217,255,0.95)]" />
+          <div className="absolute right-[31%] top-[41%] h-2 w-2 rounded-full bg-accent/85 shadow-[0_0_18px_rgba(87,217,255,0.75)]" />
+          <div className="absolute bottom-[30%] left-[45%] h-2 w-2 rounded-full bg-accent/75 shadow-[0_0_18px_rgba(87,217,255,0.75)]" />
+          <div className="absolute left-[29%] top-[33%] h-px w-[38%] rotate-12 bg-accent/30" />
+          <div className="absolute bottom-[33%] left-[46%] h-px w-[27%] -rotate-[28deg] bg-accent/25" />
+        </div>
+      ) : null}
       <canvas
         ref={canvasRef}
         onPointerDown={handlePointerDown}

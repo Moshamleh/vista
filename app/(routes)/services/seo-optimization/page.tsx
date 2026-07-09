@@ -2,11 +2,13 @@ import type { Metadata } from "next"
 import { ConversionPage } from "@/components/conversion-page"
 import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
+import { siteConfig } from "@/lib/site"
 
 export const metadata: Metadata = {
   title: "SEO Optimization Dubai | Vista by Lara",
   description:
     "SEO optimization in Dubai for UAE businesses needing technical SEO, AEO, GEO, schema, content clusters, and AI search visibility.",
+  alternates: { canonical: `${siteConfig.url}/services/seo-optimization` },
 }
 
 export default function SeoOptimizationPage() {

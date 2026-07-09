@@ -1,0 +1,804 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Vista by Lara REST API",
+    "summary": "Machine-readable REST contract for Vista by Lara knowledge, blog, contact, and lead endpoints.",
+    "description": "OpenAPI 3.1 documentation only. This file describes the existing REST endpoints and expected request/response contracts. It does not implement authentication, validation, rate limiting, or API behavior.",
+    "version": "1.0.0",
+    "contact": {
+      "name": "Vista by Lara",
+      "url": "https://www.vistabylara.com",
+      "email": "solution@vistabylara.com"
+    }
+  },
+  "jsonSchemaDialect": "https://json-schema.org/draft/2020-12/schema",
+  "servers": [
+    {
+      "url": "https://www.vistabylara.com",
+      "description": "Production"
+    },
+    {
+      "url": "http://localhost:3000",
+      "description": "Local development"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Knowledge",
+      "description": "AI-readable Vista knowledge graph and resource endpoints."
+    },
+    {
+      "name": "Blog",
+      "description": "Blog post retrieval and authenticated publishing endpoint."
+    },
+    {
+      "name": "Contact",
+      "description": "Public infrastructure inquiry submission endpoint."
+    },
+    {
+      "name": "Leads",
+      "description": "Lead feed proxy endpoint."
+    }
+  ],
+  "security": [],
+  "paths": {
+    "/api": {
+      "get": {
+        "tags": ["Knowledge"],
+        "operationId": "getKnowledgeIndex",
+        "summary": "Get Vista Knowledge API index",
+        "description": "Returns the public machine-readable Vista Knowledge API index, selected knowledge objects, endpoint catalog, and semantic relationships.",
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "Knowledge API index.",
+            "headers": {
+              "X-RateLimit-Limit": { "$ref": "#/components/headers/X-RateLimit-Limit" },
+              "X-RateLimit-Remaining": { "$ref": "#/components/headers/X-RateLimit-Remaining" },
+              "X-RateLimit-Reset": { "$ref": "#/components/headers/X-RateLimit-Reset" }
+            },
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/KnowledgeApiPayload" },
+                "examples": {
+                  "index": { "$ref": "#/components/examples/KnowledgeIndexExample" }
+                }
+              }
+            }
+          },
+          "429": { "$ref": "#/components/responses/TooManyRequests" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        }
+      }
+    },
+    "/api/{resource}": {
+      "get": {
+        "tags": ["Knowledge"],
+        "operationId": "getKnowledgeResource",
+        "summary": "Get a specific knowledge resource",
+        "description": "Returns one Vista Knowledge API resource. Supported resources are services, entities, faq, research, statistics, tools, authors, glossary, videos, checklists, and templates.",
+        "security": [],
+        "parameters": [
+          {
+            "name": "resource",
+            "in": "path",
+            "required": true,
+            "description": "Knowledge resource name.",
+            "schema": { "$ref": "#/components/schemas/KnowledgeResourceName" },
+            "examples": {
+              "services": { "value": "services" },
+              "entities": { "value": "entities" },
+              "faq": { "value": "faq" }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Knowledge resource payload.",
+            "headers": {
+              "X-RateLimit-Limit": { "$ref": "#/components/headers/X-RateLimit-Limit" },
+              "X-RateLimit-Remaining": { "$ref": "#/components/headers/X-RateLimit-Remaining" },
+              "X-RateLimit-Reset": { "$ref": "#/components/headers/X-RateLimit-Reset" }
+            },
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/KnowledgeApiPayload" },
+                "examples": {
+                  "services": { "$ref": "#/components/examples/KnowledgeServicesExample" }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Unknown resource.",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/UnknownResourceError" },
+                "examples": {
+                  "unknownResource": {
+                    "value": {
+                      "error": "Unknown knowledge API resource.",
+                      "availableResources": ["services", "entities", "faq", "research", "statistics", "tools", "authors", "glossary", "videos", "checklists", "templates"]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": { "$ref": "#/components/responses/TooManyRequests" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        }
+      }
+    },
+    "/api/blog": {
+      "get": {
+        "tags": ["Blog"],
+        "operationId": "listBlogPosts",
+        "summary": "List stored blog posts",
+        "description": "Returns blog posts stored in the configured Upstash Redis store. Public seed posts are rendered by the website but this endpoint returns the persisted API post list.",
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "Stored blog post list.",
+            "headers": {
+              "X-RateLimit-Limit": { "$ref": "#/components/headers/X-RateLimit-Limit" },
+              "X-RateLimit-Remaining": { "$ref": "#/components/headers/X-RateLimit-Remaining" },
+              "X-RateLimit-Reset": { "$ref": "#/components/headers/X-RateLimit-Reset" }
+            },
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/BlogPostListResponse" },
+                "examples": {
+                  "posts": { "$ref": "#/components/examples/BlogPostListExample" }
+                }
+              }
+            }
+          },
+          "429": { "$ref": "#/components/responses/TooManyRequests" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        }
+      },
+      "post": {
+        "tags": ["Blog"],
+        "operationId": "upsertBlogPost",
+        "summary": "Create or update a stored blog post",
+        "description": "Creates or replaces a stored blog post by slug. Requires the `x-auth-token` header to match the server-side `BLOG_ADMIN_TOKEN`.",
+        "security": [
+          {
+            "BlogAdminToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/IdempotencyKey"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/BlogPostInput" },
+              "examples": {
+                "newPost": { "$ref": "#/components/examples/BlogPostInputExample" }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Blog post created or updated.",
+            "headers": {
+              "X-RateLimit-Limit": { "$ref": "#/components/headers/X-RateLimit-Limit" },
+              "X-RateLimit-Remaining": { "$ref": "#/components/headers/X-RateLimit-Remaining" },
+              "X-RateLimit-Reset": { "$ref": "#/components/headers/X-RateLimit-Reset" }
+            },
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/OkResponse" },
+                "examples": {
+                  "ok": { "value": { "ok": true } }
+                }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/ValidationError" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "429": { "$ref": "#/components/responses/TooManyRequests" },
+          "500": { "$ref": "#/components/responses/InternalServerError" },
+          "503": {
+            "description": "Blog publishing is not configured.",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ErrorResponse" },
+                "examples": {
+                  "notConfigured": { "value": { "error": "Blog publishing is not configured." } }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/contact": {
+      "post": {
+        "tags": ["Contact"],
+        "operationId": "submitContactInquiry",
+        "summary": "Submit a Vista infrastructure inquiry",
+        "description": "Accepts a public contact form submission, validates required fields, classifies the inquiry tier, and sends it to Vista by Lara email infrastructure when SMTP environment variables are configured.",
+        "security": [],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/IdempotencyKey"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/ContactPayload" },
+              "examples": {
+                "principalInquiry": { "$ref": "#/components/examples/ContactPayloadExample" }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Inquiry accepted and email delivery attempted successfully.",
+            "headers": {
+              "X-RateLimit-Limit": { "$ref": "#/components/headers/X-RateLimit-Limit" },
+              "X-RateLimit-Remaining": { "$ref": "#/components/headers/X-RateLimit-Remaining" },
+              "X-RateLimit-Reset": { "$ref": "#/components/headers/X-RateLimit-Reset" }
+            },
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/OkResponse" },
+                "examples": {
+                  "ok": { "value": { "ok": true } }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid JSON or missing required contact fields.",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ErrorResponse" },
+                "examples": {
+                  "invalidSubmission": { "value": { "error": "Invalid form submission." } },
+                  "missingFields": { "value": { "error": "Please add your name, email, contact number, and project details." } }
+                }
+              }
+            }
+          },
+          "429": { "$ref": "#/components/responses/TooManyRequests" },
+          "500": { "$ref": "#/components/responses/InternalServerError" },
+          "503": {
+            "description": "Private email delivery is not configured.",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ErrorResponse" },
+                "examples": {
+                  "mailNotConfigured": {
+                    "value": {
+                      "error": "The contact form is designed, but private email delivery still needs the mail environment variables in Vercel."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/leads": {
+      "get": {
+        "tags": ["Leads"],
+        "operationId": "listLeads",
+        "summary": "Proxy lead feed",
+        "description": "Fetches leads from the external Vista AI Visibility Worker and returns the upstream JSON payload. Intended for internal CRM/dashboard use.",
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "Lead feed from upstream worker.",
+            "headers": {
+              "X-RateLimit-Limit": { "$ref": "#/components/headers/X-RateLimit-Limit" },
+              "X-RateLimit-Remaining": { "$ref": "#/components/headers/X-RateLimit-Remaining" },
+              "X-RateLimit-Reset": { "$ref": "#/components/headers/X-RateLimit-Reset" }
+            },
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/LeadFeedResponse" },
+                "examples": {
+                  "leads": { "$ref": "#/components/examples/LeadFeedExample" }
+                }
+              }
+            }
+          },
+          "429": { "$ref": "#/components/responses/TooManyRequests" },
+          "500": { "$ref": "#/components/responses/InternalServerError" },
+          "502": {
+            "description": "Upstream lead worker failed.",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/UpstreamErrorResponse" },
+                "examples": {
+                  "workerFailed": { "value": { "error": "Failed to fetch leads", "status": 503 } }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "BlogAdminToken": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "x-auth-token",
+        "description": "Admin token required for `POST /api/blog`. Server value is supplied through `BLOG_ADMIN_TOKEN`."
+      }
+    },
+    "parameters": {
+      "IdempotencyKey": {
+        "name": "Idempotency-Key",
+        "in": "header",
+        "required": false,
+        "description": "Optional caller-provided idempotency key for retry-safe POST requests. Documented for clients; current routes do not persist idempotency state.",
+        "schema": {
+          "type": "string",
+          "minLength": 8,
+          "maxLength": 128
+        },
+        "example": "inquiry-2026-06-30-001"
+      }
+    },
+    "headers": {
+      "X-RateLimit-Limit": {
+        "description": "Maximum requests allowed in the current rate-limit window. Recommended contract header; current routes may not emit it.",
+        "schema": { "type": "integer", "minimum": 0 },
+        "example": 60
+      },
+      "X-RateLimit-Remaining": {
+        "description": "Requests remaining in the current rate-limit window. Recommended contract header; current routes may not emit it.",
+        "schema": { "type": "integer", "minimum": 0 },
+        "example": 42
+      },
+      "X-RateLimit-Reset": {
+        "description": "Unix timestamp when the current rate-limit window resets. Recommended contract header; current routes may not emit it.",
+        "schema": { "type": "integer", "minimum": 0 },
+        "example": 1782813600
+      },
+      "Retry-After": {
+        "description": "Seconds until the client should retry after a rate-limit response.",
+        "schema": { "type": "integer", "minimum": 1 },
+        "example": 60
+      }
+    },
+    "responses": {
+      "ValidationError": {
+        "description": "Request validation failed.",
+        "content": {
+          "application/json": {
+            "schema": { "$ref": "#/components/schemas/ErrorResponse" },
+            "examples": {
+              "invalidSlug": { "value": { "error": "slug must be lowercase, hyphenated, and URL-safe." } },
+              "missingTitle": { "value": { "error": "title is required." } }
+            }
+          }
+        }
+      },
+      "Unauthorized": {
+        "description": "Authentication failed.",
+        "content": {
+          "application/json": {
+            "schema": { "$ref": "#/components/schemas/ErrorResponse" },
+            "examples": {
+              "unauthorized": { "value": { "error": "Unauthorized." } }
+            }
+          }
+        }
+      },
+      "TooManyRequests": {
+        "description": "Rate limit exceeded. This is the documented contract for clients and edge middleware.",
+        "headers": {
+          "Retry-After": { "$ref": "#/components/headers/Retry-After" },
+          "X-RateLimit-Limit": { "$ref": "#/components/headers/X-RateLimit-Limit" },
+          "X-RateLimit-Remaining": { "$ref": "#/components/headers/X-RateLimit-Remaining" },
+          "X-RateLimit-Reset": { "$ref": "#/components/headers/X-RateLimit-Reset" }
+        },
+        "content": {
+          "application/json": {
+            "schema": { "$ref": "#/components/schemas/RateLimitErrorResponse" },
+            "examples": {
+              "rateLimited": { "value": { "error": "Too many requests.", "retryAfter": 60 } }
+            }
+          }
+        }
+      },
+      "InternalServerError": {
+        "description": "Unexpected server error.",
+        "content": {
+          "application/json": {
+            "schema": { "$ref": "#/components/schemas/ErrorResponse" },
+            "examples": {
+              "serverError": { "value": { "error": "Unexpected server error." } }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "OkResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["ok"],
+        "properties": {
+          "ok": { "type": "boolean", "const": true }
+        }
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "additionalProperties": true,
+        "required": ["error"],
+        "properties": {
+          "error": { "type": "string", "minLength": 1 }
+        }
+      },
+      "RateLimitErrorResponse": {
+        "allOf": [
+          { "$ref": "#/components/schemas/ErrorResponse" },
+          {
+            "type": "object",
+            "properties": {
+              "retryAfter": { "type": "integer", "minimum": 1 }
+            }
+          }
+        ]
+      },
+      "UpstreamErrorResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["error", "status"],
+        "properties": {
+          "error": { "type": "string" },
+          "status": { "type": "integer", "minimum": 400, "maximum": 599 }
+        }
+      },
+      "UnknownResourceError": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["error", "availableResources"],
+        "properties": {
+          "error": { "type": "string" },
+          "availableResources": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/KnowledgeResourceName" }
+          }
+        }
+      },
+      "KnowledgeResourceName": {
+        "type": "string",
+        "enum": ["services", "entities", "faq", "research", "statistics", "tools", "authors", "glossary", "videos", "checklists", "templates"]
+      },
+      "KnowledgeObjectType": {
+        "type": "string",
+        "enum": ["Organization", "Service", "Industry", "Technology", "City", "FAQ", "Case Study", "Research", "Certification", "Award", "Software", "API", "Guide", "Glossary", "Statistic", "Client", "Process", "Prompt", "Template", "Tool", "Dataset"]
+      },
+      "KnowledgeObject": {
+        "type": "object",
+        "additionalProperties": true,
+        "required": ["uuid", "type", "name", "slug", "aliases", "description", "summary", "machineSummary", "children", "relatedObjects", "schemaId", "keywords", "semanticTags", "confidenceScore", "authorityScore", "lastUpdated", "language", "href"],
+        "properties": {
+          "uuid": { "type": "string", "pattern": "^kg-[a-z0-9-]+$" },
+          "type": { "$ref": "#/components/schemas/KnowledgeObjectType" },
+          "name": { "type": "string", "minLength": 1 },
+          "slug": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+          "aliases": { "type": "array", "items": { "type": "string" } },
+          "description": { "type": "string" },
+          "summary": { "type": "string" },
+          "machineSummary": { "type": "string" },
+          "parent": { "type": "string" },
+          "children": { "type": "array", "items": { "type": "string" } },
+          "relatedObjects": { "type": "array", "items": { "type": "string" } },
+          "schemaId": { "type": "string", "format": "uri-reference" },
+          "keywords": { "type": "array", "items": { "type": "string" } },
+          "semanticTags": { "type": "array", "items": { "type": "string" } },
+          "confidenceScore": { "type": "integer", "minimum": 0, "maximum": 100 },
+          "authorityScore": { "type": "integer", "minimum": 0, "maximum": 100 },
+          "lastUpdated": { "type": "string", "format": "date" },
+          "language": { "type": "string", "enum": ["en-AE", "ar-AE"] },
+          "href": { "type": "string" }
+        }
+      },
+      "SemanticRelationship": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["source", "target", "relationship", "strength"],
+        "properties": {
+          "source": { "type": "string" },
+          "target": { "type": "string" },
+          "relationship": { "type": "string" },
+          "strength": { "type": "integer", "minimum": 0, "maximum": 10 }
+        }
+      },
+      "ApiCatalogItem": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "href", "description"],
+        "properties": {
+          "name": { "type": "string" },
+          "href": { "type": "string" },
+          "description": { "type": "string" }
+        }
+      },
+      "KnowledgeApiPayload": {
+        "type": "object",
+        "additionalProperties": true,
+        "required": ["name", "version", "lastUpdated", "language", "license", "endpoints", "resource", "items"],
+        "properties": {
+          "name": { "type": "string", "const": "Vista Knowledge API" },
+          "version": { "type": "string" },
+          "lastUpdated": { "type": "string", "format": "date" },
+          "language": { "type": "string", "enum": ["en-AE", "ar-AE"] },
+          "license": { "type": "string" },
+          "endpoints": { "type": "array", "items": { "$ref": "#/components/schemas/ApiCatalogItem" } },
+          "resource": { "type": "string" },
+          "items": { "type": "array", "items": { "type": "object" } },
+          "relationships": { "type": "array", "items": { "$ref": "#/components/schemas/SemanticRelationship" } },
+          "datasets": { "type": "array", "items": { "type": "object" } },
+          "roadmap": { "type": "array", "items": { "type": "string" } }
+        }
+      },
+      "BlogPostInput": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["slug", "title", "excerpt", "content", "category", "tags", "date", "readTime", "metaTitle", "metaDescription"],
+        "properties": {
+          "slug": {
+            "type": "string",
+            "description": "Lowercase, hyphenated, URL-safe slug.",
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+            "examples": ["ai-website-features-dubai-businesses-2026"]
+          },
+          "title": { "type": "string", "minLength": 1, "maxLength": 140 },
+          "excerpt": { "type": "string", "minLength": 1, "maxLength": 500 },
+          "content": { "type": "string", "minLength": 1 },
+          "category": { "type": "string", "minLength": 1, "maxLength": 80 },
+          "tags": { "type": "array", "items": { "type": "string" }, "default": [] },
+          "date": { "type": "string", "minLength": 1, "examples": ["June 2026"] },
+          "readTime": { "type": "string", "minLength": 1, "examples": ["8 min read"] },
+          "metaTitle": { "type": "string", "minLength": 1, "maxLength": 60 },
+          "metaDescription": { "type": "string", "minLength": 1, "maxLength": 155 }
+        }
+      },
+      "BlogPostListResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["posts"],
+        "properties": {
+          "posts": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/BlogPostInput" }
+          }
+        }
+      },
+      "ContactPayload": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "email", "phone", "message"],
+        "properties": {
+          "name": { "type": "string", "minLength": 1, "maxLength": 120 },
+          "email": { "type": "string", "format": "email", "maxLength": 254 },
+          "phone": { "type": "string", "minLength": 3, "maxLength": 40 },
+          "company": { "type": "string", "maxLength": 160 },
+          "service": { "type": "string", "maxLength": 120 },
+          "budget": { "type": "string", "maxLength": 120 },
+          "message": { "type": "string", "minLength": 1, "maxLength": 4000 }
+        }
+      },
+      "Lead": {
+        "type": "object",
+        "additionalProperties": true,
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "email": { "type": "string", "format": "email" },
+          "phone": { "type": "string" },
+          "company": { "type": "string" },
+          "message": { "type": "string" },
+          "source": { "type": "string" },
+          "createdAt": { "type": "string", "format": "date-time" }
+        }
+      },
+      "LeadFeedResponse": {
+        "oneOf": [
+          {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/Lead" }
+          },
+          {
+            "type": "object",
+            "additionalProperties": true,
+            "properties": {
+              "leads": {
+                "type": "array",
+                "items": { "$ref": "#/components/schemas/Lead" }
+              }
+            }
+          }
+        ]
+      }
+    },
+    "examples": {
+      "KnowledgeIndexExample": {
+        "value": {
+          "name": "Vista Knowledge API",
+          "version": "1.0",
+          "lastUpdated": "2026-06-30",
+          "language": "en-AE",
+          "license": "Public discovery endpoint for Vista by Lara knowledge infrastructure.",
+          "resource": "index",
+          "endpoints": [
+            { "name": "Services", "href": "/api/services", "description": "Service entities and semantic relationships." }
+          ],
+          "items": [
+            {
+              "uuid": "kg-org-vista-by-lara",
+              "type": "Organization",
+              "name": "Vista by Lara",
+              "slug": "vista-by-lara",
+              "aliases": ["Vista"],
+              "description": "Dubai-based AI visibility, high-performance website, GEO, AEO, SEO, Shopify, Google Ads, and growth systems consultancy.",
+              "summary": "Vista by Lara is the central organization entity behind the knowledge graph.",
+              "machineSummary": "Organization entity for Vista by Lara.",
+              "children": ["kg-service-ai-visibility"],
+              "relatedObjects": ["kg-city-dubai"],
+              "schemaId": "https://www.vistabylara.com/#organization",
+              "keywords": ["Vista by Lara", "AI visibility Dubai"],
+              "semanticTags": ["organization", "uae"],
+              "confidenceScore": 94,
+              "authorityScore": 88,
+              "lastUpdated": "2026-06-30",
+              "language": "en-AE",
+              "href": "/"
+            }
+          ],
+          "relationships": [
+            { "source": "kg-service-ai-visibility", "target": "kg-city-dubai", "relationship": "targets discovery in", "strength": 9 }
+          ]
+        }
+      },
+      "KnowledgeServicesExample": {
+        "value": {
+          "name": "Vista Knowledge API",
+          "version": "1.0",
+          "lastUpdated": "2026-06-30",
+          "language": "en-AE",
+          "license": "Public discovery endpoint for Vista by Lara knowledge infrastructure.",
+          "resource": "services",
+          "endpoints": [
+            { "name": "Services", "href": "/api/services", "description": "Service entities and semantic relationships." }
+          ],
+          "items": [
+            {
+              "uuid": "kg-service-ai-visibility",
+              "type": "Service",
+              "name": "AI Visibility",
+              "slug": "ai-visibility",
+              "aliases": ["AI search visibility"],
+              "description": "The ability of AI systems to identify, understand, trust, and recommend a business for relevant buyer questions.",
+              "summary": "AI Visibility connects SEO, AEO, GEO, entity clarity, digital trust, structured data, and content authority.",
+              "machineSummary": "Service entity connected to GEO, AEO, entity SEO, knowledge graph, structured data, digital trust, Dubai, and UAE businesses.",
+              "parent": "kg-org-vista-by-lara",
+              "children": ["kg-guide-ai-recommendations"],
+              "relatedObjects": ["kg-city-dubai"],
+              "schemaId": "https://www.vistabylara.com/services/generative-ai#ai-visibility",
+              "keywords": ["AI visibility", "GEO agency UAE"],
+              "semanticTags": ["ai-search", "geo", "aeo"],
+              "confidenceScore": 96,
+              "authorityScore": 91,
+              "lastUpdated": "2026-06-30",
+              "language": "en-AE",
+              "href": "/knowledge/ai-visibility"
+            }
+          ],
+          "relationships": [
+            { "source": "kg-service-ai-visibility", "target": "kg-city-dubai", "relationship": "targets discovery in", "strength": 9 }
+          ]
+        }
+      },
+      "BlogPostListExample": {
+        "value": {
+          "posts": [
+            {
+              "slug": "ai-website-features-dubai-businesses-2026",
+              "title": "15 AI Website Features Every Dubai Business Needs in 2026",
+              "excerpt": "Dubai businesses need AI websites that answer customers instantly, qualify leads, personalize journeys, and expose structured proof.",
+              "content": "Article body content.",
+              "category": "AI Website Strategy",
+              "tags": ["AI website Dubai", "GEO Dubai"],
+              "date": "June 2026",
+              "readTime": "8 min read",
+              "metaTitle": "AI Website Features Dubai 2026 | Vista",
+              "metaDescription": "See 15 AI website features Dubai businesses need in 2026."
+            }
+          ]
+        }
+      },
+      "BlogPostInputExample": {
+        "value": {
+          "slug": "ai-website-features-dubai-businesses-2026",
+          "title": "15 AI Website Features Every Dubai Business Needs in 2026",
+          "excerpt": "Dubai businesses need AI websites that answer customers instantly, qualify leads, personalize journeys, and expose structured proof.",
+          "content": "Full article body content.",
+          "category": "AI Website Strategy",
+          "tags": ["AI website Dubai", "GEO Dubai", "AEO UAE"],
+          "date": "June 2026",
+          "readTime": "8 min read",
+          "metaTitle": "AI Website Features Dubai 2026 | Vista",
+          "metaDescription": "See 15 AI website features Dubai businesses need in 2026."
+        }
+      },
+      "ContactPayloadExample": {
+        "value": {
+          "name": "Aisha Rahman",
+          "email": "aisha@example.ae",
+          "phone": "+971501234567",
+          "company": "Dubai Retail Group",
+          "service": "AI website and GEO architecture",
+          "budget": "Infrastructure Integrity Audit",
+          "message": "We need to diagnose AI-discovery loss, schema gaps, and conversion bottlenecks on our Shopify stack."
+        }
+      },
+      "LeadFeedExample": {
+        "value": {
+          "leads": [
+            {
+              "id": "lead_20260630_001",
+              "name": "Aisha Rahman",
+              "email": "aisha@example.ae",
+              "phone": "+971501234567",
+              "company": "Dubai Retail Group",
+              "message": "AI visibility audit request.",
+              "source": "website",
+              "createdAt": "2026-06-30T10:00:00+04:00"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "x-rateLimitPolicy": {
+    "description": "Documented client contract. Current route handlers do not implement dedicated rate limiting in this spec-only change.",
+    "recommendedDefaults": [
+      { "scope": "public-read", "appliesTo": ["GET /api", "GET /api/{resource}", "GET /api/blog"], "limit": 60, "window": "1 minute" },
+      { "scope": "public-write", "appliesTo": ["POST /api/contact"], "limit": 10, "window": "1 minute" },
+      { "scope": "admin-write", "appliesTo": ["POST /api/blog"], "limit": 30, "window": "1 minute" },
+      { "scope": "internal-read", "appliesTo": ["GET /api/leads"], "limit": 30, "window": "1 minute" }
+    ],
+    "standardHeaders": ["X-RateLimit-Limit", "X-RateLimit-Remaining", "X-RateLimit-Reset", "Retry-After"]
+  },
+  "x-validationSummary": {
+    "POST /api/blog": [
+      "slug is required and must match ^[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "title, excerpt, content, category, date, readTime, metaTitle, and metaDescription are required",
+      "tags must be an array of strings"
+    ],
+    "POST /api/contact": [
+      "JSON body is required",
+      "name, email, phone, and message are required",
+      "service, budget, and company are optional strings"
+    ],
+    "GET /api/{resource}": [
+      "resource must be one of services, entities, faq, research, statistics, tools, authors, glossary, videos, checklists, templates"
+    ]
+  },
+  "x-authenticationSummary": {
+    "public": ["GET /api", "GET /api/{resource}", "GET /api/blog", "POST /api/contact", "GET /api/leads"],
+    "apiKey": ["POST /api/blog requires x-auth-token"],
+    "notes": ["GET /api/leads is currently documented as public because the route has no authentication guard. It is described as internal-use in endpoint text."]
+  }
+}

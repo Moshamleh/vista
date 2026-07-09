@@ -1,0 +1,29 @@
+{
+  "items": [
+    {
+      "version": "1.0.0",
+      "date": "2026-06-29",
+      "summary": "Initial flagship Article #001 package for the Vista AI Knowledge Platform."
+    },
+    {
+      "version": "1.1.0",
+      "date": "2026-06-29",
+      "summary": "Added Part 2 knowledge graph, Vista methodology, internal linking, schema, and publishing controls."
+    },
+    {
+      "version": "1.2.0",
+      "date": "2026-06-29",
+      "summary": "Added Part 3 structured content package for future MDX and entity-based search migration."
+    },
+    {
+      "version": "1.3.0",
+      "date": "2026-06-29",
+      "summary": "Published Package 1 content: metadata, hero, executive summary, AI summary, introduction, and Sections 1-3."
+    },
+    {
+      "version": "1.4.0",
+      "date": "2026-06-30",
+      "summary": "Replaced draft Package 1 with the production SEO package, Open Graph package, executive summary, AI summary, introduction, and first three article sections."
+    }
+  ]
+}

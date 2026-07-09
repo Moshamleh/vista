@@ -18,6 +18,7 @@ const panels = [
     metricLabel: "AI-assisted lead capture for UAE and GCC buyers",
     image:
       "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=900&q=80",
+    imageAlt: "Dubai business automation dashboard for AI-assisted lead capture and revenue workflows",
     icon: Workflow,
     tags: ["business automation Dubai", "AI workflow UAE", "lead generation website"],
   },
@@ -32,6 +33,7 @@ const panels = [
     metricLabel: "connected operating layer across marketing and sales",
     image:
       "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=900&q=80",
+    imageAlt: "Connected CRM, WhatsApp, ads, and analytics workflow for UAE business growth",
     icon: Link2,
     tags: ["CRM integration UAE", "WhatsApp automation Dubai", "marketing analytics GCC"],
   },
@@ -46,6 +48,7 @@ const panels = [
     metricLabel: "visibility layer: search, answer engines, and generative engines",
     image:
       "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=900&q=80",
+    imageAlt: "SEO, AEO, and GEO analytics screen for AI-search-ready lead generation in Dubai",
     icon: SearchCheck,
     tags: ["SEO services Dubai", "AEO agency UAE", "GEO optimization GCC"],
   },
@@ -113,10 +116,10 @@ export function AutomationStory() {
                 </div>
 
                 <div className="relative min-h-[460px] overflow-hidden rounded-[2rem] border border-white/10 bg-[#07101d]/88 p-4 shadow-[0_40px_110px_-70px_rgba(87,217,255,0.45)] backdrop-blur-xl">
-                  <div className="absolute right-4 top-4 h-40 w-52 overflow-hidden rounded-[1.25rem] opacity-[0.78] saturate-75 sm:h-52 sm:w-72" aria-hidden="true">
+                  <div className="absolute right-4 top-4 h-40 w-52 overflow-hidden rounded-[1.25rem] opacity-[0.78] saturate-75 sm:h-52 sm:w-72">
                     <Image
                       src={panel.image}
-                      alt=""
+                      alt={panel.imageAlt}
                       fill
                       sizes="(max-width: 640px) 13rem, 18rem"
                       className="object-cover"

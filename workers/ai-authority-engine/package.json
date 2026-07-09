@@ -1,0 +1,35 @@
+{
+  "name": "@vista/ai-authority-engine",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Shared Cloudflare Worker foundation for the Vista AI Authority Engine.",
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "vitest run --config vitest.config.mjs",
+    "lint": "eslint .",
+    "format:check": "prettier --check .",
+    "deploy": "wrangler deploy --config wrangler.jsonc"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.4",
+    "@types/node": "^24.0.0",
+    "eslint": "^9.39.4",
+    "prettier": "^3.6.2",
+    "typescript": "5.7.3",
+    "typescript-eslint": "^8.49.0",
+    "vitest": "^3.2.4",
+    "wrangler": "^4.106.0"
+  },
+  "overrides": {
+    "esbuild": "^0.28.1",
+    "undici": "^7.28.0",
+    "ws": "^8.21.0"
+  },
+  "dependencies": {
+    "jose": "^6.2.3"
+  }
+}

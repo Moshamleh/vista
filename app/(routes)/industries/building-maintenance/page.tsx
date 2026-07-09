@@ -2,11 +2,13 @@ import type { Metadata } from "next"
 import { ConversionPage } from "@/components/conversion-page"
 import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
+import { siteConfig } from "@/lib/site"
 
 export const metadata: Metadata = {
   title: "Building Maintenance Marketing Dubai | Vista by Lara",
   description:
     "Building maintenance website design and digital marketing in Dubai for UAE facility, maintenance, repair, and service companies.",
+  alternates: { canonical: `${siteConfig.url}/industries/building-maintenance` },
 }
 
 export default function BuildingMaintenancePage() {
