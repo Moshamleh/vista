@@ -1,12 +1,66 @@
 "use client"
 
+import { useEffect, useRef, useState } from "react"
 import { motion } from "framer-motion"
 import { ArrowDown, ArrowRight, Award, Bot, Sparkles, Star } from "lucide-react"
 
-import { SplineScene } from "@/components/ui/splite"
 import { siteConfig } from "@/lib/site"
 
-const ROBOT_SCENE = "https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
+const heroSignals = [
+  { label: "Public AI data", value: "/ai-data", detail: "crawlable entity graph" },
+  { label: "Knowledge assets", value: "102", detail: "indexed routes in production" },
+  { label: "Schema layer", value: "FAQ + Service", detail: "answer-ready markup" },
+]
+
+const robotSignals = [
+  "AI Visibility",
+  "Entity Graph",
+  "AEO / GEO",
+  "Dubai + GCC",
+]
+
+function LazyRobotFrame() {
+  const containerRef = useRef<HTMLDivElement>(null)
+  const [shouldLoad, setShouldLoad] = useState(false)
+
+  useEffect(() => {
+    const node = containerRef.current
+    if (!node || shouldLoad) return
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShouldLoad(true)
+          observer.disconnect()
+        }
+      },
+      { rootMargin: "160px 0px", threshold: 0.12 },
+    )
+
+    observer.observe(node)
+    return () => observer.disconnect()
+  }, [shouldLoad])
+
+  return (
+    <div ref={containerRef} className="relative h-full w-full bg-[#030408]">
+      {shouldLoad ? (
+        <iframe
+          src="/robot-frame?v=stable-isolated-robot"
+          title="Vista by Lara 3D AI robot"
+          className="h-full w-full border-0 bg-[#030408] brightness-110 contrast-110"
+          loading="eager"
+          allow="autoplay; fullscreen; xr-spatial-tracking"
+        />
+      ) : (
+        <div className="flex h-full w-full items-center justify-center bg-[radial-gradient(circle_at_center,rgba(87,217,255,0.18),rgba(3,4,8,0.92)_58%,#030408_100%)]">
+          <div className="rounded-full border border-accent/20 bg-accent/10 px-5 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-accent">
+            AI robot ready
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}
 
 export function Hero() {
   const callAI = async () => {
@@ -67,11 +121,11 @@ export function Hero() {
             transition={{ duration: 0.6, delay: 0.12 }}
             className="max-w-5xl font-heading text-4xl font-extrabold leading-[0.98] tracking-[-0.045em] text-foreground text-balance sm:text-6xl lg:text-[5.35rem]"
           >
-            Dubai Branding, UX, and{" "}
+            Research-backed AI visibility, high-performance websites, and{" "}
             <span className="italic text-accent">
-              AI Visibility
+              growth systems
             </span>{" "}
-            for Premium Brands
+            for Dubai brands
           </motion.h1>
 
           <motion.p
@@ -80,9 +134,9 @@ export function Hero() {
             transition={{ duration: 0.6, delay: 0.24 }}
             className="mt-7 max-w-2xl text-lg leading-8 text-muted-foreground/92 sm:text-xl"
           >
-            <strong className="text-foreground">Vista by Lara</strong> builds conversion-ready websites, premium brand
-            systems, and SEO/AEO/GEO content engines for Dubai, UAE, and GCC companies that need to be found, trusted,
-            and chosen.
+            <strong className="text-foreground">Vista by Lara</strong> is a Dubai-based AI visibility and digital
+            growth agency helping UAE and GCC businesses get found in Google and recommended by AI answer engines
+            through SEO, AEO/GEO, Shopify optimization, and conversion-focused design.
           </motion.p>
 
           <motion.div
@@ -95,22 +149,41 @@ export function Hero() {
               href={siteConfig.whatsapp}
               className="inline-flex min-h-14 items-center justify-center gap-2 rounded-full bg-accent px-8 text-base font-semibold text-background shadow-[0_24px_60px_rgba(87,217,255,0.28)] transition-transform hover:scale-[1.02]"
             >
-              Speak to an expert
+              Request technical briefing
               <ArrowRight className="h-4 w-4" />
             </a>
             <button
               onClick={callAI}
-              className="bg-black text-white border border-yellow-500 px-6 py-3 rounded-lg hover:opacity-80 transition"
+              className="inline-flex min-h-14 items-center justify-center gap-2 rounded-full border border-accent/30 bg-accent/10 px-8 text-base font-semibold text-accent transition-colors hover:bg-accent/15"
             >
-              Get AI Growth Plan
+              Generate AI visibility plan
             </button>
             <a
-              href="#automation-growth"
+              href="/knowledge/ai-visibility/why-ai-isnt-recommending-your-business"
               className="inline-flex min-h-14 items-center justify-center gap-2 rounded-full border border-white/10 bg-white/[0.025] px-8 text-base font-semibold text-foreground/82 backdrop-blur-md transition-colors hover:border-accent/35 hover:bg-accent/10 hover:text-accent"
             >
-              See the lead system
+              Read the AI visibility guide
               <ArrowDown className="h-4 w-4" />
             </a>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.48 }}
+            className="mt-10 grid w-full max-w-3xl gap-px overflow-hidden rounded-[1.5rem] border border-white/10 bg-white/10 sm:grid-cols-3"
+          >
+            {heroSignals.map((signal) => (
+              <div key={signal.label} className="bg-[#071018]/88 p-4 backdrop-blur-md sm:p-5">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                  {signal.label}
+                </p>
+                <p className="mt-2 font-heading text-2xl font-extrabold tracking-tight text-foreground">
+                  {signal.value}
+                </p>
+                <p className="mt-1 text-xs leading-5 text-accent/90">{signal.detail}</p>
+              </div>
+            ))}
           </motion.div>
         </div>
 
@@ -135,8 +208,29 @@ export function Hero() {
               </p>
             </div>
 
+            <div className="absolute left-2 top-20 z-20 hidden max-w-[14rem] rounded-2xl border border-accent/15 bg-[#05070d]/78 p-4 shadow-[0_24px_80px_-50px_rgba(87,217,255,0.8)] backdrop-blur-xl md:block">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-accent">Command center</p>
+              <div className="mt-4 space-y-2">
+                {robotSignals.map((signal) => (
+                  <div key={signal} className="flex items-center justify-between gap-3 text-xs">
+                    <span className="text-foreground/72">{signal}</span>
+                    <span className="h-1.5 w-1.5 rounded-full bg-accent shadow-[0_0_14px_rgba(87,217,255,0.8)]" />
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="absolute bottom-10 right-0 z-20 hidden w-[16rem] rounded-2xl border border-white/10 bg-black/40 p-4 backdrop-blur-xl md:block">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">AI retrieval path</p>
+              <div className="mt-4 grid grid-cols-[auto_1fr] gap-x-3 gap-y-2 text-xs text-foreground/72">
+                <span className="text-accent">01</span><span>Service entity defined</span>
+                <span className="text-accent">02</span><span>FAQ answers extracted</span>
+                <span className="text-accent">03</span><span>Proof linked to briefing</span>
+              </div>
+            </div>
+
             <div className="relative z-10 h-full w-full scale-[1.08] drop-shadow-[0_0_55px_rgba(87,217,255,0.22)]">
-              <SplineScene scene={ROBOT_SCENE} className="h-full w-full brightness-110 contrast-110" />
+              <LazyRobotFrame />
             </div>
           </div>
         </motion.div>

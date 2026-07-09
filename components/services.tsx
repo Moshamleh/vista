@@ -18,7 +18,63 @@ type ServiceCard = {
 
 const SERVICES: ServiceCard[] = [
   {
-    title: "Luxury Branding Systems",
+    title: "Technical SEO",
+    eyebrow: "Search visibility",
+    description:
+      "Technical SEO, schema, UAE keyword clusters, local search, and crawlability that support Google and AI discovery.",
+    href: "/services/seo-optimization",
+    shape: "ring",
+    tags: ["SEO", "Schema", "Crawlability"],
+  },
+  {
+    title: "AEO & GEO Services",
+    eyebrow: "ChatGPT, Perplexity, AI Overview",
+    description:
+      "Answer and Generative Engine Optimization for AI citations, entity confidence, and UAE/GCC answer visibility across ChatGPT, Perplexity, Claude, and Google AI Overviews.",
+    href: "/services/aeo-geo",
+    shape: "core",
+    stats: "ChatGPT, Perplexity, Claude, Bing Copilot",
+    tags: ["AEO", "GEO", "AI Citations"],
+  },
+  {
+    title: "Web Design",
+    eyebrow: "High-performance web",
+    description:
+      "Cinematic, premium websites built for credibility, speed, and conversion for Dubai and GCC brands.",
+    href: "/services/web-design-dubai",
+    shape: "cube",
+    stats: "Fast, responsive, conversion-ready",
+    tags: ["Next.js", "Design", "Performance"],
+  },
+  {
+    title: "Web Development",
+    eyebrow: "Full-stack engineering",
+    description:
+      "Full-stack engineering, integrations, and scalable foundations for premium digital growth.",
+    href: "/services/web-development-dubai",
+    shape: "stack",
+    tags: ["Engineering", "Integrations", "Scale"],
+  },
+  {
+    title: "Shopify & E-commerce",
+    eyebrow: "AI-ready commerce",
+    description:
+      "AI-driven e-commerce architecture for Shopify stores, product pages, conversion paths, and search-ready category content.",
+    href: "/services/shopify-development-dubai",
+    shape: "sphere",
+    tags: ["Shopify", "Conversion", "AI Search"],
+  },
+  {
+    title: "UI/UX Design",
+    eyebrow: "UX/UI platforms",
+    description:
+      "UX systems for apps, portals, dashboards, and SaaS products built for Dubai, Abu Dhabi, and GCC users.",
+    href: "/services/ui-ux-design-dubai",
+    shape: "diamond",
+    tags: ["UX", "UI", "SaaS"],
+  },
+  {
+    title: "Branding",
     eyebrow: "Brand identity Dubai",
     description:
       "Strategic naming, positioning, visual identity, and brand systems for premium UAE companies that need to look established before the first pitch.",
@@ -28,68 +84,32 @@ const SERVICES: ServiceCard[] = [
     tags: ["Brand Strategy", "Visual Identity", "Dubai Luxury"],
   },
   {
-    title: "AI E-commerce Growth",
-    eyebrow: "Shopify optimization UAE",
+    title: "AI & Automation",
+    eyebrow: "Agents and CRM",
     description:
-      "AI-driven e-commerce architecture for Shopify stores, product pages, conversion paths, and search-ready category content.",
-    href: "/services/ai-ecommerce",
-    shape: "sphere",
-    tags: ["Shopify", "Conversion", "AI Search"],
+      "AI agents, CRM automation, and lead routing for real estate, clinics, restaurants, retail, and service businesses that need faster inquiry handling and qualified UAE leads.",
+    href: "/services/uae-ai-agent",
+    shape: "beam",
+    stats: "WhatsApp-ready, SEO-aware, CRM-friendly",
+    tags: ["AI Agents", "CRM", "Automation"],
   },
   {
-    title: "SEO and AEO",
-    eyebrow: "Search visibility",
+    title: "Google Ads",
+    eyebrow: "PPC and search demand",
     description:
-      "Technical SEO, answer blocks, schema, and UAE keyword clusters that help Google and AI systems recommend your brand.",
-    href: "/services/seo-optimization",
+      "Google Ads management with GA4, GTM, conversion tracking, landing pages, and sales growth reporting for UAE lead generation.",
+    href: "/services/google-ads-dubai",
     shape: "ring",
-    tags: ["AEO", "GEO", "Schema"],
-  },
-  {
-    title: "Digital Products",
-    eyebrow: "UX/UI platforms",
-    description:
-      "UX systems for apps, portals, dashboards, and SaaS products built for Dubai, Abu Dhabi, and GCC users.",
-    href: "/services/digital-products",
-    shape: "stack",
-    tags: ["UX", "UI", "SaaS"],
-  },
-  {
-    title: "Websites and Development",
-    eyebrow: "High-performance web",
-    description:
-      "Cinematic websites, full-stack engineering, integrations, and scalable foundations for premium digital growth.",
-    href: "/services/websites",
-    shape: "cube",
-    stats: "Fast, responsive, conversion-ready",
-    tags: ["Next.js", "CMS", "Performance"],
-  },
-  {
-    title: "Generative AI",
-    eyebrow: "Intelligent workflows",
-    description:
-      "AI workflows, content systems, automation logic, and creative tooling that make your brand easier to find and faster to operate.",
-    href: "/services/generative-ai",
-    shape: "core",
-    tags: ["Automation", "Agents", "GEO"],
-  },
-  {
-    title: "Maintenance Management",
-    eyebrow: "Operational support",
-    description:
-      "A polished web and digital operations layer for service companies that need reliability, trust, and lead flow.",
-    href: "/services/maintenance-management",
-    shape: "prism",
-    tags: ["Support", "Trust", "Leads"],
+    tags: ["Google Ads", "PPC", "GA4"],
   },
   {
     title: "Digital Marketing",
     eyebrow: "Demand generation",
     description:
-      "Premium campaigns, landing pages, content direction, and analytics loops for UAE brands that need qualified leads without cheap noise.",
+      "Premium campaigns, content, paid social, landing pages, and analytics loops for UAE brands that need qualified leads without cheap noise.",
     href: "/services/digital-marketing",
-    shape: "beam",
-    tags: ["Campaigns", "Landing Pages", "Analytics"],
+    shape: "prism",
+    tags: ["Campaigns", "Content", "Analytics"],
   },
 ]
 

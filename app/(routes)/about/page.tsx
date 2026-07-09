@@ -11,7 +11,7 @@ const faqs = [
   {
     question: "What is Vista by Lara?",
     answer:
-      "Vista by Lara is a Dubai-based luxury branding, UX design, website, and generative AI agency serving UAE and GCC businesses.",
+      "Vista by Lara is a Dubai-based AI visibility and digital growth agency helping UAE and GCC businesses get found in Google and recommended by AI answer engines through SEO, AEO/GEO, Shopify optimization, and conversion-focused design.",
   },
   {
     question: "Where is Vista by Lara based?",
@@ -36,9 +36,9 @@ const faqs = [
 ]
 
 export const metadata: Metadata = {
-  title: "About Vista by Lara | Dubai Branding Agency UAE",
+  title: "About Vista by Lara | Dubai AI Visibility Agency UAE",
   description:
-    "Vista by Lara is a Dubai luxury branding, UX design, website, and generative AI agency for UAE and GCC brands. Noble Business Winner 2025.",
+    "Vista by Lara is a Dubai-based AI visibility and digital growth agency for UAE and GCC businesses. Noble Business Winner 2025.",
   keywords: [
     "branding agency Dubai",
     "UX design agency UAE",
@@ -52,8 +52,7 @@ export const metadata: Metadata = {
   alternates: { canonical: aboutUrl },
   openGraph: {
     title: "About Vista by Lara | Dubai Branding Agency",
-    description:
-      "Dubai luxury branding, UX design, website, and generative AI agency for UAE and GCC businesses.",
+    description: siteConfig.description,
     url: aboutUrl,
     type: "website",
     siteName: siteConfig.name,
@@ -63,8 +62,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "About Vista by Lara | Dubai Branding Agency",
-    description:
-      "Dubai luxury branding, UX design, website, and generative AI agency for UAE and GCC businesses.",
+    description: siteConfig.description,
     images: ["https://www.vistabylara.com/og/about.jpg"],
   },
 }
@@ -79,8 +77,7 @@ const schema = {
       url: aboutUrl,
       isPartOf: { "@id": `${siteConfig.url}/#website` },
       about: { "@id": `${siteConfig.url}/#organization` },
-      description:
-        "Vista by Lara is a Dubai-based luxury branding, UX design, website, and generative AI agency for UAE and GCC businesses.",
+      description: siteConfig.description,
       inLanguage: "en-AE",
     },
     {
@@ -125,11 +122,24 @@ const proofPoints = [
 
 const entityStack = [
   ["Business name", "Vista by Lara"],
-  ["Service category", "Luxury branding, UX design, websites, and generative AI"],
+  ["Service category", "AI visibility, SEO, AEO/GEO, Shopify optimization, and conversion-focused design"],
   ["Primary location", "Dubai, United Arab Emirates"],
   ["Target audience", "Premium UAE and GCC brands, founders, and growth teams"],
   ["Key differentiator", "Strategy, design, engineering, and AI in one senior team"],
   ["Outcome delivered", "Sharper positioning, higher-trust websites, and conversion-ready digital experiences"],
+]
+
+const certifications = [
+  { name: "Google Analytics Certification", issued: "November 6, 2025" },
+  { name: "Google Ads Search Certification", issued: "October 13, 2025" },
+  { name: "Google Ads AI-Powered Performance Certification", issued: "November 6, 2025" },
+  { name: "Campaign Manager 360 Certification", issued: "November 6, 2025" },
+  { name: "Google Cloud: Introduction to Generative AI", issued: "Completion badge" },
+  { name: "Coursera: SEO with Squarespace", issued: "Project certificate" },
+  { name: "Coursera: Business Analysis & Process Management", issued: "Project certificate" },
+  // TODO: awaiting badge proof from client before this ships — placeholder per their request
+  { name: "Google Partner", issued: "Partner program status" },
+  { name: "Meta Partner", issued: "Partner program status" },
 ]
 
 export default function AboutPage() {
@@ -142,10 +152,10 @@ export default function AboutPage() {
             <div>
               <p className="text-sm font-medium uppercase tracking-[0.3em] text-accent">About Vista by Lara</p>
               <h1 className="mt-6 font-heading text-5xl font-semibold leading-tight tracking-tight text-foreground sm:text-7xl">
-                Dubai Branding Agency for UAE and GCC Growth
+                Dubai AI Visibility Agency for UAE and GCC Growth
               </h1>
               <p className="mt-7 max-w-3xl text-lg leading-8 text-muted-foreground">
-                Vista by Lara is a Dubai-based luxury branding, UX design, website, and generative AI agency. We help UAE and GCC businesses build trusted brands, premium digital experiences, and conversion-ready platforms.
+                {siteConfig.description}
               </p>
               <div className="mt-9 flex flex-col gap-3 sm:flex-row">
                 <a
@@ -187,7 +197,7 @@ export default function AboutPage() {
               </h2>
             </div>
             <p className="text-lg leading-8 text-muted-foreground">
-              Vista by Lara creates luxury brand identities, UX/UI systems, high-performance websites, and AI-enabled digital products for Dubai and UAE businesses. Our work connects brand strategy, premium design, and scalable technology for companies competing in the GCC.
+              Vista by Lara helps UAE and GCC businesses get found in Google and recommended by AI answer engines through SEO, AEO/GEO, Shopify optimization, and conversion-focused design. Our work connects technical infrastructure, structured data, and premium design for companies competing in the GCC.
             </p>
           </div>
         </section>
@@ -214,6 +224,24 @@ export default function AboutPage() {
                 </div>
               ))}
             </div>
+          </div>
+        </section>
+
+        <section className="mx-auto max-w-7xl px-5 pb-20 sm:px-8">
+          <p className="text-sm font-medium uppercase tracking-[0.25em] text-accent">Credentials</p>
+          <h2 className="mt-5 max-w-3xl font-heading text-3xl font-semibold tracking-tight text-foreground sm:text-5xl">
+            Certifications
+          </h2>
+          <p className="mt-5 max-w-3xl text-base leading-7 text-muted-foreground">
+            Platform and coursework certifications held by the Vista by Lara team, listed with issue date.
+          </p>
+          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {certifications.map((item) => (
+              <div key={item.name} className="rounded-2xl border border-border/30 bg-[#0c111d] p-5">
+                <h3 className="font-heading text-lg font-semibold leading-tight text-foreground">{item.name}</h3>
+                <p className="mt-2 text-sm text-muted-foreground">{item.issued}</p>
+              </div>
+            ))}
           </div>
         </section>
 

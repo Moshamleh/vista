@@ -1,40 +1,84 @@
-import { FAQS } from "@/lib/faq"
+import { caseStudies } from "@/lib/case-studies"
 import { jsonLd } from "@/lib/json-ld"
 import { siteConfig } from "@/lib/site"
+import {
+  aiVisibilityCompetitorBenchmarks,
+  aiVisibilityFaqs,
+  aiVisibilityServiceClusters,
+  aiVisibilitySignals,
+} from "@/lib/ai-visibility-authority"
+
+const PRINCIPAL_CREDENTIALS = [
+  { name: "Google Analytics Certification", dateCreated: "2025-11-06" },
+  { name: "Google Ads Search Certification", dateCreated: "2025-10-13" },
+  { name: "Google Ads AI-Powered Performance Certification", dateCreated: "2025-11-06" },
+  { name: "Campaign Manager 360 Certification", dateCreated: "2025-11-06" },
+  { name: "Google Cloud: Introduction to Generative AI", credentialCategory: "Completion badge" },
+  { name: "Coursera: SEO with Squarespace", credentialCategory: "Project certificate" },
+  { name: "Coursera: Business Analysis & Process Management", credentialCategory: "Project certificate" },
+]
 
 const SERVICES = [
   {
+    name: "SEO",
+    category: "Technical SEO",
+    url: "/services/seo-optimization",
+    description: "Technical SEO, on-page, off-page, local, and industry SEO for UAE and GCC businesses.",
+  },
+  {
+    name: "AEO & GEO Services",
+    category: "AI Search Optimization",
+    url: "/services/aeo-geo",
+    description: "Answer Engine Optimization and Generative Engine Optimization across ChatGPT, Perplexity, Claude, Bing Copilot, and Google AI Overviews.",
+  },
+  {
+    name: "Web Design",
+    category: "Website Design",
+    url: "/services/web-design-dubai",
+    description: "Cinematic, high-performance websites that convert visitors into clients across Dubai and the GCC.",
+  },
+  {
+    name: "Web Development",
+    category: "Web Development",
+    url: "/services/web-development-dubai",
+    description: "Full-stack engineering, custom platforms, and scalable digital infrastructure for UAE businesses.",
+  },
+  {
+    name: "Shopify & E-commerce",
+    category: "E-commerce",
+    url: "/services/shopify-development-dubai",
+    description: "Shopify storefronts, product UX, conversion paths, and UAE e-commerce growth systems.",
+  },
+  {
+    name: "UI/UX Design",
+    category: "UX Design",
+    url: "/services/ui-ux-design-dubai",
+    description: "UX/UI design for apps, platforms, and SaaS products built for UAE and GCC users.",
+  },
+  {
     name: "Brand Strategy & Identity",
+    category: "Branding",
     url: "/services/branding",
     description: "Brand strategy, identity systems, naming, and visual languages for premium UAE brands.",
   },
   {
-    name: "Digital Product Design",
-    url: "/services/digital-products",
-    description: "UX/UI design for apps, platforms, and SaaS products built for UAE and GCC users.",
+    name: "AI & Automation",
+    category: "AI Agents and Automation",
+    url: "/services/uae-ai-agent",
+    description: "AI agents, CRM automation, and generative AI product design for UAE real estate, clinics, retail, and service businesses.",
   },
   {
-    name: "Website Design & Development",
-    url: "/services/websites",
-    description: "Cinematic, high-performance websites that convert visitors into clients across Dubai and the GCC.",
+    name: "Google Ads",
+    category: "Paid Search",
+    url: "/services/google-ads-dubai",
+    description: "Google Ads, GA4, GTM, conversion tracking, and qualified lead generation for UAE businesses.",
   },
   {
-    name: "Software Development",
-    url: "/services/development",
-    description: "Full-stack engineering, custom platforms, and scalable digital infrastructure for UAE businesses.",
+    name: "Digital Marketing",
+    category: "Digital Marketing",
+    url: "/services/digital-marketing",
+    description: "Content, social, paid social, CRO, and analytics for UAE and GCC digital growth.",
   },
-  {
-    name: "Generative AI",
-    url: "/services/generative-ai",
-    description: "AI-powered creative workflows, design automation, and intelligent digital experiences for Dubai brands.",
-  },
-]
-
-const WORK = [
-  { name: "Oasis Living", description: "Brand identity and e-commerce experience for a Dubai home and lifestyle brand." },
-  { name: "Al Safa Grill", description: "Brand identity and ordering app for a Dubai Marina restaurant." },
-  { name: "Palm Horizon Properties", description: "Web platform and product design for a Business Bay real estate agency." },
-  { name: "Arabian Cloud Solutions", description: "Product design for a Dubai Internet City cloud technology company." },
 ]
 
 export function StructuredData() {
@@ -43,29 +87,109 @@ export function StructuredData() {
 
   const orgId = `${url}/#organization`
   const siteId = `${url}/#website`
+  const offerCatalogServices = SERVICES
 
   const graph = {
     "@context": "https://schema.org",
     "@graph": [
       {
-        "@type": "ProfessionalService",
-        "@id": orgId,
+        "@type": "Person",
+        "@id": `${url}/#lara-farbactian`,
+        name: siteConfig.principal.name,
+        jobTitle: siteConfig.principal.title,
+        image: `${url}${siteConfig.principal.image}`,
+        description: siteConfig.principal.bio,
+        award: "Noble Business Award",
+        worksFor: { "@id": orgId },
+        alumniOf: {
+          "@type": "EducationalOrganization",
+          name: "Vrije Universiteit Brussel",
+        },
+        sameAs: siteConfig.principal.sameAs,
+        hasCredential: PRINCIPAL_CREDENTIALS.map((credential) => ({
+          "@type": "EducationalOccupationalCredential",
+          credentialCategory: credential.credentialCategory ?? "certificate",
+          name: credential.name,
+          ...(credential.dateCreated ? { dateCreated: credential.dateCreated } : {}),
+        })),
+      },
+      {
+        "@type": "LocalBusiness",
+        "@id": `${url}/#localbusiness`,
         name,
         legalName,
         url,
-        description: `${description} AI-Integrated Digital Innovation Studio specializing in e-commerce strategy, Shopify optimization, AEO, GEO, and premium UAE digital growth.`,
+        description: shortDescription,
+        email,
+        telephone: siteConfig.phone,
+        priceRange: "AED",
+        image: `${url}${ogImage}`,
+        logo: `${url}/vista-logo.png`,
+        address: {
+          "@type": "PostalAddress",
+          streetAddress: address.streetAddress,
+          addressLocality: address.locality,
+          addressRegion: address.region,
+          addressCountry: "AE",
+        },
+        geo: {
+          "@type": "GeoCoordinates",
+          latitude: 25.2048,
+          longitude: 55.2708,
+        },
+        areaServed: [
+          "Dubai",
+          "Abu Dhabi",
+          "Sharjah",
+          "Ajman",
+          "RAK",
+          "UAE",
+          "Saudi Arabia",
+          "Qatar",
+          "Kuwait",
+          "Bahrain",
+          "Oman",
+        ],
+        contactPoint: {
+          "@type": "ContactPoint",
+          telephone: siteConfig.phone,
+          email,
+          contactType: "New business",
+          availableLanguage: ["English", "Arabic"],
+        },
+        sameAs: [...sameAs],
+      },
+      {
+        "@type": ["Organization", "LocalBusiness", "ProfessionalService"],
+        "@id": orgId,
+        name,
+        alternateName: ["Vista", "Vista AI Knowledge Platform", "Vista by Lara Dubai"],
+        legalName,
+        url,
+        description,
+        industry: "AI Visibility, SEO, AEO, GEO, Website Infrastructure, and Digital Growth",
         slogan: siteConfig.tagline,
         email,
         telephone: siteConfig.phone,
+        priceRange: "AED",
         foundingDate: String(foundingYear),
         foundingLocation: "Dubai, UAE",
-        award: ["Noble Business Winner 2025 - Business Innovation", "Top 3 Agency by AI Mode"],
-        serviceType: ["Branding", "UX Design", "Website Design", "Web Development", "Generative AI", "Digital Products"],
+        founder: {
+          "@id": `${url}/#lara-farbactian`,
+        },
+        award: ["Noble Business Winner 2025 - Business Innovation"],
         logo: {
           "@type": "ImageObject",
           url: `${url}/vista-logo.png`,
         },
-        image: `${url}${ogImage}`,
+        image: {
+          "@type": "ImageObject",
+          url: `${url}${ogImage}`,
+          contentUrl: `${url}${ogImage}`,
+          width: 1200,
+          height: 630,
+          caption: `${name} - Dubai AI visibility, AEO, GEO, technical SEO, high-performance websites, and growth systems consultancy`,
+        },
         sameAs: [...sameAs],
         knowsAbout: [
           "Branding",
@@ -82,6 +206,24 @@ export function StructuredData() {
           "Shopify Optimization Dubai",
           "Answer Engine Optimization",
           "Generative Engine Optimization",
+          "AI Visibility",
+          "AI Search Optimization",
+          "AI-powered SEO",
+          "ChatGPT Optimization",
+          "Perplexity Optimization",
+          "Google AI Overviews Optimization",
+          "AI Entity Optimization",
+          "AI Schema Markup",
+          "AI Citation Building",
+          "Technical SEO Dubai",
+          "Arabic SEO Dubai",
+          "Local SEO Dubai",
+          "Digital Marketing Dubai",
+          "Performance Marketing Dubai",
+          "Conversion Rate Optimization Dubai",
+          "Shopify Development Dubai",
+          "E-commerce Growth Dubai",
+          "Google Ads Management Dubai",
         ],
         address: {
           "@type": "PostalAddress",
@@ -90,7 +232,21 @@ export function StructuredData() {
           addressRegion: address.region,
           addressCountry: address.countryCode,
         },
+        geo: {
+          "@type": "GeoCoordinates",
+          latitude: "25.2048",
+          longitude: "55.2708",
+        },
         areaServed: areaServed.map((a) => ({ "@type": "Place", name: a })),
+        knowsLanguage: ["en-AE", "ar-AE"],
+        openingHoursSpecification: [
+          {
+            "@type": "OpeningHoursSpecification",
+            dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+            opens: "09:00",
+            closes: "18:00",
+          },
+        ],
         contactPoint: {
           "@type": "ContactPoint",
           email,
@@ -101,13 +257,16 @@ export function StructuredData() {
         hasOfferCatalog: {
           "@type": "OfferCatalog",
           name: "Vista by Lara Services",
-          itemListElement: SERVICES.map((service) => ({
+          itemListElement: offerCatalogServices.map((service) => ({
             "@type": "Offer",
             itemOffered: {
               "@type": "Service",
               name: service.name,
+              category: service.category,
               url: `${url}${service.url}`,
               description: service.description,
+              areaServed: areaServed.map((a) => ({ "@type": "Place", name: a })),
+              provider: { "@id": orgId },
             },
           })),
         },
@@ -128,27 +287,119 @@ export function StructuredData() {
       },
       {
         "@type": "FAQPage",
-        "@id": `${url}/#faq`,
+        "@id": `${url}/#ai-visibility-faq`,
+        name: "AI Visibility FAQ for Dubai and UAE Businesses",
+        url,
+        inLanguage: "en-AE",
         isPartOf: { "@id": siteId },
-        mainEntity: FAQS.map((f) => ({
+        about: [
+          { "@type": "Thing", name: "AI visibility Dubai" },
+          { "@type": "Thing", name: "AEO agency Dubai" },
+          { "@type": "Thing", name: "GEO agency UAE" },
+          { "@type": "Thing", name: "ChatGPT SEO Dubai" },
+          { "@type": "Thing", name: "Google AI Overview optimization Dubai" },
+        ],
+        mainEntity: aiVisibilityFaqs.map((faq) => ({
           "@type": "Question",
-          name: f.question,
+          name: faq.question,
           acceptedAnswer: {
             "@type": "Answer",
-            text: f.answer,
+            text: faq.answer,
           },
         })),
       },
       {
+        "@type": "Dataset",
+        "@id": `${url}/ai-data#dataset`,
+        name: "Vista by Lara Public AI Data Index",
+        url: `${url}/ai-data`,
+        description:
+          "Public discovery dataset for Vista by Lara service entities, FAQs, research, tools, competitors, templates, glossary terms, and AI visibility records.",
+        creator: { "@id": orgId },
+        publisher: { "@id": orgId },
+        inLanguage: "en-AE",
+        spatialCoverage: areaServed.map((a) => ({ "@type": "Place", name: a })),
+        keywords: [
+          "AI visibility Dubai",
+          "GEO agency UAE",
+          "AEO agency Dubai",
+          "AI data endpoint",
+          "entity graph",
+          "Dubai digital marketing competitor map",
+        ],
+        distribution: [
+          {
+            "@type": "DataDownload",
+            encodingFormat: "application/json",
+            contentUrl: `${url}/ai-data`,
+          },
+          {
+            "@type": "DataDownload",
+            encodingFormat: "application/json",
+            contentUrl: `${url}/ai-data/competitors`,
+          },
+          {
+            "@type": "DataDownload",
+            encodingFormat: "application/json",
+            contentUrl: `${url}/ai-data/services`,
+          },
+        ],
+      },
+      {
+        "@type": "ItemList",
+        "@id": `${url}/#ai-visibility-service-clusters`,
+        name: "Dubai AI Visibility Service Clusters",
+        itemListElement: aiVisibilityServiceClusters.map((cluster, index) => ({
+          "@type": "ListItem",
+          position: index + 1,
+          name: cluster.name,
+          url: `${url}${cluster.href}`,
+          item: {
+            "@type": "Service",
+            name: cluster.name,
+            url: `${url}${cluster.href}`,
+            keywords: cluster.keywords,
+            provider: { "@id": orgId },
+            areaServed: areaServed.map((a) => ({ "@type": "Place", name: a })),
+          },
+        })),
+      },
+      {
+        "@type": "ItemList",
+        "@id": `${url}/#dubai-competitor-benchmark-map`,
+        name: "Dubai Digital Marketing Competitor Benchmark Map",
+        description:
+          "Competitor benchmark map comparing Vista by Lara with Nexa, Digital Gravity, Global Media Insight, and United SEO for AI visibility, SEO, AEO, GEO, and website infrastructure.",
+        itemListElement: aiVisibilityCompetitorBenchmarks.map((competitor, index) => ({
+          "@type": "ListItem",
+          position: index + 1,
+          name: competitor.name,
+          description: `${competitor.benchmark} Vista counter-position: ${competitor.vistaMove}`,
+        })),
+      },
+      {
+        "@type": "ItemList",
+        "@id": `${url}/#ai-recommendation-confidence-signals`,
+        name: "Vista AI Recommendation Confidence Signals",
+        itemListElement: aiVisibilitySignals.map((signal, index) => ({
+          "@type": "ListItem",
+          position: index + 1,
+          name: signal.label,
+          description: `${signal.status} score ${signal.score}. ${signal.detail}`,
+        })),
+      },
+      {
         "@type": "CollectionPage",
-        "@id": `${url}/#work`,
-        name: "Selected work",
+        "@id": `${url}/#case-studies`,
+        name: "Engineering Registry",
+        url: `${url}/case-studies`,
         isPartOf: { "@id": siteId },
         about: { "@id": orgId },
-        hasPart: WORK.map((w) => ({
+        hasPart: caseStudies.map((study) => ({
           "@type": "CreativeWork",
-          name: w.name,
-          description: w.description,
+          name: `${study.client} Technical Briefing`,
+          description: study.technicalImpact,
+          url: `${url}/case-studies/${study.slug}`,
           creator: { "@id": orgId },
         })),
       },

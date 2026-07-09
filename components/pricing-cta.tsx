@@ -9,7 +9,7 @@ import { siteConfig } from "@/lib/site"
 
 const TRUST = [
   { value: "320+", label: "Projects delivered" },
-  { value: "14+", label: "Years of experience" },
+  { value: String(siteConfig.foundingYear), label: "Founded" },
   { value: "100%", label: "Client satisfaction" },
 ]
 
@@ -23,7 +23,7 @@ export function PricingCta() {
         transition={{ duration: 8, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
         className="pointer-events-none absolute left-[10%] top-12 h-20 w-20 sm:h-28 sm:w-28"
       >
-        <Image src="/orb-purple.png" alt="" width={112} height={112} className="h-full w-full object-contain opacity-60" />
+        <Image src="/orb-purple.png" alt="Purple Vista by Lara pricing page accent orb" width={112} height={112} className="h-full w-full object-contain opacity-60" />
       </motion.div>
       <motion.div
         aria-hidden
@@ -31,7 +31,7 @@ export function PricingCta() {
         transition={{ duration: 7, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut", delay: 0.8 }}
         className="pointer-events-none absolute right-[12%] bottom-16 h-14 w-14 sm:h-20 sm:w-20"
       >
-        <Image src="/orb-orange.png" alt="" width={80} height={80} className="h-full w-full object-contain opacity-60" />
+        <Image src="/orb-orange.png" alt="Orange Vista by Lara pricing page accent orb" width={80} height={80} className="h-full w-full object-contain opacity-60" />
       </motion.div>
 
       <Reveal className="relative mx-auto max-w-4xl text-center">

@@ -23,17 +23,16 @@ type ServicePageProps = {
 }
 
 const relatedServices = [
-  { label: "Branding", href: "/services/branding" },
-  { label: "Digital Products", href: "/services/digital-products" },
-  { label: "Websites", href: "/services/websites" },
-  { label: "Development", href: "/services/development" },
-  { label: "Generative AI", href: "/services/generative-ai" },
-  { label: "Web Design Dubai", href: "/services/web-design-dubai" },
-  { label: "Web Development Dubai", href: "/services/web-development-dubai" },
-  { label: "Ecommerce Development", href: "/services/ecommerce-development-dubai" },
-  { label: "Shopify Development", href: "/services/shopify-development-dubai" },
+  { label: "SEO", href: "/services/seo-optimization" },
+  { label: "AEO & GEO", href: "/services/aeo-geo" },
+  { label: "Web Design", href: "/services/web-design-dubai" },
+  { label: "Web Development", href: "/services/web-development-dubai" },
+  { label: "Shopify & E-commerce", href: "/services/shopify-development-dubai" },
   { label: "UI/UX Design", href: "/services/ui-ux-design-dubai" },
-  { label: "SEO Services", href: "/services/seo-services-dubai" },
+  { label: "Branding", href: "/services/branding" },
+  { label: "AI & Automation", href: "/services/uae-ai-agent" },
+  { label: "Google Ads", href: "/services/google-ads-dubai" },
+  { label: "Digital Marketing", href: "/services/digital-marketing" },
 ]
 
 export function ServicePage({
@@ -56,6 +55,24 @@ export function ServicePage({
   const schema = {
     "@context": "https://schema.org",
     "@graph": [
+      {
+        "@type": "LocalBusiness",
+        "@id": `${siteConfig.url}/#localbusiness`,
+        name: siteConfig.name,
+        url: siteConfig.url,
+        telephone: siteConfig.phone,
+        email: siteConfig.email,
+        priceRange: "AED",
+        address: {
+          "@type": "PostalAddress",
+          streetAddress: siteConfig.address.streetAddress,
+          addressLocality: "Dubai",
+          addressRegion: "Dubai",
+          addressCountry: "AE",
+        },
+        areaServed: ["Dubai", "Abu Dhabi", "Sharjah", "Ajman", "RAK", "UAE", "Saudi Arabia", "Qatar", "Kuwait", "Bahrain", "Oman"],
+        openingHours: "Mo-Sa 09:00-18:00",
+      },
       {
         "@type": "Service",
         "@id": `${pageUrl}#service`,
@@ -208,6 +225,33 @@ export function ServicePage({
                 <span key={place} className="rounded-full border border-accent/15 px-4 py-2">
                   {place}
                 </span>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="mx-auto max-w-7xl px-5 pb-20 sm:px-8 sm:pb-28">
+          <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+            <div>
+              <p className="text-sm font-medium uppercase tracking-[0.25em] text-accent">Competitive SEO context</p>
+              <h2 className="mt-5 font-heading text-3xl font-semibold tracking-tight text-foreground sm:text-5xl">
+                How Vista positions {serviceName} against generic Dubai agency pages
+              </h2>
+              <p className="mt-5 text-base leading-7 text-muted-foreground">
+                This page is part of Vista by Lara&apos;s competitor-gap SEO architecture. It maps Dubai market demand without copying competitor claims, then connects the service to structured data, AI-readable assets, proof pages, and conversion paths.
+              </p>
+            </div>
+            <div className="overflow-hidden rounded-[1.5rem] border border-border/30 bg-[#0c111d]">
+              {[
+                ["Common market page", "Generic service description, broad promises, and weak evidence."],
+                ["Vista page architecture", "Definition-first answer, UAE keyword cluster, FAQ schema, LocalBusiness schema, Service schema, and internal links."],
+                ["AI retrieval signal", "Clear entity relationship between Vista by Lara, the service, Dubai/UAE buyers, and the business outcome."],
+                ["Conversion route", "WhatsApp and principal-level briefing paths instead of passive contact language."],
+              ].map(([label, value]) => (
+                <div key={label} className="grid gap-3 border-b border-border/30 p-5 last:border-b-0 sm:grid-cols-[0.38fr_0.62fr]">
+                  <h3 className="font-heading text-lg font-semibold text-foreground">{label}</h3>
+                  <p className="text-base leading-7 text-muted-foreground">{value}</p>
+                </div>
               ))}
             </div>
           </div>
