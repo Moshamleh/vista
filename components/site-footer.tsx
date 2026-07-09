@@ -112,7 +112,7 @@ const whatsappHref = siteConfig.whatsapp
 const footerAddress = `${siteConfig.address.streetAddress}, ${siteConfig.address.locality}, ${siteConfig.address.country}`
 
 function isArabicPath(pathname: string | null) {
-  return pathname === "/ar" || pathname?.startsWith("/ar/")
+  return pathname === "/ar" || Boolean(pathname?.startsWith("/ar/"))
 }
 
 function localizeHref(href: string, isArabic: boolean) {

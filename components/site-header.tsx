@@ -207,7 +207,7 @@ const ARABIC_KNOWLEDGE_PATH = "/ar/knowledge/ai-visibility/why-ai-isnt-recommend
 const ENGLISH_KNOWLEDGE_PATH = "/knowledge/ai-visibility/why-ai-isnt-recommending-your-business"
 
 function isArabicPath(pathname: string | null) {
-  return pathname === "/ar" || pathname?.startsWith("/ar/")
+  return pathname === "/ar" || Boolean(pathname?.startsWith("/ar/"))
 }
 
 function localizeHref(href: string, isArabic: boolean) {

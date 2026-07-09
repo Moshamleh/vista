@@ -59,7 +59,7 @@ export async function generateMetadata({ params }: BlogArticlePageProps): Promis
       title: post.metaTitle,
       description: post.metaDescription,
       url: `/blog/${post.slug}`,
-      type: "article",
+      type: "article" as const,
       publishedTime: post.date,
       authors: [siteConfig.legalName],
       images: post.image
@@ -67,7 +67,7 @@ export async function generateMetadata({ params }: BlogArticlePageProps): Promis
         : [siteConfig.ogImage],
     },
     twitter: {
-      card: "summary_large_image",
+      card: "summary_large_image" as const,
       title: post.metaTitle,
       description: post.metaDescription,
       images: [post.image ?? siteConfig.ogImage],
@@ -206,14 +206,141 @@ export default async function BlogArticlePage({ params }: BlogArticlePageProps) 
                 <div className="space-y-7 text-lg leading-relaxed text-foreground/85 sm:text-xl">
                   {post.body.map((block, index) => {
                     if (typeof block === "string") return <p key={`${index}-${block}`}>{block}</p>
-                    if (block.type === "heading") {
-                      return <h2 key={`${index}-${block.text}`} className="pt-5 font-heading text-3xl font-medium leading-tight tracking-tight text-foreground sm:text-4xl">{block.text}</h2>
+
+                    switch (block.type) {
+                      case "heading":
+                        return (
+                          <h2 key={`${index}-${block.text}`} className="pt-5 font-heading text-3xl font-medium leading-tight tracking-tight text-foreground sm:text-4xl">
+                            {block.text}
+                          </h2>
+                        )
+                      case "list":
+                      case "checklist":
+                        return (
+                          <div key={index}>
+                            {"title" in block && block.title && (
+                              <p className="mb-3 text-sm font-semibold uppercase tracking-[0.16em] text-accent">{block.title}</p>
+                            )}
+                            <ul className="list-disc space-y-3 pl-6 text-foreground/80">
+                              {block.items.map((item: string) => <li key={item}>{item}</li>)}
+                            </ul>
+                          </div>
+                        )
+                      case "evidence":
+                        return (
+                          <div key={index} className="rounded-2xl border border-accent/20 bg-accent/5 p-6 text-base leading-7 text-foreground/85">
+                            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">Data Fact</p>
+                            <p className="mt-2">{block.fact}</p>
+                            <Link href={block.href} className="mt-3 inline-block text-sm font-semibold text-accent hover:underline">
+                              Source: {block.source}
+                            </Link>
+                          </div>
+                        )
+                      case "insight":
+                      case "recommendation":
+                        return (
+                          <div key={index} className="rounded-2xl border border-border/40 bg-[#0c111d] p-6">
+                            <h3 className="font-heading text-xl font-semibold text-foreground">{block.title}</h3>
+                            <p className="mt-2 text-base leading-7 text-foreground/80">{block.text}</p>
+                          </div>
+                        )
+                      case "mistake":
+                        return (
+                          <div key={index} className="rounded-2xl border border-border/40 bg-[#0c111d] p-6">
+                            <p className="text-sm font-semibold uppercase tracking-[0.16em] text-muted-foreground">Common mistake</p>
+                            <p className="mt-2 text-base leading-7 text-foreground/80">{block.mistake}</p>
+                            <p className="mt-3 text-sm font-semibold uppercase tracking-[0.16em] text-accent">Correction</p>
+                            <p className="mt-2 text-base leading-7 text-foreground/80">{block.correction}</p>
+                          </div>
+                        )
+                      case "table":
+                        return (
+                          <div key={index} className="overflow-x-auto rounded-2xl border border-border/40">
+                            <table className="min-w-full text-left text-sm">
+                              <thead className="bg-[#0c111d] text-foreground">
+                                <tr>
+                                  {block.columns.map((column: string) => (
+                                    <th key={column} className="px-5 py-3 font-heading text-base">{column}</th>
+                                  ))}
+                                </tr>
+                              </thead>
+                              <tbody className="divide-y divide-border/40 text-muted-foreground">
+                                {block.rows.map((row: string[], rowIndex: number) => (
+                                  <tr key={rowIndex}>
+                                    {row.map((cell: string, cellIndex: number) => (
+                                      <td key={cellIndex} className="px-5 py-4 leading-6">{cell}</td>
+                                    ))}
+                                  </tr>
+                                ))}
+                              </tbody>
+                            </table>
+                          </div>
+                        )
+                      case "decision-tree":
+                        return (
+                          <div key={index} className="rounded-2xl border border-border/40 bg-[#0c111d] p-6">
+                            <h3 className="font-heading text-xl font-semibold text-foreground">{block.title}</h3>
+                            <div className="mt-4 space-y-3">
+                              {block.branches.map((branch) => (
+                                <div key={branch.condition} className="text-base leading-7 text-foreground/80">
+                                  <span className="font-semibold text-foreground">{branch.condition}</span> → {branch.action}
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        )
+                      case "faq":
+                        return (
+                          <div key={index} className="space-y-4">
+                            {block.questions.map((qa) => (
+                              <div key={qa.question} className="rounded-2xl border border-border/40 bg-[#0c111d] p-6">
+                                <h3 className="font-heading text-lg font-semibold text-foreground">{qa.question}</h3>
+                                <p className="mt-2 text-base leading-7 text-foreground/80">{qa.answer}</p>
+                              </div>
+                            ))}
+                          </div>
+                        )
+                      case "related":
+                        return (
+                          <div key={index}>
+                            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.16em] text-accent">{block.title}</p>
+                            <div className="grid gap-3 sm:grid-cols-2">
+                              {block.links.map((link) => (
+                                <Link key={link.href} href={link.href} className="rounded-2xl border border-border/40 bg-[#0c111d] p-4 hover:border-accent/40">
+                                  <p className="font-heading text-base font-semibold text-foreground">{link.label}</p>
+                                  <p className="mt-1 text-sm leading-6 text-muted-foreground">{link.summary}</p>
+                                </Link>
+                              ))}
+                            </div>
+                          </div>
+                        )
+                      case "cta":
+                        return (
+                          <div key={index} className="rounded-2xl border border-accent/30 bg-accent/5 p-6">
+                            <h3 className="font-heading text-xl font-semibold text-foreground">{block.title}</h3>
+                            <p className="mt-2 text-base leading-7 text-foreground/80">{block.text}</p>
+                            <Link href={block.href} className="mt-4 inline-flex rounded-full bg-accent px-6 py-3 text-sm font-semibold text-background hover:scale-[1.02]">
+                              {block.label}
+                            </Link>
+                          </div>
+                        )
+                      case "case-link":
+                        return (
+                          <Link key={index} href={block.href} className="block rounded-2xl border border-accent/20 bg-accent/5 p-6 hover:border-accent/40">
+                            <p className="text-sm font-semibold uppercase tracking-[0.16em] text-accent">{block.label}</p>
+                            <p className="mt-2 text-base leading-7 text-foreground/80">{block.summary}</p>
+                          </Link>
+                        )
+                      case "conclusion":
+                        return (
+                          <div key={index} className="rounded-2xl border border-border/40 bg-[#0c111d] p-6">
+                            <h3 className="font-heading text-xl font-semibold text-foreground">{block.question}</h3>
+                            <p className="mt-2 text-base leading-7 text-foreground/80">{block.answer}</p>
+                          </div>
+                        )
+                      default:
+                        return null
                     }
-                    return (
-                      <ul key={index} className="list-disc space-y-3 pl-6 text-foreground/80">
-                        {block.items.map((item) => <li key={item}>{item}</li>)}
-                      </ul>
-                    )
                   })}
                 </div>
               </div>
