@@ -149,7 +149,10 @@ export const legacyShopifyPages: LegacyShopifyPage[] = [
       { label: "WhatsApp Technical Briefing", href: siteConfig.whatsapp },
     ],
   }),
-  page("/ar/products/website-seo-pro", "Website SEO Pro UAE", "website SEO pro UAE", "SEO Product", "June 7, 2026", { kind: "product" }),
+  page("/ar/products/website-seo-pro", "Website SEO Pro UAE", "website SEO pro UAE", "SEO Product", "June 7, 2026", {
+    kind: "product",
+    description: "Website SEO Pro UAE (Arabic path) explains website SEO pro UAE for Dubai and UAE businesses with Vista by Lara's SEO, AEO, GEO, structured data, and WhatsApp-ready conversion approach.",
+  }),
   page("/ar-bh/products/interior-3d-design-cgi-uae", "Interior 3D Design CGI UAE", "interior 3D design CGI UAE", "3D Design", "June 7, 2026", { kind: "product", location: "Bahrain, Dubai, and UAE" }),
   page("/ar-om/products/website-seo-pro", "Website SEO Pro Oman and UAE", "website SEO pro Oman UAE", "SEO Product", "June 6, 2026", { kind: "product", location: "Oman, Dubai, and UAE" }),
   page("/ar-kw/products/website-launch-basic-uae", "Website Launch Basic UAE", "website launch basic UAE", "Website Product", "June 6, 2026", { kind: "product", location: "Kuwait, Dubai, and UAE" }),
