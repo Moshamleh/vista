@@ -1,7 +1,9 @@
 "use client"
 
 import { useCallback, useEffect, useRef, useState } from "react"
-import createGlobe from "cobe"
+
+type CreateGlobe = typeof import("cobe").default
+type GlobeInstance = ReturnType<CreateGlobe>
 
 type Marker = {
   id: string
@@ -55,17 +57,21 @@ export function GlobeCdn({
   className = "",
   speed = 0.002,
 }: GlobeCdnProps) {
+  const wrapperRef = useRef<HTMLDivElement>(null)
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const pointerInteracting = useRef<{ x: number; y: number } | null>(null)
   const dragOffset = useRef({ phi: 0, theta: 0 })
   const phiOffsetRef = useRef(0)
   const thetaOffsetRef = useRef(0)
   const isPausedRef = useRef(false)
+  const [isInView, setIsInView] = useState(false)
   const [traffic, setTraffic] = useState(() =>
     arcs.map((arc, index) => ({ id: arc.id, value: [88, 76, 64, 52, 49, 42, 38][index] || 30 }))
   )
 
   useEffect(() => {
+    if (!isInView) return
+
     const interval = setInterval(() => {
       setTraffic((data) =>
         data.map((item) => ({
@@ -76,6 +82,30 @@ export function GlobeCdn({
     }, 450)
 
     return () => clearInterval(interval)
+  }, [isInView])
+
+  useEffect(() => {
+    const element = wrapperRef.current
+    if (!element) return
+
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    if (reducedMotion) return
+
+    if (!("IntersectionObserver" in window)) {
+      const timeout = globalThis.setTimeout(() => setIsInView(true), 0)
+      return () => globalThis.clearTimeout(timeout)
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInView(Boolean(entry?.isIntersecting))
+      },
+      { rootMargin: "280px" },
+    )
+
+    observer.observe(element)
+
+    return () => observer.disconnect()
   }, [])
 
   const handlePointerDown = useCallback((event: React.PointerEvent) => {
@@ -116,14 +146,21 @@ export function GlobeCdn({
   }, [handlePointerUp])
 
   useEffect(() => {
-    if (!canvasRef.current) return
+    if (!isInView || !canvasRef.current) return
 
     const canvas = canvasRef.current
-    let globe: ReturnType<typeof createGlobe> | null = null
+    let globe: GlobeInstance | null = null
     let animationId = 0
     let phi = -0.85
+    let cancelled = false
+    let resizeObserver: ResizeObserver | null = null
 
-    const init = () => {
+    const init = async () => {
+      const createGlobe = (await import("cobe")).default
+      if (cancelled) return
+
+      const start = () => {
+      if (cancelled) return
       const width = canvas.offsetWidth
       if (width === 0 || globe) return
 
@@ -165,25 +202,31 @@ export function GlobeCdn({
     }
 
     if (canvas.offsetWidth > 0) {
-      init()
+      start()
     } else {
-      const observer = new ResizeObserver((entries) => {
+      resizeObserver = new ResizeObserver((entries) => {
         if (entries[0]?.contentRect.width > 0) {
-          observer.disconnect()
-          init()
+          resizeObserver?.disconnect()
+          start()
         }
       })
-      observer.observe(canvas)
+      resizeObserver.observe(canvas)
     }
+    }
+
+    init()
 
     return () => {
+      cancelled = true
+      resizeObserver?.disconnect()
       if (animationId) cancelAnimationFrame(animationId)
       globe?.destroy()
+      canvas.style.opacity = "0"
     }
-  }, [markers, arcs, speed])
+  }, [markers, arcs, speed, isInView])
 
   return (
-    <div className={`relative aspect-square select-none ${className}`}>
+    <div ref={wrapperRef} className={`relative aspect-square select-none ${className}`}>
       <canvas
         ref={canvasRef}
         onPointerDown={handlePointerDown}

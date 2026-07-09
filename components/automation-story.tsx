@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import { ArrowRight, Bot, DatabaseZap, Link2, MessageCircle, SearchCheck, Workflow } from "lucide-react"
 
 import FlowArt, { FlowSection } from "@/components/story-scroll"
@@ -112,12 +113,15 @@ export function AutomationStory() {
                 </div>
 
                 <div className="relative min-h-[460px] overflow-hidden rounded-[2rem] border border-white/10 bg-[#07101d]/88 p-4 shadow-[0_40px_110px_-70px_rgba(87,217,255,0.45)] backdrop-blur-xl">
-                  <img
-                    src={panel.image}
-                    alt=""
-                    className="absolute right-4 top-4 h-40 w-52 rounded-[1.25rem] object-cover opacity-78 saturate-75 sm:h-52 sm:w-72"
-                    loading="lazy"
-                  />
+                  <div className="absolute right-4 top-4 h-40 w-52 overflow-hidden rounded-[1.25rem] opacity-[0.78] saturate-75 sm:h-52 sm:w-72" aria-hidden="true">
+                    <Image
+                      src={panel.image}
+                      alt=""
+                      fill
+                      sizes="(max-width: 640px) 13rem, 18rem"
+                      className="object-cover"
+                    />
+                  </div>
                   <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_18%,rgba(87,217,255,0.16),transparent_34%),linear-gradient(180deg,transparent,rgba(3,4,8,0.86)_72%)]" />
 
                   <div className="relative flex h-full min-h-[430px] flex-col justify-end gap-7 p-5 sm:p-8">

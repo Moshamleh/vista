@@ -296,7 +296,7 @@ export default function BrandingPage() {
                 <a
                   href={whatsappHref}
                   target="_blank"
-                  rel="noopener"
+                  rel="noopener noreferrer"
                   className="branding-pill inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-white/20 px-6 py-3.5 text-[14px] font-semibold uppercase tracking-wide text-foreground hover:border-accent hover:text-accent"
                 >
                   WhatsApp strategy call
@@ -364,7 +364,7 @@ export default function BrandingPage() {
 
             <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
               {workCards.map((card) => (
-                <a key={card.title} href={whatsappHref} target="_blank" rel="noopener" className="branding-work-card group relative block overflow-hidden rounded-2xl bg-[#111520]">
+                <a key={card.title} href={whatsappHref} target="_blank" rel="noopener noreferrer" className="branding-work-card group relative block overflow-hidden rounded-2xl bg-[#111520]">
                   <div className="relative aspect-[4/3] overflow-hidden">
                     <Image src={card.image} alt={card.alt} fill sizes="(min-width: 768px) 50vw, 100vw" className="branding-card-img object-cover" />
                     <div className="branding-card-meta absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-background/90 via-background/20 to-transparent p-6 opacity-0">
@@ -551,7 +551,7 @@ export default function BrandingPage() {
         <section className="branding-award-grain relative overflow-hidden border-t border-white/10 py-28 text-center md:py-40">
           <div className="pointer-events-none absolute left-1/2 top-1/2 h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/10 blur-[130px]" />
           <div className="relative z-10 mx-auto max-w-[1320px] px-5 md:px-8">
-            <p className="text-[12px] font-semibold uppercase tracking-[0.25em] text-accent">(Let's build / 08)</p>
+            <p className="text-[12px] font-semibold uppercase tracking-[0.25em] text-accent">(Let&apos;s build / 08)</p>
             <h2 className="branding-display mx-auto mt-6 max-w-[13ch] text-[clamp(3rem,12vw,10rem)] text-foreground">
               Got a brand to <span className="text-accent">launch?</span>
             </h2>
@@ -559,7 +559,7 @@ export default function BrandingPage() {
               Tell us where you want to be in Dubai, UAE, or the GCC. We will map the brand strategy, identity, SEO, AEO, GEO, and conversion path to get you there.
             </p>
             <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <a href={whatsappHref} target="_blank" rel="noopener" className="branding-pill inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-accent px-8 py-4 text-[15px] font-bold uppercase tracking-wide text-background">
+              <a href={whatsappHref} target="_blank" rel="noopener noreferrer" className="branding-pill inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-accent px-8 py-4 text-[15px] font-bold uppercase tracking-wide text-background">
                 WhatsApp branding consultation <ArrowUpRight className="h-4 w-4" />
               </a>
               <a href="/contact" className="branding-pill inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-white/20 px-8 py-4 text-[15px] font-semibold uppercase tracking-wide text-foreground hover:border-accent hover:text-accent">

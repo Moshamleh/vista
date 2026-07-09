@@ -121,7 +121,7 @@ export function IndustryPage({
                 <a
                   href={whatsappHref}
                   target="_blank"
-                  rel="noopener"
+                  rel="noopener noreferrer"
                   className="inline-flex min-h-12 items-center justify-center rounded-full bg-accent px-7 font-heading text-sm font-semibold uppercase tracking-[0.04em] text-background transition-transform hover:scale-[1.03]"
                 >
                   Plan a Dubai project
@@ -129,7 +129,7 @@ export function IndustryPage({
                 <a
                   href={whatsappHref}
                   target="_blank"
-                  rel="noopener"
+                  rel="noopener noreferrer"
                   className="inline-flex min-h-12 items-center justify-center rounded-full border border-accent/30 px-7 font-heading text-sm font-semibold uppercase tracking-[0.04em] text-accent transition-colors hover:bg-accent/10"
                 >
                   WhatsApp consultation
@@ -245,7 +245,7 @@ export function IndustryPage({
                     key={link.href}
                     href={link.href}
                     target={link.href.startsWith("http") ? "_blank" : undefined}
-                    rel={link.href.startsWith("http") ? "noopener" : undefined}
+                    rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
                     className="rounded-full border border-accent/20 px-4 py-2 text-sm text-foreground transition-colors hover:bg-accent/10 hover:text-accent"
                   >
                     {link.label}

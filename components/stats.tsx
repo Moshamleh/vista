@@ -287,7 +287,7 @@ export function Stats() {
                 <a
                   href={getWhatsappLink("general")}
                   target="_blank"
-                  rel="noopener"
+                  rel="noopener noreferrer"
                   className="mt-8 inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-accent px-6 font-heading text-sm font-bold uppercase tracking-[0.06em] text-background transition-transform hover:scale-[1.02]"
                 >
                   Build my growth system <ArrowRight className="h-4 w-4" />

@@ -1,8 +1,6 @@
 import type { Metadata } from "next"
-import Script from "next/script"
 import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
-import { VistaLeadQualifier } from "@/components/vista-lead-qualifier"
 import { jsonLd } from "@/lib/json-ld"
 import { siteConfig } from "@/lib/site"
 
@@ -116,7 +114,7 @@ export default function ContactPage() {
                 <a
                   href={whatsappHref}
                   target="_blank"
-                  rel="noopener"
+                  rel="noopener noreferrer"
                   className="inline-flex min-h-12 items-center justify-center rounded-full bg-accent px-7 font-heading text-sm font-semibold uppercase tracking-[0.04em] text-background transition-transform hover:scale-[1.03]"
                 >
                   WhatsApp the team
@@ -124,7 +122,7 @@ export default function ContactPage() {
                 <a
                   href={whatsappHref}
                   target="_blank"
-                  rel="noopener"
+                  rel="noopener noreferrer"
                   className="inline-flex min-h-12 items-center justify-center rounded-full border border-accent/30 px-7 font-heading text-sm font-semibold uppercase tracking-[0.04em] text-accent transition-colors hover:bg-accent/10"
                 >
                   WhatsApp now
@@ -143,7 +141,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <p className="text-sm text-muted-foreground">Phone / WhatsApp</p>
-                  <a href={whatsappHref} target="_blank" rel="noopener" className="mt-1 block text-lg font-semibold text-foreground hover:text-accent">
+                  <a href={whatsappHref} target="_blank" rel="noopener noreferrer" className="mt-1 block text-lg font-semibold text-foreground hover:text-accent">
                     {siteConfig.phone}
                   </a>
                 </div>
@@ -214,8 +212,6 @@ export default function ContactPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(schema) }} />
 
       <SiteFooter />
-
-      {/* <Script src="https://vista-lead-qualifier.vistabylara.workers.dev/chat" strategy="afterInteractive" /> */}
     </div>
   )
 }

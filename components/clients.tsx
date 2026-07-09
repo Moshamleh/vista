@@ -34,6 +34,7 @@ function PixelCanvas({ colors, gap = 7 }: { colors: string[]; gap?: number }) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
   const pixelsRef = useRef<Pixel[]>([])
   const frameRef = useRef(0)
+  const [isVisible, setIsVisible] = useState(false)
 
   const setup = useCallback(() => {
     const canvas = canvasRef.current
@@ -74,6 +75,33 @@ function PixelCanvas({ colors, gap = 7 }: { colors: string[]; gap?: number }) {
 
   useEffect(() => {
     const canvas = canvasRef.current
+    const parent = canvas?.parentElement
+    if (!parent) return
+
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    if (reducedMotion) return
+
+    if (!("IntersectionObserver" in window)) {
+      const timeout = globalThis.setTimeout(() => setIsVisible(true), 0)
+      return () => globalThis.clearTimeout(timeout)
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(Boolean(entry?.isIntersecting))
+      },
+      { rootMargin: "220px" },
+    )
+
+    observer.observe(parent)
+
+    return () => observer.disconnect()
+  }, [])
+
+  useEffect(() => {
+    if (!isVisible) return
+
+    const canvas = canvasRef.current
     const ctx = canvas?.getContext("2d")
     if (!canvas || !ctx) return
 
@@ -107,7 +135,7 @@ function PixelCanvas({ colors, gap = 7 }: { colors: string[]; gap?: number }) {
       resizeObserver.disconnect()
       window.cancelAnimationFrame(frameRef.current)
     }
-  }, [setup])
+  }, [isVisible, setup])
 
   return <canvas ref={canvasRef} className="absolute inset-0 h-full w-full" aria-hidden="true" />
 }
@@ -152,23 +180,6 @@ export function Clients() {
       aria-labelledby="clients-heading"
       className="relative isolate overflow-hidden border-y border-border/40 bg-background px-4 py-24 sm:px-8 sm:py-32"
     >
-      <style>{`
-        .vista-glass-text {
-          color: transparent;
-          background: linear-gradient(135deg, rgba(255,255,255,1) 0%, rgba(255,255,255,.35) 28%, rgba(87,217,255,.92) 50%, rgba(255,255,255,.22) 72%, rgba(255,255,255,1) 100%);
-          background-size: 220% auto;
-          -webkit-background-clip: text;
-          background-clip: text;
-          -webkit-text-stroke: 1px rgba(255,255,255,.16);
-          filter: drop-shadow(0 20px 45px rgba(0,0,0,.5)) drop-shadow(0 0 22px rgba(87,217,255,.12));
-          animation: vista-shimmer 8s linear infinite;
-        }
-        @keyframes vista-shimmer {
-          0% { background-position: 220% center; }
-          100% { background-position: 0% center; }
-        }
-      `}</style>
-
       <div className="pointer-events-none absolute inset-0 z-0">
         <PixelCanvas colors={["rgba(159,161,181,.35)", "rgba(87,217,255,.55)", "rgba(255,255,255,.18)"]} />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(10,10,10,0.62)_48%,var(--background)_100%)]" />

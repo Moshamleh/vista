@@ -77,7 +77,7 @@ export function FooterScrollGlobe() {
   const [activeSection, setActiveSection] = useState(0)
   const [scrollProgress, setScrollProgress] = useState(0)
   const containerRef = useRef<HTMLElement>(null)
-  const sectionRefs = useRef<(HTMLDivElement | null)[]>([])
+  const sectionRefs = useRef<(HTMLElement | null)[]>([])
 
   const activePosition = globePositions[activeSection] ?? globePositions[0]
 

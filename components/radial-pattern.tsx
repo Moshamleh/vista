@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useMemo, useRef } from "react"
+import { useEffect, useMemo, useRef, useState } from "react"
 
 import { cn } from "@/lib/utils"
 
@@ -88,10 +88,59 @@ const VISIBILITY_TILES: VisibilityTile[] = [
 
 function PixelCanvas({ colors, gap = 5, speed = 22, className }: PixelCanvasProps) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
+  const [isActive, setIsActive] = useState(false)
+  const [isInView, setIsInView] = useState(false)
 
   const colorStops = useMemo(() => colors.map((color) => color.trim()).filter(Boolean), [colors])
 
   useEffect(() => {
+    const canvas = canvasRef.current
+    const parent = canvas?.parentElement
+    if (!canvas || !parent) return
+
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    if (reducedMotion) return
+
+    const activate = () => setIsActive(true)
+    const deactivate = () => setIsActive(false)
+
+    parent.addEventListener("pointerenter", activate)
+    parent.addEventListener("focusin", activate)
+    parent.addEventListener("pointerleave", deactivate)
+    parent.addEventListener("focusout", deactivate)
+
+    if (!("IntersectionObserver" in window)) {
+      const timeout = globalThis.setTimeout(() => setIsInView(true), 0)
+      return () => {
+        globalThis.clearTimeout(timeout)
+        parent.removeEventListener("pointerenter", activate)
+        parent.removeEventListener("focusin", activate)
+        parent.removeEventListener("pointerleave", deactivate)
+        parent.removeEventListener("focusout", deactivate)
+      }
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInView(Boolean(entry?.isIntersecting))
+      },
+      { rootMargin: "220px" },
+    )
+
+    observer.observe(parent)
+
+    return () => {
+      observer.disconnect()
+      parent.removeEventListener("pointerenter", activate)
+      parent.removeEventListener("focusin", activate)
+      parent.removeEventListener("pointerleave", deactivate)
+      parent.removeEventListener("focusout", deactivate)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (!isActive || !isInView) return
+
     const canvas = canvasRef.current
     if (!canvas) return
 
@@ -169,9 +218,9 @@ function PixelCanvas({ colors, gap = 5, speed = 22, className }: PixelCanvasProp
       observer.disconnect()
       window.cancelAnimationFrame(animationFrame)
     }
-  }, [colorStops, gap, speed])
+  }, [colorStops, gap, isActive, isInView, speed])
 
-  return <canvas ref={canvasRef} aria-hidden="true" className={cn("absolute inset-0 size-full opacity-0 transition-opacity duration-300 group-hover:opacity-100", className)} />
+  return <canvas ref={canvasRef} aria-hidden="true" className={cn("absolute inset-0 size-full opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-within:opacity-100", className)} />
 }
 
 function VisibilityCard({ tile }: { tile: VisibilityTile }) {

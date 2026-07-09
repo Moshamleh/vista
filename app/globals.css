@@ -317,6 +317,12 @@
   }
 }
 
+@media (max-width: 768px), (prefers-reduced-motion: reduce) {
+  body {
+    background-attachment: scroll;
+  }
+}
+
 @keyframes marquee {
   from {
     transform: translateX(0);
@@ -328,6 +334,382 @@
 
 .animate-marquee {
   animation: marquee 32s linear infinite;
+}
+
+@keyframes vista-reveal-in {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.vista-reveal-in {
+  animation: vista-reveal-in 0.65s cubic-bezier(0.21, 0.47, 0.32, 0.98) both;
+}
+
+.vista-delay-80 {
+  animation-delay: 80ms;
+}
+
+.vista-delay-140 {
+  animation-delay: 140ms;
+}
+
+.vista-delay-160 {
+  animation-delay: 160ms;
+}
+
+.vista-delay-260 {
+  animation-delay: 260ms;
+}
+
+.vista-delay-360 {
+  animation-delay: 360ms;
+}
+
+@keyframes vista-header-in {
+  from {
+    opacity: 0;
+    transform: translateY(-5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.vista-header-in {
+  animation: vista-header-in 0.55s ease-out both;
+}
+
+@keyframes vista-typewriter-mask {
+  0%,
+  8% {
+    width: 0;
+  }
+  44%,
+  68% {
+    width: calc(100% - 0.35rem);
+  }
+  100% {
+    width: 0;
+  }
+}
+
+.vista-typewriter-mask {
+  animation: vista-typewriter-mask 4.8s steps(13, end) infinite;
+}
+
+.vista-glass-text {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 255, 255, 0.35) 28%,
+    rgba(87, 217, 255, 0.92) 50%,
+    rgba(255, 255, 255, 0.22) 72%,
+    rgba(255, 255, 255, 1) 100%
+  );
+  background-clip: text;
+  background-size: 220% auto;
+  color: transparent;
+  filter: drop-shadow(0 20px 45px rgba(0, 0, 0, 0.5)) drop-shadow(0 0 22px rgba(87, 217, 255, 0.12));
+  -webkit-background-clip: text;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.16);
+}
+
+@keyframes vista-shimmer {
+  0% {
+    background-position: 220% center;
+  }
+  100% {
+    background-position: 0% center;
+  }
+}
+
+.vista-glass-text {
+  animation: vista-shimmer 8s linear infinite;
+}
+
+.vlq {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 9999;
+  font-family: "Space Grotesk", sans-serif;
+}
+
+.vlq-btn {
+  display: flex;
+  width: 56px;
+  height: 56px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(0, 229, 255, 0.4);
+  border-radius: 50%;
+  background: rgba(0, 229, 255, 0.1);
+  color: #00e5ff;
+  box-shadow: 0 0 24px rgba(0, 229, 255, 0.2);
+  font-size: 24px;
+  transition: all 0.3s;
+}
+
+.vlq-btn:hover {
+  background: rgba(0, 229, 255, 0.2);
+  transform: scale(1.05);
+}
+
+.vlq-box {
+  position: absolute;
+  right: 0;
+  bottom: 70px;
+  display: none;
+  width: 320px;
+  overflow: hidden;
+  flex-direction: column;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  background: #0a0a0a;
+  box-shadow: 0 32px 64px rgba(0, 0, 0, 0.6);
+}
+
+.vlq-box.open {
+  display: flex;
+}
+
+.vlq-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(0, 229, 255, 0.06);
+  padding: 14px 16px;
+}
+
+.vlq-head-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #00e5ff;
+  box-shadow: 0 0 6px rgba(0, 229, 255, 0.8);
+}
+
+.vlq-head-text {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.vlq-head-sub {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 11px;
+}
+
+.vlq-msgs {
+  display: flex;
+  max-height: 280px;
+  flex-direction: column;
+  gap: 10px;
+  overflow-y: auto;
+  padding: 14px;
+  scroll-behavior: smooth;
+}
+
+.vlq-msg {
+  max-width: 85%;
+  border-radius: 12px;
+  padding: 9px 13px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.vlq-msg.bot {
+  align-self: flex-start;
+  border-bottom-left-radius: 4px;
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.vlq-msg.user {
+  align-self: flex-end;
+  border: 1px solid rgba(0, 229, 255, 0.2);
+  border-bottom-right-radius: 4px;
+  background: rgba(0, 229, 255, 0.1);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.vlq-wa {
+  display: block;
+  margin: 4px 0;
+  border: 1px solid rgba(37, 211, 102, 0.3);
+  border-radius: 10px;
+  background: rgba(37, 211, 102, 0.1);
+  padding: 10px 14px;
+  color: #25d366;
+  font-size: 13px;
+  font-weight: 500;
+  text-align: center;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.vlq-wa:hover {
+  background: rgba(37, 211, 102, 0.2);
+}
+
+.vlq-options {
+  display: grid;
+  gap: 8px;
+  margin-top: 2px;
+}
+
+.vlq-option {
+  display: flex;
+  width: 100%;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(0, 229, 255, 0.25);
+  border-radius: 10px;
+  background: rgba(0, 229, 255, 0.08);
+  padding: 10px 12px;
+  color: #00e5ff;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.vlq-option:hover {
+  border-color: rgba(0, 229, 255, 0.45);
+  background: rgba(0, 229, 255, 0.16);
+}
+
+.vlq-option.whatsapp {
+  border-color: rgba(37, 211, 102, 0.35);
+  background: rgba(37, 211, 102, 0.1);
+  color: #25d366;
+}
+
+.vlq-option.whatsapp:hover {
+  background: rgba(37, 211, 102, 0.2);
+}
+
+.vlq-browse {
+  display: none;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.vlq-browse.open {
+  display: grid;
+}
+
+.vlq-link {
+  display: flex;
+  min-height: 36px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 12px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.vlq-link:hover {
+  border-color: rgba(0, 229, 255, 0.35);
+  background: rgba(0, 229, 255, 0.08);
+  color: #00e5ff;
+}
+
+.vlq-input-row {
+  display: flex;
+  gap: 8px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 10px;
+}
+
+.vlq-input {
+  flex: 1;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  outline: none;
+  background: rgba(255, 255, 255, 0.04);
+  padding: 8px 12px;
+  color: #fff;
+  font-family: inherit;
+  font-size: 13px;
+}
+
+.vlq-input:focus {
+  border-color: rgba(0, 229, 255, 0.3);
+}
+
+.vlq-send {
+  display: flex;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(0, 229, 255, 0.3);
+  border-radius: 8px;
+  background: rgba(0, 229, 255, 0.1);
+  color: #00e5ff;
+  font-size: 16px;
+  transition: all 0.2s;
+}
+
+.vlq-send:hover {
+  background: rgba(0, 229, 255, 0.2);
+}
+
+.vlq-typing {
+  display: none;
+  align-self: flex-start;
+  border-radius: 12px;
+  border-bottom-left-radius: 4px;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 9px 13px;
+}
+
+.vlq-typing span {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin: 0 2px;
+  border-radius: 50%;
+  animation: vlq-bounce 0.9s infinite;
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.vlq-typing span:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.vlq-typing span:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+@keyframes vlq-bounce {
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(-6px);
+  }
 }
 
 @keyframes branding-reel-scan {
@@ -464,6 +846,17 @@
 @media (prefers-reduced-motion: reduce) {
   .animate-marquee {
     animation: none;
+  }
+
+  .vista-reveal-in,
+  .vista-header-in,
+  .vista-typewriter-mask,
+  .vista-glass-text {
+    animation: none;
+  }
+
+  .vista-typewriter-mask {
+    width: calc(100% - 0.35rem);
   }
 
   .branding-reel-scan,

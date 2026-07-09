@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react"
 import { motion } from "framer-motion"
 import { ArrowDown, ArrowRight, Award, Bot, Sparkles, Star } from "lucide-react"
 
-import { siteConfig } from "@/lib/site"
+import { getWhatsappLink, siteConfig } from "@/lib/site"
 
 const heroSignals = [
   { label: "Public AI data", value: "/ai-data", detail: "crawlable entity graph" },
@@ -63,24 +63,6 @@ function LazyRobotFrame() {
 }
 
 export function Hero() {
-  const callAI = async () => {
-    try {
-      const res = await fetch(
-        "/recommend?q=need%20more%20leads",
-        { cache: "no-store" }
-      )
-
-      const data = await res.json()
-
-      if (data?.whatsappLink) {
-        window.open(data.whatsappLink, "_blank")
-      }
-    } catch {
-      // No-op: CTA should not break the homepage
-    }
-  }
-
-
   return (
     <section
       id="top"
@@ -95,12 +77,7 @@ export function Hero() {
 
       <div className="relative z-10 mx-auto grid min-h-[calc(100vh-12rem)] w-full max-w-7xl items-center gap-12 lg:grid-cols-[1.02fr_0.98fr]">
         <div className="order-2 flex flex-col items-start text-left lg:order-1">
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55 }}
-            className="mb-6 flex flex-wrap gap-2.5"
-          >
+          <div className="vista-reveal-in vista-delay-80 mb-6 flex flex-wrap gap-2.5">
             <span className="inline-flex items-center gap-1.5 rounded-full border border-accent/20 bg-accent/5 px-3 py-1.5 text-xs font-semibold uppercase tracking-widest text-accent backdrop-blur-md">
               <Award className="h-3.5 w-3.5" />
               Noble Business Winner 2025
@@ -113,7 +90,7 @@ export function Hero() {
               <Star className="h-3.5 w-3.5 fill-current" />
               5.0 GCC Leader
             </span>
-          </motion.div>
+          </div>
 
           <motion.h1
             initial={{ opacity: 0, y: 16 }}
@@ -152,12 +129,14 @@ export function Hero() {
               Request technical briefing
               <ArrowRight className="h-4 w-4" />
             </a>
-            <button
-              onClick={callAI}
+            <a
+              href={getWhatsappLink("generative-ai")}
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex min-h-14 items-center justify-center gap-2 rounded-full border border-accent/30 bg-accent/10 px-8 text-base font-semibold text-accent transition-colors hover:bg-accent/15"
             >
               Generate AI visibility plan
-            </button>
+            </a>
             <a
               href="/knowledge/ai-visibility/why-ai-isnt-recommending-your-business"
               className="inline-flex min-h-14 items-center justify-center gap-2 rounded-full border border-white/10 bg-white/[0.025] px-8 text-base font-semibold text-foreground/82 backdrop-blur-md transition-colors hover:border-accent/35 hover:bg-accent/10 hover:text-accent"
@@ -187,12 +166,7 @@ export function Hero() {
           </motion.div>
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, scale: 0.96 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="order-1 lg:order-2"
-        >
+        <div className="vista-reveal-in vista-delay-140 order-1 lg:order-2">
           <div className="relative mx-auto flex h-[420px] w-full max-w-[720px] items-center justify-center overflow-visible sm:h-[540px] lg:h-[700px]">
             <div className="pointer-events-none absolute inset-0 z-0" aria-hidden="true">
               <div className="absolute left-1/2 top-1/2 h-[92%] w-[92%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/14 blur-[95px]" />
@@ -233,7 +207,7 @@ export function Hero() {
               <LazyRobotFrame />
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   )

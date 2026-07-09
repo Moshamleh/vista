@@ -38,7 +38,7 @@ export function CTA() {
           <a
             href={siteConfig.whatsapp}
             target="_blank"
-            rel="noopener"
+            rel="noopener noreferrer"
             className="inline-flex items-center gap-2 rounded-full bg-accent px-8 py-4 text-base font-medium text-background transition-transform hover:scale-[1.03] hover:bg-accent/90"
           >
             Start today

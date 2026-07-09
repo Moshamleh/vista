@@ -1,11 +1,6 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useGSAP } from '@gsap/react';
-
-gsap.registerPlugin(ScrollTrigger);
 
 function cx(...parts: Array<string | undefined | false | null>): string {
   return parts.filter(Boolean).join(' ');
@@ -57,6 +52,7 @@ const FlowArt: React.FC<FlowArtProps> = ({
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [reducedMotion, setReducedMotion] = useState(false);
+  const childrenTotal = childCount(children);
 
   useEffect(() => {
     const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -66,16 +62,28 @@ const FlowArt: React.FC<FlowArtProps> = ({
     return () => mq.removeEventListener('change', update);
   }, []);
 
-  useGSAP(
-    () => {
-      if (!containerRef.current || reducedMotion) return;
+  useEffect(() => {
+    if (!containerRef.current || reducedMotion) return;
+
+    let cancelled = false;
+    let cleanup = () => {};
+
+    const run = async () => {
+      const [{ gsap }, { ScrollTrigger }] = await Promise.all([
+        import('gsap'),
+        import('gsap/ScrollTrigger'),
+      ]);
+
+      if (cancelled || !containerRef.current) return;
+
+      gsap.registerPlugin(ScrollTrigger);
 
       const sections = Array.from(
         containerRef.current.querySelectorAll<HTMLElement>('[data-flow-section]'),
       );
       if (sections.length === 0) return;
 
-      const triggers: ScrollTrigger[] = [];
+      const triggers: Array<{ kill: () => void }> = [];
 
       sections.forEach((section, i) => {
         gsap.set(section, { zIndex: i + 1 });
@@ -113,12 +121,18 @@ const FlowArt: React.FC<FlowArtProps> = ({
 
       ScrollTrigger.refresh();
 
-      return () => {
+      cleanup = () => {
         triggers.forEach((t) => t.kill());
       };
-    },
-    { scope: containerRef, dependencies: [childCount(children), reducedMotion] },
-  );
+    };
+
+    run();
+
+    return () => {
+      cancelled = true;
+      cleanup();
+    };
+  }, [childrenTotal, reducedMotion]);
 
   return (
     <div
