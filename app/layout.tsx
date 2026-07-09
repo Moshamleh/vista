@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from 'next'
 import Script from 'next/script'
-import { headers } from 'next/headers'
 import { Space_Grotesk, Inter, Noto_Sans_Arabic } from 'next/font/google'
 import { siteConfig } from '@/lib/site'
 import { StructuredData } from '@/components/structured-data'
@@ -99,22 +98,36 @@ export const viewport: Viewport = {
   ],
 }
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const headerList = await headers()
-  const pathname = headerList.get('x-vista-pathname') || ''
-  const isArabic = pathname === '/ar' || pathname.startsWith('/ar/')
-
   return (
     <html
-      lang={isArabic ? 'ar' : 'en'}
-      dir={isArabic ? 'rtl' : 'ltr'}
+      lang="en"
+      dir="ltr"
       className={`${spaceGrotesk.variable} ${inter.variable} ${notoSansArabic.variable} bg-background`}
     >
       <head>
+        <script
+          id="vista-locale-attrs"
+          // Runs synchronously before paint to set the correct lang/dir for /ar pages,
+          // avoiding both an RTL flash and a server-side headers() call that would force
+          // every route into dynamic rendering. Mirrors isArabicPath() used client-side
+          // elsewhere (site-header.tsx, site-footer.tsx, vista-lead-qualifier.tsx).
+          dangerouslySetInnerHTML={{
+            __html: `
+(function () {
+  var p = window.location.pathname;
+  if (p === '/ar' || p.indexOf('/ar/') === 0) {
+    document.documentElement.lang = 'ar';
+    document.documentElement.dir = 'rtl';
+  }
+})();
+`,
+          }}
+        />
         <Script
           id="google-tag-consent-default"
           strategy="beforeInteractive"
