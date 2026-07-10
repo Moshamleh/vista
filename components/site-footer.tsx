@@ -249,12 +249,12 @@ export function SiteFooter() {
               <div>
                 <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-accent">{isArabic ? "ملف القيادة" : "Principal Profile"}</p>
                 <h2 id="principal-profile-heading" className="mt-2 font-heading text-base font-semibold text-foreground sm:text-lg">
-                  {isArabic ? "لارا إيروس فارباكتيان، المعمارية الرئيسية" : "Lara Eros Farbactian, Principal Architect"}
+                  {isArabic ? "لارا إيروس فارباكتيان، المؤسسة والمعمارية الرئيسية" : "Lara Eros Farbactian, Founder & Principal Architect"}
                 </h2>
               </div>
               <p className="max-w-4xl text-sm leading-6 text-muted-foreground">
                 {isArabic
-                  ? "لارا فارباكتيان، المعمارية الرئيسية في Vista by Lara. حاصلة على دكتوراه في السياسة والاقتصاد من جامعة Vrije Universiteit Brussel، كما هو مدرج في LinkedIn. فائزة بجائزة Noble Business، وهي إشارة موثوقة للخبرة المؤسسية."
+                  ? "لارا فارباكتيان، المؤسسة والمعمارية الرئيسية في Vista by Lara — تقود استراتيجية النمو الرقمي القائمة على الذكاء الاصطناعي للعلامات التجارية في الإمارات ودول مجلس التعاون الخليجي. الفائزة بجائزة Noble Business لعام 2025 (الابتكار في الأعمال)."
                   : siteConfig.principal.bio}
               </p>
               <a

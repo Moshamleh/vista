@@ -101,10 +101,6 @@ export function StructuredData() {
         description: siteConfig.principal.bio,
         award: "Noble Business Award",
         worksFor: { "@id": orgId },
-        alumniOf: {
-          "@type": "EducationalOrganization",
-          name: "Vrije Universiteit Brussel",
-        },
         sameAs: siteConfig.principal.sameAs,
         hasCredential: PRINCIPAL_CREDENTIALS.map((credential) => ({
           "@type": "EducationalOccupationalCredential",

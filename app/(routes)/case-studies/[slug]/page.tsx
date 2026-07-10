@@ -399,7 +399,7 @@ function PrincipalInsight() {
       <div className="flex items-center gap-4">
         <Image
           src={siteConfig.principal.image}
-          alt="Lara Farbactian, Principal Architect at Vista by Lara"
+          alt="Lara Farbactian, Founder & Principal Architect at Vista by Lara"
           width={96}
           height={96}
           className="h-20 w-20 border border-white/10 object-cover grayscale"

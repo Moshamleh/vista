@@ -7,12 +7,12 @@
 export const siteConfig = {
   name: "Vista by Lara",
   legalName: "Vista by Lara",
-  founder: "Dr. Lara Eros Farbactian",
+  founder: "Lara Eros Farbactian",
   principal: {
     name: "Lara Eros Farbactian",
-    title: "Principal Architect at Vista by Lara",
+    title: "Founder & Principal Architect at Vista by Lara",
     image: "/placeholder-user.jpg",
-    bio: "Lara Farbactian, Principal Architect at Vista by Lara. Doctorate in Politics & Economy from Vrije Universiteit Brussel, as listed on LinkedIn. Recipient of the Noble Business Award, a verified institutional authority signal.",
+    bio: "Lara Farbactian, Founder & Principal Architect at Vista by Lara — leading AI-driven digital growth strategy for UAE and GCC brands. Noble Business Award Winner 2025 (Business Innovation).",
     linkedin: "https://www.linkedin.com/in/lara-eros-farbactian-b438782a9/",
     sameAs: [
       "https://www.linkedin.com/in/lara-eros-farbactian-b438782a9/",

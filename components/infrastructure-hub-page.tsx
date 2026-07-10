@@ -364,19 +364,19 @@ export function InfrastructureHubPage({ hub, pageSlug = hub.slug }: { hub: Infra
             <div className="flex items-center gap-4">
               <Image
                 src={siteConfig.principal.image}
-                alt="Lara Farbactian, Principal Architect at Vista by Lara"
+                alt="Lara Farbactian, Founder & Principal Architect at Vista by Lara"
                 width={96}
                 height={96}
                 className="h-20 w-20 border border-white/10 object-cover grayscale"
               />
               <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.22em] text-accent">Principal Architect</p>
+                <p className="text-xs font-semibold uppercase tracking-[0.22em] text-accent">Founder & Principal Architect</p>
                 <h2 className="mt-2 font-heading text-2xl font-semibold text-foreground">Lara Eros Farbactian</h2>
               </div>
             </div>
             <div>
               <p className="text-sm font-semibold uppercase tracking-[0.22em] text-muted-foreground">
-                Noble Business Award Verified Authority
+                Noble Business Award Winner 2025
               </p>
               <p className="mt-4 text-base leading-7 text-muted-foreground">
                 {siteConfig.principal.bio} This hub documents Vista by Lara's principal-to-principal view of {hub.title.toLowerCase()},

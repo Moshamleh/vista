@@ -1059,7 +1059,7 @@ export function getKnowledgeApiPayload(resource?: string) {
             name: siteConfig.principal.name,
             title: siteConfig.principal.title,
             credentials:
-              "Principal Architect, Vista by Lara; Doctorate in Politics & Economy from Vrije Universiteit Brussel, as listed on LinkedIn; Noble Business Award recipient",
+              "Founder & Principal Architect, Vista by Lara; Noble Business Award Winner 2025 (Business Innovation)",
             sameAs: siteConfig.principal.sameAs,
             reviewedPages: ["/knowledge/ai-visibility/why-ai-isnt-recommending-your-business"],
           },
