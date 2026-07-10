@@ -50,9 +50,8 @@ export function SplineScene({ scene, className }: SplineSceneProps) {
 
   useEffect(() => {
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    const desktop3d = window.matchMedia("(min-width: 1024px) and (pointer: fine)").matches
     const saveData = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData
-    const available = desktop3d && !reducedMotion && !saveData && canCreateWebGLContext()
+    const available = !reducedMotion && !saveData && canCreateWebGLContext()
 
     const timeout = window.setTimeout(() => setWebglAvailable(available), 0)
 
