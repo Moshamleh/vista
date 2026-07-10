@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   description:
     "Terms of Use for Vista by Lara, a Dubai, UAE branding, UX, website development, and generative AI agency. Includes AED fees, VAT, project terms, IP, and acceptable use.",
   alternates: { canonical: pageUrl },
-  robots: { index: false, follow: true },
+  robots: { index: true, follow: true },
   openGraph: {
     title: "Terms of Use | Vista by Lara",
     description:

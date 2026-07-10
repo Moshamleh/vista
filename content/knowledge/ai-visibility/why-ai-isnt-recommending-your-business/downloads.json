@@ -1,0 +1,49 @@
+{
+  "items": [
+    {
+      "id": "ai-visibility-pdf-guide",
+      "label": "PDF Guide",
+      "href": "/downloads/ai-visibility-guide.pdf",
+      "type": "pdf",
+      "description": "A concise reference guide summarizing AI visibility, digital trust, entity recognition, GEO, AEO, and implementation priorities.",
+      "fileSize": "118 KB",
+      "lastUpdated": "2026-06-29"
+    },
+    {
+      "id": "ai-visibility-readiness-checklist",
+      "label": "Checklist",
+      "href": "/downloads/ai-visibility-readiness-checklist.pdf",
+      "type": "pdf",
+      "description": "A printable checklist for reviewing entity clarity, schema, FAQs, proof density, internal links, performance, and conversion routing.",
+      "fileSize": "92 KB",
+      "lastUpdated": "2026-06-29"
+    },
+    {
+      "id": "ai-visibility-audit-worksheet",
+      "label": "Audit Worksheet",
+      "href": "/downloads/ai-visibility-audit-worksheet.pdf",
+      "type": "worksheet",
+      "description": "A worksheet for scoring structured data, business profile quality, reviews, content depth, mentions, entity consistency, performance, and authority.",
+      "fileSize": "88 KB",
+      "lastUpdated": "2026-06-29"
+    },
+    {
+      "id": "ai-visibility-template",
+      "label": "Template",
+      "href": "/downloads/ai-visibility-entity-template.pdf",
+      "type": "worksheet",
+      "description": "A reusable entity mapping template for documenting business identity, service categories, locations, proof sources, and conversion paths.",
+      "fileSize": "76 KB",
+      "lastUpdated": "2026-06-29"
+    },
+    {
+      "id": "ai-visibility-implementation-guide",
+      "label": "Implementation Guide",
+      "href": "/downloads/ai-visibility-implementation-guide.pdf",
+      "type": "pdf",
+      "description": "A practical guide for turning audit findings into metadata, schema, content, FAQ, internal linking, and authority improvements.",
+      "fileSize": "104 KB",
+      "lastUpdated": "2026-06-29"
+    }
+  ]
+}

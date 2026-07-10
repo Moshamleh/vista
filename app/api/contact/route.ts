@@ -2,6 +2,7 @@ import { NextResponse } from "next/server"
 import nodemailer from "nodemailer"
 import { hasAllowedOrigin } from "@/lib/request-security"
 import { rateLimit } from "@/lib/rate-limit"
+import { classifyInquiry } from "@/lib/principal-protocol"
 
 const RECIPIENT_EMAIL = "vistabylara@gmail.com"
 const MAX_BODY_BYTES = 16_000
@@ -98,6 +99,7 @@ export async function POST(request: Request) {
   const service = clean(payload.service)
   const budget = clean(payload.budget)
   const message = clean(payload.message)
+  const tier = classifyInquiry(`${service} ${budget} ${message}`)
 
   if (!name || !email || !phone || !message) {
     return NextResponse.json({ error: "Please add your name, email, contact number, and project details." }, { status: 400 })
@@ -147,7 +149,8 @@ export async function POST(request: Request) {
     ["Contact number", phone],
     ["Company", company || "Not provided"],
     ["Service", service || "Not selected"],
-    ["Budget", budget || "Not selected"],
+    ["Infrastructure scope", budget || "Not selected"],
+    ["Intent tier", tier],
     ["Message", message],
   ]
 
@@ -156,7 +159,7 @@ export async function POST(request: Request) {
       from: `"Vista by Lara Website" <${smtpUser}>`,
       to: RECIPIENT_EMAIL,
       replyTo: email,
-      subject: `New Vista by Lara project inquiry from ${cleanSingleLine(name)}`,
+      subject: `[${tier}] Vista by Lara infrastructure inquiry from ${cleanSingleLine(name)}`,
       text: rows.map(([label, value]) => `${label}: ${value}`).join("\n\n"),
       html: `
         <div style="font-family:Arial,sans-serif;line-height:1.6;color:#111827">

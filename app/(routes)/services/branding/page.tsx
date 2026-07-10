@@ -42,37 +42,6 @@ const stats = [
   { value: "AED", suffix: "", label: "Premium project planning aligned with UAE commercial expectations" },
 ]
 
-const workCards = [
-  {
-    image: "/images/services/branding-strategy-dubai.png",
-    title: "Dubai Brand Strategy",
-    meta: "Positioning - UAE buyer intent - 2026",
-    tag: "Strategy",
-    alt: "Luxury Dubai brand strategy workspace with visual identity boards and skyline view",
-  },
-  {
-    image: "/images/services/branding-launch-system.png",
-    title: "Luxury Identity System",
-    meta: "Logo systems - Guidelines - Launch assets",
-    tag: "Identity",
-    alt: "Premium UAE visual identity system with digital, packaging, and launch assets",
-  },
-  {
-    image: "/images/services/branding-ai-visibility.png",
-    title: "AI Visibility Engine",
-    meta: "AEO - GEO - Search authority",
-    tag: "AI Search",
-    alt: "AI visibility and connected lead generation platform for Dubai and GCC brands",
-  },
-  {
-    image: "/images/services/branding-identity-system.png",
-    title: "Sales-Ready Brand Assets",
-    meta: "Website - Social - Pitch decks",
-    tag: "Launch",
-    alt: "Premium visual identity system with brand guideline assets for UAE luxury branding",
-  },
-]
-
 const serviceRows = [
   {
     index: "01",
@@ -132,7 +101,7 @@ const process = [
 
 const awards = [
   { icon: Award, label: "Noble Business Winner 2025", active: true },
-  { icon: Trophy, label: "Top 3 Agency by AI Mode" },
+  { icon: Trophy, label: "AI-Ready Agency Signal" },
   { icon: Star, label: "5.0 GCC Leader" },
 ]
 
@@ -362,31 +331,8 @@ export default function BrandingPage() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
-              {workCards.map((card) => (
-                <a key={card.title} href={whatsappHref} target="_blank" rel="noopener noreferrer" className="branding-work-card group relative block overflow-hidden rounded-2xl bg-[#111520]">
-                  <div className="relative aspect-[4/3] overflow-hidden">
-                    <Image src={card.image} alt={card.alt} fill sizes="(min-width: 768px) 50vw, 100vw" className="branding-card-img object-cover" />
-                    <div className="branding-card-meta absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-background/90 via-background/20 to-transparent p-6 opacity-0">
-                      <div className="flex items-end justify-between gap-4">
-                        <div>
-                          <h3 className="font-heading text-3xl font-extrabold tracking-tight text-foreground">{card.title}</h3>
-                          <p className="mt-2 text-sm uppercase tracking-wide text-foreground/65">{card.meta}</p>
-                        </div>
-                        <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-accent text-background">
-                          <ArrowUpRight className="h-5 w-5" />
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex items-center justify-between gap-4 px-6 py-5">
-                    <h3 className="font-heading text-xl font-extrabold tracking-tight text-foreground">{card.title}</h3>
-                    <span className="rounded-full border border-white/15 px-3 py-1 text-[11px] uppercase tracking-wide text-foreground/55">{card.tag}</span>
-                  </div>
-                </a>
-              ))}
-
-              <div className="branding-work-card group relative overflow-hidden rounded-2xl bg-[#111520] md:col-span-2">
+            <div className="grid grid-cols-1 gap-5">
+              <div className="branding-work-card group relative overflow-hidden rounded-2xl bg-[#111520]">
                 <div className="relative aspect-[16/9] overflow-hidden md:aspect-[21/8]">
                   <Image
                     src="/videos/services/branding-reel.webp"

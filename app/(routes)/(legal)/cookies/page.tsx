@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   description:
     "Cookie Policy for Vista by Lara in Dubai, UAE. Learn how we use essential, analytics, preference, and marketing cookies on vistabylara.com.",
   alternates: { canonical: pageUrl },
-  robots: { index: false, follow: true },
+  robots: { index: true, follow: true },
   openGraph: {
     title: "Cookie Policy | Vista by Lara",
     description:

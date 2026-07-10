@@ -1,0 +1,75 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "vista-ai-authority-engine",
+	"main": "src/index.ts",
+	"compatibility_date": "2026-06-30",
+	"compatibility_flags": [
+		"nodejs_compat"
+	],
+	"workers_dev": true,
+	"observability": {
+		"enabled": true
+	},
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "vista-ai-authority-engine",
+			"migrations_dir": "./migrations",
+			"database_id": "83525737-e7a1-49f2-a4e3-855de8668023"
+		}
+	],
+	"kv_namespaces": [
+		{
+			"binding": "CACHE",
+			"id": "ce4b062a8c99458ea5d6647593e030a5"
+		}
+	],
+	"triggers": {
+		"crons": [
+			"*/15 * * * *"
+		]
+	},
+	"vars": {
+		"NODE_ENV": "production",
+		"SERVICE_NAME": "vista-ai-authority-engine",
+		"SERVICE_VERSION": "1.0.0",
+		"AUTH_ISSUER": "vista-ai-authority-engine",
+		"AUTH_AUDIENCE": "vista-ai-authority-clients",
+		"LOG_LEVEL": "info",
+		"RATE_LIMIT_MAX": "120",
+		"RATE_LIMIT_WINDOW_SECONDS": "60",
+		"OPENAPI_TITLE": "Vista AI Authority Engine",
+		"OPENAPI_VERSION": "1.0.0",
+		"AI_GENERATION_PROVIDER": "openai",
+		"AI_GENERATION_MODEL": "gpt-4.1",
+		"AI_GENERATION_TIMEOUT_MS": "30000",
+		"PUBLISHER_WEBSITE_BASE_URL": "https://www.vistabylara.com",
+		"PUBLISHER_DEFAULT_TARGETS": "website,json-export,markdown-export",
+		"PUBLISHER_TIMEOUT_MS": "15000",
+		"VISIBILITY_SCAN_CRON_ENABLED": "true",
+		"GOOGLE_SEARCH_CONSOLE_ENDPOINT": "https://searchconsole.googleapis.com/webmasters/v3",
+		"GOOGLE_SEARCH_CONSOLE_SITE_URL": "https://www.vistabylara.com/",
+		"EXTERNAL_INDEXING_CRON_ENABLED": "false",
+		"INDEXNOW_ENDPOINT": "https://api.indexnow.org/indexnow",
+		"PUBLIC_BUYING_SIGNAL_CRON_ENABLED": "false",
+		"QUESTION_DISCOVERY_CRON_SEED": "AI visibility Dubai",
+		"INTERNAL_SEED_QUESTIONS": "What is AI visibility in Dubai?\nHow can UAE businesses improve GEO?\nWhich Shopify agency in Dubai supports AI visibility?\nHow much does AI automation cost in UAE?\nWhat is Generative Engine Optimization for Dubai brands?"
+	},
+	"queues": {
+		"producers": [
+			{
+				"binding": "AUTHORITY_QUEUE",
+				"queue": "vista-ai-authority-events"
+			}
+		],
+		"consumers": [
+			{
+				"queue": "vista-ai-authority-events",
+				"max_batch_size": 10,
+				"max_batch_timeout": 30,
+				"max_retries": 3,
+				"dead_letter_queue": "vista-ai-authority-events-dead"
+			}
+		]
+	}
+}

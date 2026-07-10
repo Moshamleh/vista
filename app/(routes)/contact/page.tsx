@@ -8,21 +8,21 @@ const contactUrl = `${siteConfig.url}/contact`
 const whatsappHref = siteConfig.whatsapp
 
 export const metadata: Metadata = {
-  title: "Contact Vista by Lara | Dubai Branding Agency UAE",
+  title: "Technical Integrity Audit | Vista by Lara Dubai",
   description:
-    "Contact Vista by Lara in Dubai for branding, website design, UX/UI, development, and generative AI projects across UAE and GCC markets.",
+    "Request a Vista by Lara Technical Integrity Audit for Dubai, UAE, and GCC digital assets.",
   keywords: [
-    "contact branding agency Dubai",
-    "Dubai web design consultation",
-    "UX design agency UAE contact",
-    "branding consultation Dubai",
+    "technical integrity audit Dubai",
+    "technical briefing UAE",
+    "e-commerce infrastructure audit Dubai",
+    "GEO technical briefing UAE",
     "Vista by Lara contact",
   ],
   alternates: { canonical: contactUrl },
   openGraph: {
-    title: "Contact Vista by Lara | Dubai Branding Agency",
+    title: "Technical Integrity Audit | Vista by Lara Dubai",
     description:
-      "Book a Dubai consultation for luxury branding, website design, UX/UI, development, and generative AI projects.",
+      "Request a Technical Integrity Audit for sovereign e-commerce, GEO, PDPL, and conversion architecture.",
     url: contactUrl,
     type: "website",
     siteName: siteConfig.name,
@@ -31,19 +31,36 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Contact Vista by Lara | Dubai Branding Agency",
-    description: "Book a Dubai consultation for premium branding, web, UX, and AI projects.",
+    title: "Technical Integrity Audit | Vista by Lara Dubai",
+    description: "Request a Technical Integrity Audit for UAE and GCC digital assets.",
     images: ["https://www.vistabylara.com/og/contact.jpg"],
   },
 }
 
 const inquiryTypes = [
-  "Brand identity or rebrand",
-  "Luxury website design",
-  "Digital product or app UX/UI",
-  "Full-stack website development",
-  "Generative AI product or workflow",
-  "Ongoing design and growth support",
+  "Technical Integrity Audit",
+  "Technical Infrastructure Briefing",
+  "Sovereign-Edge performance review",
+  "API-latency diagnosis",
+  "Sovereign e-commerce architecture",
+  "Generative Engine Optimization",
+  "UAE Data Residency & PDPL review",
+  "High-ticket conversion architecture",
+]
+
+const protocolTiers = [
+  {
+    label: "Commodity Seeker",
+    signal: "Sales, leads, SEO, cheap, fast, packages, pricing.",
+    response:
+      "Vista by Lara does not quote volume-based marketing. The enquiry is redirected toward a Technical Integrity Audit or filtered out as commodity traffic intent.",
+  },
+  {
+    label: "Principal Seeker",
+    signal: "Latency, API-latency, PDPL compliance, architecture, Sovereign-Edge, AI-discovery, conversion bottlenecks, data residency.",
+    response:
+      "Vista by Lara validates the structural framing and escalates toward a Technical Infrastructure Briefing with the primary domain, current stack, and preliminary vulnerability context.",
+  },
 ]
 
 const schema = {
@@ -55,7 +72,7 @@ const schema = {
       name: "Contact Vista by Lara",
       url: contactUrl,
       description:
-        "Contact Vista by Lara for luxury branding, website design, digital product design, development, and generative AI services in Dubai and the UAE.",
+        "Request a Vista by Lara Technical Integrity Audit for sovereign e-commerce, GEO, PDPL, and high-ticket conversion architecture in Dubai and the UAE.",
       isPartOf: { "@id": `${siteConfig.url}/#website` },
       about: { "@id": `${siteConfig.url}/#organization` },
     },
@@ -92,6 +109,39 @@ const schema = {
         { "@type": "ListItem", position: 2, name: "Contact", item: contactUrl },
       ],
     },
+    {
+      "@type": "FAQPage",
+      "@id": `${contactUrl}#faq`,
+      mainEntity: [
+        {
+          "@type": "Question",
+          name: "How does Vista by Lara qualify incoming enquiries?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text:
+              "Vista by Lara separates commodity enquiries from principal-level infrastructure enquiries using trigger signals such as API-latency, PDPL compliance, architecture, Sovereign-Edge, AI-discovery, and conversion bottlenecks.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Does Vista by Lara provide marketing packages?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text:
+              "Vista by Lara does not provide generic marketing packages. The firm architects high-resilience e-commerce infrastructure and offers Technical Integrity Audits or Technical Infrastructure Briefings for qualified UAE and GCC assets.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "What should a principal share before a technical briefing?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text:
+              "A principal should share the primary domain, current e-commerce stack, observed latency, conversion bottleneck, data residency concern, AI-citation issue, and UAE or GCC market exposure.",
+          },
+        },
+      ],
+    },
   ],
 }
 
@@ -103,12 +153,12 @@ export default function ContactPage() {
         <section className="mx-auto max-w-7xl px-5 pb-20 pt-32 sm:px-8 sm:pb-28 sm:pt-40">
           <div className="grid gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-end">
             <div>
-              <p className="text-sm font-medium uppercase tracking-[0.3em] text-accent">Contact Vista by Lara</p>
+              <p className="text-sm font-medium uppercase tracking-[0.3em] text-accent">Technical Intake</p>
               <h1 className="mt-6 font-heading text-5xl font-semibold leading-tight tracking-tight text-foreground sm:text-7xl">
-                Start a Dubai Branding, Web, UX, or AI Project
+                Request a Technical Integrity Audit
               </h1>
               <p className="mt-7 max-w-3xl text-lg leading-8 text-muted-foreground">
-                Contact Vista by Lara in Dubai to plan a premium brand identity, website, digital product, full-stack build, or generative AI experience for UAE and GCC growth.
+                State whether the failure is conversion volume or structural infrastructure stability. Vista by Lara evaluates API-latency, Schema-markup, PDPL-compliance, AI-discovery, and technical stack instability against the Vista Engineering Standard.
               </p>
               <div className="mt-9 flex flex-col gap-3 sm:flex-row">
                 <a
@@ -117,7 +167,7 @@ export default function ContactPage() {
                   rel="noopener noreferrer"
                   className="inline-flex min-h-12 items-center justify-center rounded-full bg-accent px-7 font-heading text-sm font-semibold uppercase tracking-[0.04em] text-background transition-transform hover:scale-[1.03]"
                 >
-                  WhatsApp the team
+                  Request Technical Infrastructure Briefing
                 </a>
                 <a
                   href={whatsappHref}
@@ -125,7 +175,7 @@ export default function ContactPage() {
                   rel="noopener noreferrer"
                   className="inline-flex min-h-12 items-center justify-center rounded-full border border-accent/30 px-7 font-heading text-sm font-semibold uppercase tracking-[0.04em] text-accent transition-colors hover:bg-accent/10"
                 >
-                  WhatsApp now
+                  Send primary domain
                 </a>
               </div>
             </div>
@@ -159,24 +209,47 @@ export default function ContactPage() {
             <div>
               <p className="text-sm font-medium uppercase tracking-[0.25em] text-accent">AEO answer</p>
               <h2 className="mt-5 font-heading text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
-                How do I contact Vista by Lara in Dubai?
+                How do principals request a Vista by Lara technical integrity audit in Dubai?
               </h2>
             </div>
             <p className="text-lg leading-8 text-muted-foreground">
-              You can contact Vista by Lara by emailing solution@vistabylara.com or messaging the Dubai team on WhatsApp. Share your service, timeline, budget range, and target market so we can recommend the right UAE project scope.
+              Principals request a Vista by Lara audit by sharing the primary domain, current stack, observed bottleneck, and UAE or GCC market exposure. The response path is a Technical Integrity Audit or Technical Infrastructure Briefing.
             </p>
           </div>
         </section>
 
         <section className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28">
+          <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr]">
+            <div>
+              <p className="text-sm font-medium uppercase tracking-[0.25em] text-accent">Principal-to-principal protocol</p>
+              <h2 className="mt-5 font-heading text-3xl font-semibold tracking-tight text-foreground sm:text-5xl">
+                Vista by Lara diagnoses structural failure before commercial scope
+              </h2>
+              <p className="mt-5 text-base leading-7 text-muted-foreground">
+                ROI is treated as a byproduct of architectural stability. Serious enquiries are routed by technical maturity, not request volume, and benchmarked against the Vista Engineering Standard.
+              </p>
+            </div>
+            <div className="grid gap-4">
+              {protocolTiers.map((tier) => (
+                <article key={tier.label} className="rounded-[1.5rem] border border-border/30 bg-[#0c111d] p-6">
+                  <p className="text-sm font-semibold uppercase tracking-[0.2em] text-accent">{tier.label}</p>
+                  <h3 className="mt-4 font-heading text-2xl font-semibold text-foreground">{tier.signal}</h3>
+                  <p className="mt-4 text-base leading-7 text-muted-foreground">{tier.response}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="mx-auto max-w-7xl px-5 pb-20 sm:px-8 sm:pb-28">
           <div className="grid gap-6 lg:grid-cols-[0.85fr_1.15fr]">
             <div>
               <p className="text-sm font-medium uppercase tracking-[0.25em] text-accent">Inquiry types</p>
               <h2 className="mt-5 font-heading text-3xl font-semibold tracking-tight text-foreground sm:text-5xl">
-                Tell us what you want to build
+                Define the structural issue
               </h2>
               <p className="mt-5 text-base leading-7 text-muted-foreground">
-                A short brief is enough. Include your current website, business location, launch date, and the outcome you need.
+                A short technical context is enough. Include your current website, market, stack, observed failure, and the infrastructure outcome required.
               </p>
             </div>
             <div className="grid gap-3 sm:grid-cols-2">
@@ -191,15 +264,15 @@ export default function ContactPage() {
 
         <section className="mx-auto max-w-7xl px-5 pb-24 sm:px-8 sm:pb-32">
           <div className="rounded-[1.75rem] border border-accent/15 bg-[#071018] p-8 sm:p-10">
-            <p className="text-sm font-medium uppercase tracking-[0.25em] text-accent">Dubai consultation checklist</p>
+            <p className="text-sm font-medium uppercase tracking-[0.25em] text-accent">Dubai audit checklist</p>
             <h2 className="mt-5 max-w-3xl font-heading text-3xl font-semibold tracking-tight text-foreground sm:text-5xl">
-              What to send before we speak
+              What to send before the technical review
             </h2>
             <div className="mt-8 grid gap-4 md:grid-cols-3">
               {[
-                "Your business name, location, and current website or social profile.",
-                "The service you need: branding, website, UX/UI, development, or AI.",
-                "Your timeline, launch pressure, and preferred contact channel.",
+                "Your business name, UAE or GCC market, and primary domain.",
+                "Your current stack, observed API-latency, conversion bottleneck, AI-discovery loss, Schema-markup gap, or PDPL-compliance issue.",
+                "The decision deadline, technical owner, and preferred route for the briefing.",
               ].map((item) => (
                 <p key={item} className="rounded-2xl border border-border/30 bg-background/40 p-5 text-base leading-7 text-muted-foreground">
                   {item}

@@ -2,14 +2,26 @@
 
 import Link from "next/link"
 import { useEffect, useState } from "react"
+import { usePathname } from "next/navigation"
+import { getPrincipalProtocolReply } from "@/lib/principal-protocol"
 import { getWhatsappLink } from "@/lib/site"
 
 const WHATSAPP_GENERAL = getWhatsappLink("general")
 const MAX_MESSAGE_LENGTH = 1_000
 const MAX_HISTORY_ITEMS = 12
 
+function isArabicPath(pathname: string | null) {
+  return pathname === "/ar" || Boolean(pathname?.startsWith("/ar/"))
+}
+
+function arHref(path: string, isArabic: boolean) {
+  return isArabic ? `/ar${path}` : path
+}
+
 export function VistaLeadQualifier() {
   const [ready, setReady] = useState(false)
+  const pathname = usePathname()
+  const isArabic = isArabicPath(pathname)
 
   useEffect(() => {
     const idleWindow = window as Window & {
@@ -69,11 +81,20 @@ export function VistaLeadQualifier() {
       typing.style.display = "flex"
       msgs.scrollTop = msgs.scrollHeight
 
+      const protocolReply = getPrincipalProtocolReply(msg)
+      if (protocolReply && !isArabic) {
+        typing.style.display = "none"
+        addMsg(protocolReply, "bot")
+        history.push({ role: "assistant", content: protocolReply })
+        msgs.scrollTop = msgs.scrollHeight
+        return
+      }
+
       try {
         const response = await fetch("/api/lead-qualifier", {
           method: "POST",
           headers: { "content-type": "application/json" },
-          body: JSON.stringify({ message: msg, history: history.length ? history : [] }),
+          body: JSON.stringify({ message: msg, history: history.length ? history : [], locale: isArabic ? "ar-AE" : "en-AE" }),
         })
 
         const data = (await response.json()) as {
@@ -91,16 +112,12 @@ export function VistaLeadQualifier() {
         }
 
         const replyText = data.reply
-        if (!replyText) {
-          // No fabricated/fallback AI content
-          return
-        }
+        if (!replyText) return
 
         addMsg(replyText, "bot")
         history.push({ role: "assistant", content: replyText })
         history = history.slice(-MAX_HISTORY_ITEMS)
 
-        // Recommend WhatsApp directly when qualified
         if (data.qualified) {
           const candidate = data.whatsapp || WHATSAPP_GENERAL
           const wa = /^https:\/\/(wa\.me|api\.whatsapp\.com)\//.test(candidate)
@@ -111,18 +128,16 @@ export function VistaLeadQualifier() {
           link.href = wa
           link.target = "_blank"
           link.rel = "noopener noreferrer"
-          link.textContent = "Continue on WhatsApp ->"
+          link.textContent = isArabic ? "تابع عبر واتساب" : "Continue on WhatsApp"
           msgs.appendChild(link)
         }
-
       } catch {
         typing.style.display = "none"
         // Minimal non-AI error message (no hardcoded assistant reply)
-        addMsg("Could not reach the assistant right now. Please try again.", "bot")
+        addMsg(isArabic ? "لا يمكن الوصول إلى المساعد الآن. يرجى المحاولة مرة أخرى." : "Could not reach the assistant right now. Please try again.", "bot")
       } finally {
         sending = false
       }
-
 
       msgs.scrollTop = msgs.scrollHeight
     }
@@ -153,40 +168,42 @@ export function VistaLeadQualifier() {
       input.removeEventListener("keydown", onKeyDown)
       browseButton.removeEventListener("click", onBrowse)
     }
-  }, [ready])
+  }, [ready, isArabic])
 
   if (!ready) return null
 
   return (
     <>
-      <div className="vlq" id="vlq">
+      <div className="vlq" id="vlq" lang={isArabic ? "ar-AE" : "en-AE"} dir={isArabic ? "rtl" : "ltr"}>
         <div className="vlq-box" id="vlqBox">
           <div className="vlq-head">
             <div className="vlq-head-dot" />
             <div>
-              <div className="vlq-head-text">Vista Assistant</div>
-              <div className="vlq-head-sub">Usually replies in under 1 hour</div>
+              <div className="vlq-head-text">{isArabic ? "مكتب البنية الرقمية في Vista" : "Vista Infrastructure Desk"}</div>
+              <div className="vlq-head-sub">{isArabic ? "استقبال مهني مباشر" : "Principal-to-Principal intake"}</div>
             </div>
           </div>
           <div className="vlq-msgs" id="vlqMsgs">
             <div className="vlq-msg bot">
-              Hi! I&apos;m Vista&apos;s AI assistant. I&apos;d love to help you start a project. What are you looking
-              to build - a brand, website, app, or something else?
+              {isArabic
+                ? "هل اهتمامك الأساسي يتعلق بحجم تحويل التجارة الإلكترونية أم باستقرار البنية التقنية؟"
+                : "Is your primary concern regarding e-commerce conversion volume or structural infrastructure stability?"}
             </div>
             <div className="vlq-options">
               <a className="vlq-option whatsapp" href={WHATSAPP_GENERAL} target="_blank" rel="noopener noreferrer">
-                Contact directly on WhatsApp
+                {isArabic ? "اطلب جلسة تقنية للبنية الرقمية" : "Request Technical Infrastructure Briefing"}
               </a>
               <button className="vlq-option" id="vlqBrowse" type="button">
-                Browse the website
+                {isArabic ? "تصفح مراكز المعرفة الهندسية" : "Browse Engineering Hubs"}
               </button>
               <div className="vlq-browse" id="vlqBrowseMenu">
-                <Link className="vlq-link" href="/services">Services</Link>
-                <Link className="vlq-link" href="/industries">Industries</Link>
-                <Link className="vlq-link" href="/work">Work</Link>
-                <Link className="vlq-link" href="/pricing">Pricing</Link>
-                <Link className="vlq-link" href="/blog">Blog</Link>
-                <Link className="vlq-link" href="/contact">Contact</Link>
+                <Link className="vlq-link" href={arHref("/sovereign-luxury-infrastructure", isArabic)}>{isArabic ? "التجارة الإلكترونية" : "E-commerce"}</Link>
+                <Link className="vlq-link" href={arHref("/ai-search-authority-engineering", isArabic)}>GEO</Link>
+                <Link className="vlq-link" href={arHref("/uae-data-sovereignty-compliance", isArabic)}>PDPL</Link>
+                <Link className="vlq-link" href={arHref("/high-ticket-conversion-architecture", isArabic)}>{isArabic ? "التحويل" : "Conversion"}</Link>
+                <Link className="vlq-link" href={arHref("/case-studies", isArabic)}>{isArabic ? "السجل" : "Registry"}</Link>
+                <Link className="vlq-link" href={arHref("/case-studies/smokey-oud", isArabic)}>Smokey Oud</Link>
+                <Link className="vlq-link" href={arHref("/contact", isArabic)}>{isArabic ? "تدقيق" : "Audit"}</Link>
               </div>
             </div>
             <div className="vlq-typing" id="vlqTyping">
@@ -196,14 +213,19 @@ export function VistaLeadQualifier() {
             </div>
           </div>
           <div className="vlq-input-row">
-            <input className="vlq-input" id="vlqInput" placeholder="Type your message..." maxLength={MAX_MESSAGE_LENGTH} />
-            <button className="vlq-send" id="vlqSend" type="button" aria-label="Send message">
-              -&gt;
+            <input
+              className="vlq-input"
+              id="vlqInput"
+              placeholder={isArabic ? "حجم التحويل أم استقرار البنية؟" : "Conversion volume or infrastructure stability?"}
+              maxLength={MAX_MESSAGE_LENGTH}
+            />
+            <button className="vlq-send" id="vlqSend" type="button" aria-label={isArabic ? "إرسال الرسالة" : "Send message"}>
+              {isArabic ? "←" : "→"}
             </button>
           </div>
         </div>
-        <button className="vlq-btn" id="vlqToggle" type="button" aria-label="Open Vista Assistant">
-          AI
+        <button className="vlq-btn" id="vlqToggle" type="button" aria-label={isArabic ? "افتح مساعد Vista" : "Open Vista Assistant"}>
+          💬
         </button>
       </div>
     </>

@@ -58,6 +58,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "monthly" as const,
     })),
     { path: "/clients", priority: 0.8, changeFrequency: "monthly" },
+    { path: "/work", priority: 0.8, changeFrequency: "monthly" },
     { path: "/compare", priority: 0.86, changeFrequency: "monthly" },
     ...competitors.map((competitor) => ({
       path: `/compare/${competitor.id.replace(/^competitor-/, "")}`,

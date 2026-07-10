@@ -1,0 +1,32 @@
+# Production Checklist
+
+- [x] Backend compiles.
+- [x] Backend lint passes.
+- [x] Backend format check passes.
+- [x] Backend tests pass.
+- [x] Admin app compiles.
+- [x] Admin lint passes.
+- [x] Admin format check passes.
+- [x] Admin tests pass.
+- [x] Admin e2e passes.
+- [x] OpenAPI endpoint inventory exists.
+- [x] D1 migrations exist for all domains.
+- [x] Repository tests exist for all domains.
+- [x] Queue producer and consumer code exists.
+- [x] Cron code exists.
+- [ ] Node 22+ active for Wrangler.
+- [ ] Wrangler dry-run passes.
+- [ ] D1 database created.
+- [ ] `DB` binding added to `wrangler.jsonc`.
+- [ ] D1 migrations applied remotely.
+- [ ] KV namespace created.
+- [ ] `CACHE` binding added to `wrangler.jsonc`.
+- [ ] Queues created in Cloudflare.
+- [ ] `AUTH_SHARED_SECRET` configured.
+- [ ] Active AI provider credential configured.
+- [ ] Provider credentials configured or deliberately disabled.
+- [ ] GitHub Actions CI added for Worker.
+- [ ] GitHub Actions deploy workflow added.
+- [ ] Admin hosting target selected and deployed.
+- [ ] Production URL verified.
+- [ ] Cloudflare logs verified.

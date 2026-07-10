@@ -1,0 +1,171 @@
+
+ ⛅️ wrangler 4.106.0
+────────────────────
+Your Worker has access to the following bindings:
+Binding                                                                                 Resource                  Mode
+env.CACHE                                                                               KV Namespace              local
+env.AUTHORITY_QUEUE (vista-ai-authority-events)                                         Queue                     local
+env.DB (vista-ai-authority-engine)                                                      D1 Database               local
+env.NODE_ENV ("production")                                                             Environment Variable      local
+env.SERVICE_NAME ("vista-ai-authority-engine")                                          Environment Variable      local
+env.SERVICE_VERSION ("1.0.0")                                                           Environment Variable      local
+env.AUTH_ISSUER ("vista-ai-authority-engine")                                           Environment Variable      local
+env.AUTH_AUDIENCE ("vista-ai-authority-clients")                                        Environment Variable      local
+env.LOG_LEVEL ("info")                                                                  Environment Variable      local
+env.RATE_LIMIT_MAX ("120")                                                              Environment Variable      local
+env.RATE_LIMIT_WINDOW_SECONDS ("60")                                                    Environment Variable      local
+env.OPENAPI_TITLE ("Vista AI Authority Engine")                                         Environment Variable      local
+env.OPENAPI_VERSION ("1.0.0")                                                           Environment Variable      local
+env.AI_GENERATION_PROVIDER ("openai")                                                   Environment Variable      local
+env.AI_GENERATION_MODEL ("gpt-4.1")                                                     Environment Variable      local
+env.AI_GENERATION_TIMEOUT_MS ("30000")                                                  Environment Variable      local
+env.PUBLISHER_WEBSITE_BASE_URL ("https://www.vistabylara.com")                          Environment Variable      local
+env.PUBLISHER_DEFAULT_TARGETS ("website,json-export,markdown-export")                   Environment Variable      local
+env.PUBLISHER_TIMEOUT_MS ("15000")                                                      Environment Variable      local
+env.VISIBILITY_SCAN_CRON_ENABLED ("true")                                               Environment Variable      local
+env.GOOGLE_SEARCH_CONSOLE_ENDPOINT ("https://searchconsole.googleapis.com/...")         Environment Variable      local
+env.GOOGLE_SEARCH_CONSOLE_SITE_URL ("https://www.vistabylara.com/")                     Environment Variable      local
+env.EXTERNAL_INDEXING_CRON_ENABLED ("false")                                            Environment Variable      local
+env.INDEXNOW_ENDPOINT ("https://api.indexnow.org/indexnow")                             Environment Variable      local
+env.PUBLIC_BUYING_SIGNAL_CRON_ENABLED ("false")                                         Environment Variable      local
+env.QUESTION_DISCOVERY_CRON_SEED ("AI visibility Dubai")                                Environment Variable      local
+env.INTERNAL_SEED_QUESTIONS ("What is AI visibility in Dubai?
+How c...")                Environment Variable      local
+env.AUTH_SHARED_SECRET ("(hidden)")                                                     Environment Variable      local
+
+[wrangler:warn] Unable to fetch the `Request.cf` object! Falling back to a default placeholder...
+Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+    at TLSSocket.onConnectSecure (node:_tls_wrap:1631:34)
+    at TLSSocket.emit (node:events:508:28)
+    at TLSSocket.emit (node:domain:489:12)
+    at TLSSocket._finishInit (node:_tls_wrap:1077:8)
+    at ssl.onhandshakedone (node:_tls_wrap:863:12)
+⎔ Starting local server...
+[wrangler:warn] Unable to fetch the `Request.cf` object! Falling back to a default placeholder...
+Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+    at TLSSocket.onConnectSecure (node:_tls_wrap:1631:34)
+    at TLSSocket.emit (node:events:508:28)
+    at TLSSocket.emit (node:domain:489:12)
+    at TLSSocket._finishInit (node:_tls_wrap:1077:8)
+    at ssl.onhandshakedone (node:_tls_wrap:863:12)
+[wrangler:info] Ready on http://127.0.0.1:8787
+[wrangler:info] OPTIONS /questions 204 No Content (13ms)
+{"timestamp":"2026-07-01T13:30:30.304Z","service":"vista-ai-⎔ Reloading local server...
+[wrangler:warn] Unable to fetch the `Request.cf` object! Falling back to a default placeholder...
+Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+    at TLSSocket.onConnectSecure (node:_tls_wrap:1631:34)
+    at TLSSocket.emit (node:events:508:28)
+    at TLSSocket.emit (node:domain:489:12)
+    at TLSSocket._finishInit (node:_tls_wrap:1077:8)
+    at ssl.onhandshakedone (node:_tls_wrap:863:12)
+{"timestamp":"2026-07-01T13:30:30.304Z","service":"vista-ai-authority-engine","version":"1.0.0","environment":"production","level":"info","message":"otel.metric","context":{"name":"operations.route","durationMs":0,"ok":true,"attributes":{"path":"/questions"}},"requestId":"da17730c-1367-44d0-99c0-29f361315d95"}
+{"timestamp":"2026-07-01T13:30:30.548Z","service":"vista-ai-authority-engine","version":"1.0.0","environment":"production","level":"info","message":"otel.metric","context":{"name":"operations.route","durationMs":0,"ok":true,"attributes":{"path":"/content"}},"requestId":"e7df0578-567f-43c7-8704-8ce6db94fd0b"}
+{"timestamp":"2026-07-01T13:30:30.776Z","service":"vista-ai-authority-engine","version":"1.0.0","environment":"production","level":"info","message":"otel.metric","context":{"name":"operations.route","durationMs":0,"ok":true,"attributes":{"path":"/visibility/score"}},"requestId":"10fc1ea5-b7b5-4337-b35f-10eab27b9630"}
+{"timestamp":"2026-07-01T13:31:14.128Z","service":"vista-ai-authority-engine","version":"1.0.0","environment":"production","level":"info","message":"otel.metric","context":{"name":"operations.route","durationMs":0,"ok":true,"attributes":{"path":"/questions"}},"requestId":"9c149db6-9cda-44c5-a160-774e0a5271ff"}
+{"timestamp":"2026-07-01T13:31:14.229Z","service":"vista-ai-authority-engine","version":"1.0.0","environment":"production","level":"info","message":"otel.metric","context":{"name":"operations.route","durationMs":0,"ok":true,"attributes":{"path":"/content"}},"requestId":"7f901d5b-df09-4eca-be6e-cb07b8e8f38d"}
+{"timestamp":"2026-07-01T13:31:14.379Z","service":"vista-ai-authority-engine","version":"1.0.0","environmen⎔ Reloading local server...
+[wrangler:warn] Unable to fetch the `Request.cf` object! Falling back to a default placeholder...
+Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+    at TLSSocket.onConnectSecure (node:_tls_wrap:1631:34)
+    at TLSSocket.emit (node:events:508:28)
+    at TLSSocket.emit (node:domain:489:12)
+    at TLSSocket._finishInit (node:_tls_wrap:1077:8)
+    at ssl.onhandshakedone (node:_tls_wrap:863:12)
+⎔ Local server updated and ready
+⎔ Reloading local server...
+[wrangler:warn] Unable to fetch the `Request.cf` object! Falling back to a default placeholder...
+Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+    at TLSSocket.onConnectSecure (node:_tls_wrap:1631:34)
+    at TLSSocket.emit (node:events:508:28)
+    at TLSSocket.emit (node:domain:489:12)
+    at TLSSocket._finishInit (node:_tls_wrap:1077:8)
+    at ssl.onhandshakedone (node:_tls_wrap:863:12)
+⎔ Local server updated and ready
+s":{"path":"/signals"}},"requestId":"dd0bb95c-6f67-48cf-84c6-2f56d93b84a6"}
+{"timestamp":"2026-07-01T13:35:14.447Z","service":"vista-ai-authority-engine","version":"1.0.0","environment":"production","level":"info","message":"otel.metric","context":{"name":"operations.route","durationMs":0,"ok":true,"attributes":{"path":"/generate/providers"}},"requestId":"931e6a6d-6a80-4678-8175-90bdd61c1e2b"}
+{"timestamp":"2026-07-01T13:35:14.526Z","service":"vista-ai-authority-engine","version":"1.0.0","environment":"production","level":"info","message":"otel.metric","context":{"name":"operations.route","durationMs":0,"ok":true,"attributes":{"path":"/publish/providers"}},"requestId":"2a2f4ac9-20a4-4ae5-80bf-941fa126fdb0"}
+{"timestamp":"2026-07-01T13:35:14.635Z","service":"vista-ai-authority-engine","version":"1.0.0","environment":"production","level":"info","message":"otel.metric","context":{"name":"operations.route","durationMs":68,"ok":true,"attributes":{"path":"/ops/health"}},"requestId":"66fd9053-cdc7-45d1-9a8f-1258cc0531e0"}
+{"timestamp":"2026-07-01T13:35:14.679Z","service":"vista-ai-authority-engine","version":"1.0.0","environment":"production","level":"info","message":"otel.metric","context":{"name":"operations.route","durationMs":1,"ok":true,"attributes":{"path":"/ops/readiness"}},"requestId":"23647d3f-9b14-4ff3-8a53-bbe3d57d9e3d"}
+{"timestamp":"2026-07-01T13:35:14.711Z","service":"vista-ai-authority-engine","version":"1.0.0","environment":"production","level":"info","message":"otel.metric","context":{"name":"operations.route","durationMs":1,"ok":true,"attributes":{"path":"/ops/infrastructure"}},"requestId":"5dda87bf-9d46-4666-9ae1-e85bbb6681b4"}
+{"timestamp":"2026-07-01T13:35:16.012Z","service":"vista-ai-authority-engine","version":"1.0.0","environment":"production","level":"info","message":"otel.metric","context":{"name":"operations.route","durationMs":0,"ok":true,"attributes":{"path":"/opportunities"}},"requestId":"1178a6d5-93cc-45c6-90b6-b5ff692dc6aa"}
+{"timestamp":"2026-07-01T13:35:16.058Z","service":"vista-ai-authority-engine","version":"1.0.0","environment":"production","level":"info","message":"otel.metric","context":{"name":"operations.route","durationMs":0,"ok":true,"attributes":{"path":"/sources"}},"requestId":"eebd757e-aa8e-4e41-b7fb-0991701a8786"}
+{"timestamp":"2026-07-01T13:35:16.218Z","service":"vista-ai-authority-engine","version":"1.0.0","environment":"production","level":"info","message":"otel.metric","context":{"name":"operations.route","durationMs":0,"ok":true,"attributes":{"path":"/index/status"}},"requestId":"d34b69e7-0214-424e-a8cd-a0f16fdd5bd7"}
+{"timestamp":"2026-07-01T13:35:16.274Z","service":"vista-ai-authority-engine","version":"1.0.0","environment":"production","level":"info","message":"otel.metric","context":{"name":"operations.route","durationMs":0,"ok":true,"attributes":{"path":"/bing/status"}},"requestId":"9c2798b7-9b7f-4209-ba04-3632d3013d77"}
+{"timestamp":"2026-07-01T13:35:16.316Z","service":"vista-ai-authority-engine","version":"1.0.0","environment":"production","level":"info","message":"otel.metric","context":{"name":"operations.route","durationMs":0,"ok":true,"attributes":{"path":"/search-console/status"}},"requestId":"c1e5d1f4-ef7f-4088-a465-f86b6c555110"}
+{"timestamp":"2026-07-01T13:35:16.357Z","service":"vista-ai-authority-engine","version":"1.0.0","environment":"production","level":"info","message":"otel.metric","context":{"name":"operations.route","durationMs":0,"ok":true,"attributes":{"path":"/publish/providers"}},"requestId":"a1ba1b07-05f6-4fb8-b0e6-e05ec3b34510"}
+{"timestamp":"2026-07-01T13:35:16.424Z","service":"vista-ai-authority-engine","version":"1.0.0","environment":"production","level":"info","message":"otel.metric","context":{"name":"operations.route","durationMs":0,"ok":true,"attributes":{"path":"/publish/jobs"}},"requestId":"a6fc5745-177c-4676-9393-7288046caf55"}
+{"timestamp":"2026-07-01T13:35:16.460Z","service":"vista-ai-authority-engine","version":"1.0.0","environment":"production","level":"info","message":"otel.metric","context":{"name":"operations.route","durationMs":0,"ok":true,"attributes":{"path":"/questions"}},"requestId":"d574a67d-8ce4-4a3a-8712-96dbcb7efa6e"}
+{"timestamp":"2026-07-01T13:35:16.500Z","service":"vista-ai-authority-engine","version":"1.0.0","environment":"production","level":"info","message":"otel.metric","context":{"name":"operations.route","durationMs":0,"ok":true,"attributes":{"path":"/stats"}},"requestId":"8a6a2bfc-f8f9-4979-a8fa-7ef00a611869"}
+{"timestamp":"2026-07-01T13:35:16.551Z","service":"vista-ai-authority-engine","version":"1.0.0","environment":"production","level":"info","message":"otel.metric","context":{"name":"operations.route","durationMs":0,"ok":true,"attributes":{"path":"/visibility/score"}},"requestId":"563e1d25-d827-49b5-8c42-3d039f13953c"}
+{"timestamp":"2026-07-01T13:35:16.594Z","service":"vista-ai-authority-engine","version":"1.0.0","environment":"production","level":"info","message":"otel.metric","context":{"name":"operations.route","durationMs":0,"ok":true,"attributes":{"path":"/visibility/history"}},"requestId":"1986cbe2-0c0a-4d21-94cb-151af5734ea6"}
+{"timestamp":"2026-07-01T13:35:16.651Z","service":"vista-ai-authority-engine","version":"1.0.0","environment":"production","level":"info","message":"otel.metric","context":{"name":"operations.route","durationMs":0,"ok":true,"attributes":{"path":"/visibility/recommendations"}},"requestId":"55d9a121-59db-4eb3-9808-14d1310defde"}
+{"timestamp":"2026-07-01T13:35:16.746Z","service":"vista-ai-authority-engine","version":"1.0.0","environment":"production","level":"info","message":"otel.metric","context":{"name":"operations.route","durationMs":0,"ok":true,"attributes":{"path":"/geo/entities"}},"requestId":"61354010-ed17-4548-b6af-81663a19ff9c"}
+{"timestamp":"2026-07-01T13:35:16.794Z","service":"vista-ai-authority-engine","version":"1.0.0","environment":"production","level":"info","message":"otel.metric","context":{"name":"operations.route","durationMs":0,"ok":true,"attributes":{"path":"/geo/status"}},"requestId":"2708c0ea-b7a6-44bb-9d1f-e063c89b3b0d"}
+⎔ Local server updated and ready
+{"timestamp":"2026-07-01T13:36:04.255Z","service":"vista-ai-authority-engine","version":"1.0.0","environment":"production","level":"info","message":"otel.metric","context":{"name":"operations.route","durationMs":0,"ok":true,"attributes":{"path":"/sources"}},"requestId":"e91113a8-8c19-401a-b76c-83c5ace5f0e3"}
+{"timestamp":"2026-07-01T13:36:04.304Z","service":"vista-ai-authority-engine","version":"1.0.0","environment":"production","level":"info","message":"otel.metric","context":{"name":"operations.route","durationMs":0,"ok":true,"attributes":{"path":"/opportunities"}},"requestId":"6e5ebb6d-0c10-4f61-9879-be3201bdac47"}
+{"timestamp":"2026-07-01T13:37:17.369Z","service":"vista-ai-authority-engine","version":"1.0.0","environment":"production","level":"info","message":"otel.metric","context":{"name":"operations.route","durationMs":0,"ok":true,"attributes":{"path":"/generate/providers"}},"requestId":"def278bc-f244-4780-b41a-c1a3285f5e5b"}
+{"timestamp":"2026-07-01T13:37:17.414Z","service":"vista-ai-authority-engine","version":"1.0.0","environment":"production","level":"info","message":"otel.metric","context":{"name":"operations.route","durationMs":0,"ok":true,"attributes":{"path":"/publish/providers"}},"requestId":"e1d6162e-a38e-4ac7-a992-67df326fd476"}
+{"timestamp":"2026-07-01T13:37:17.487Z","service":"vista-ai-authority-engine","version":"1.0.0","environment":"production","level":"info","message":"otel.metric","context":{"name":"operations.route","durationMs":41,"ok":true,"attributes":{"path":"/ops/health"}},"requestId":"e776d2b4-4347-4e35-9ce4-369206164655"}
+{"timestamp":"2026-07-01T13:37:17.543Z","service":"vista-ai-authority-engine","version":"1.0.0","environment":"production","level":"info","message":"otel.metric","context":{"name":"operations.route","durationMs":1,"ok":true,"attributes":{"path":"/ops/readiness"}},"requestId":"d4def3d9-6f6a-4e86-80ad-09451c77c7ff"}
+{"timestamp":"2026-07-01T13:37:17.585Z","service":"vista-ai-authority-engine","version":"1.0.0","environment":"production","level":"info","message":"otel.metric","context":{"name":"operations.route","durationMs":1,"ok":true,"attributes":{"path":"/ops/infrastructure"}},"requestId":"d3eba086-40f0-4720-b893-f50c37cd3b52"}
+{"timestamp":"2026-07-01T13:37:17.878Z","service":"vista-ai-authority-engine","version":"1.0.0","environment":"production","level":"info","message":"otel.metric","context":{"name":"operations.route","durationMs":0,"ok":true,"attributes":{"path":"/opportunities"}},"requestId":"b2baaec8-2260-4d25-bc21-c02fa5e698c2"}
+{"timestamp":"2026-07-01T13:37:17.918Z","service":"vista-ai-authority-engine","version":"1.0.0","environment":"production","level":"info","message":"otel.metric","context":{"name":"operations.route","durationMs":0,"ok":true,"attributes":{"path":"/sources"}},"requestId":"26ab3afe-3483-461d-8b95-e05e25d8ed05"}
+{"timestamp":"2026-07-01T13:37:18.217Z","service":"vista-ai-authority-engine","version":"1.0.0","environment":"production","level":"info","message":"otel.metric","context":{"name":"operations.route","durationMs":0,"ok":true,"attributes":{"path":"/index/status"}},"requestId":"a0c68e3e-7b2e-40d6-bc7f-d6c575c9974a"}
+{"timestamp":"2026-07-01T13:37:18.283Z","service":"vista-ai-authority-engine","version":"1.0.0","environment":"production","level":"info","message":"otel.metric","context":{"name":"operations.route","durationMs":0,"ok":true,"attributes":{"path":"/bing/status"}},"requestId":"cff98198-7868-4638-869e-b2b19638d1dd"}
+{"timestamp":"2026-07-01T13:37:18.322Z","service":"vista-ai-authority-engine","version":"1.0.0","environment":"production","level":"info","message":"otel.metric","context":{"name":"operations.route","durationMs":0,"ok":true,"attributes":{"path":"/search-console/status"}},"requestId":"0760aff2-034c-462b-8c33-457d3837b4fb"}
+{"timestamp":"2026-07-01T13:37:18.401Z","service":"vista-ai-authority-engine","version":"1.0.0","environment":"production","level":"info","message":"otel.metric","context":{"name":"operations.route","durationMs":0,"ok":true,"attributes":{"path":"/visibility/score"}},"requestId":"408574e9-590c-41f0-a14b-1a24bab875c7"}
+{"timestamp":"2026-07-01T13:37:18.437Z","service":"vista-ai-authority-engine","version":"1.0.0","environment":"production","level":"info","message":"otel.metric","context":{"name":"operations.route","durationMs":0,"ok":true,"attributes":{"path":"/visibility/history"}},"requestId":"f9c2d842-221c-4fb1-98ab-4b468c5f3f9e"}
+{"timestamp":"2026-07-01T13:37:18.479Z","service":"vista-ai-authority-engine","version":"1.0.0","environment":"production","level":"info","message":"otel.metric","context":{"name":"operations.route","durationMs":0,"ok":true,"attributes":{"path":"/visibility/recommendations"}},"requestId":"3e250ea3-730b-4c26-a186-531ec616519d"}
+{"timestamp":"2026-07-01T13:37:18.536Z","service":"vista-ai-authority-engine","version":"1.0.0","environment":"production","level":"info","message":"otel.metric","context":{"name":"operations.route","durationMs":0,"ok":true,"attributes":{"path":"/publish/jobs"}},"requestId":"425c71ce-4145-42b9-b140-85c7ba519359"}
+{"timestamp":"2026-07-01T13:37:18.572Z","service":"vista-ai-authority-engine","version":"1.0.0","environment":"production","level":"info","message":"otel.metric","context":{"name":"operations.route","durationMs":0,"ok":true,"attributes":{"path":"/publish/providers"}},"requestId":"feca885b-b8c6-41a0-8ded-21b529093db5"}
+{"timestamp":"2026-07-01T13:37:18.601Z","service":"vista-ai-authority-engine","version":"1.0.0","environment":"production","level":"info","message":"otel.metric","context":{"name":"operations.route","durationMs":0,"ok":true,"attributes":{"path":"/questions"}},"requestId":"b8eb2112-2bc9-48ae-93fb-2c84faeba2c1"}
+{"timestamp":"2026-07-01T13:37:18.643Z","service":"vista-ai-authority-engine","version":"1.0.0","environment":"production","level":"info","message":"otel.metric","context":{"name":"operations.route","durationMs":0,"ok":true,"attributes":{"path":"/stats"}},"requestId":"d35de9e4-2b6b-41a5-80f8-455af1dd1810"}
+{"timestamp":"2026-07-01T13:37:18.798Z","service":"vista-ai-authority-engine","version":"1.0.0","environment":"production","level":"info","message":"otel.metric","context":{"name":"operations.route","durationMs":0,"ok":true,"attributes":{"path":"/geo/status"}},"requestId":"71af6706-978d-4129-b2e8-8eb0bb6bf5e4"}
+{"timestamp":"2026-07-01T13:37:18.850Z","service":"vista-ai-authority-engine","version":"1.0.0","environment":"production","level":"info","message":"otel.metric","context":{"name":"operations.route","durationMs":0,"ok":true,"attributes":{"path":"/geo/entities"}},"requestId":"8e455d0b-cccd-4248-860f-0a5edb5f6550"}
+⎔ Reloading local server...
+[wrangler:warn] Unable to fetch the `Request.cf` object! Falling back to a default placeholder...
+Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+    at TLSSocket.onConnectSecure (node:_tls_wrap:1631:34)
+    at TLSSocket.emit (node:events:508:28)
+    at TLSSocket.emit (node:domain:489:12)
+    at TLSSocket._finishInit (node:_tls_wrap:1077:8)
+    at ssl.onhandshakedone (node:_tls_wrap:863:12)
+⎔ Local server updated and ready
+authority-engine","version":"1.0.0","environment":"production","level":"info","message":"otel.metric","context":{"name":"operations.route","durationMs":0,"ok":true,"attributes":{"path":"/visibility/history"}},"requestId":"f9c2d842-221c-4fb1-98ab-4b468c5f3f9e"}
+[wrangler:info] GET /visibility/score 200 OK (214ms)
+[wrangler:info] GET /visibility/history 200 OK (250ms)
+{"timestamp":"2026-07-01T13:37:18.479Z","service":"vista-ai-authority-engine","version":"1.0.0","environment":"production","level":"info","message":"otel.metric","context":{"name":"operations.route","durationMs":0,"ok":true,"attributes":{"path":"/visibility/recommendations"}},"requestId":"3e250ea3-730b-4c26-a186-531ec616519d"}
+[wrangler:info] GET /visibility/recommendations 200 OK (286ms)
+{"timestamp":"2026-07-01T13:37:18.536Z","service":"vista-ai-authority-engine","version":"1.0.0","environment":"production","level":"info","message":"otel.metric","context":{"name":"operations.route","durationMs":0,"ok":true,"attributes":{"path":"/publish/jobs"}},"requestId":"425c71ce-4145-42b9-b140-85c7ba519359"}
+[wrangler:info] GET /publish/jobs 200 OK (47ms)
+{"timestamp":"2026-07-01T13:37:18.572Z","service":"vista-ai-authority-engine","version":"1.0.0","environment":"production","level":"info","message":"otel.metric","context":{"name":"operations.route","durationMs":0,"ok":true,"attributes":{"path":"/publish/providers"}},"requestId":"feca885b-b8c6-41a0-8ded-21b529093db5"}
+[wrangler:info] GET /publish/providers 200 OK (73ms)
+{"timestamp":"2026-07-01T13:37:18.601Z","service":"vista-ai-authority-engine","version":"1.0.0","environment":"production","level":"info","message":"otel.metric","context":{"name":"operations.route","durationMs":0,"ok":true,"attributes":{"path":"/questions"}},"requestId":"b8eb2112-2bc9-48ae-93fb-2c84faeba2c1"}
+[wrangler:info] GET /questions 200 OK (115ms)
+{"timestamp":"2026-07-01T13:37:18.643Z","service":"vista-ai-authority-engine","version":"1.0.0","environment":"production","level":"info","message":"otel.metric","context":{"name":"operations.route","durationMs":0,"ok":true,"attributes":{"path":"/stats"}},"requestId":"d35de9e4-2b6b-41a5-80f8-455af1dd1810"}
+[wrangler:info] GET /stats 200 OK (159ms)
+{"timestamp":"2026-07-01T13:37:18.798Z","service":"vista-ai-authority-engine","version":"1.0.0","environment":"production","level":"info","message":"otel.metric","context":{"name":"operations.route","durationMs":0,"ok":true,"attributes":{"path":"/geo/status"}},"requestId":"71af6706-978d-4129-b2e8-8eb0bb6bf5e4"}
+[wrangler:info] GET /geo/status 200 OK (58ms)
+{"timestamp":"2026-07-01T13:37:18.850Z","service":"vista-ai-authority-engine","version":"1.0.0","environment":"production","level":"info","message":"otel.metric","context":{"name":"operations.route","durationMs":0,"ok":true,"attributes":{"path":"/geo/entities"}},"requestId":"8e455d0b-cccd-4248-860f-0a5edb5f6550"}
+[wrangler:info] GET /geo/entities 200 OK (93ms)
+⎔ Reloading local server...
+[wrangler:warn] Unable to fetch the `Request.cf` object! Falling back to a default placeholder...
+Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+    at TLSSocket.onConnectSecure (node:_tls_wrap:1631:34)
+    at TLSSocket.emit (node:events:508:28)
+    at TLSSocket.emit (node:domain:489:12)
+    at TLSSocket._finishInit (node:_tls_wrap:1077:8)
+    at ssl.onhandshakedone (node:_tls_wrap:863:12)
+⎔ Local server updated and ready
+nhandshakedone (node:_tls_wrap:863:12)
+⎔ Local server updated and ready
+⎔ Reloading local server...
+[wrangler:warn] Unable to fetch the `Request.cf` object! Falling back to a default placeholder...
+Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+    at TLSSocket.onConnectSecure (node:_tls_wrap:1631:34)
+    at TLSSocket.emit (node:events:508:28)
+    at TLSSocket.emit (node:domain:489:12)
+    at TLSSocket._finishInit (node:_tls_wrap:1077:8)
+    at ssl.onhandshakedone (node:_tls_wrap:863:12)
+⎔ Local server updated and ready

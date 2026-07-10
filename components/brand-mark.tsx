@@ -5,7 +5,7 @@ export function BrandMark({ priority = false }: { priority?: boolean }) {
     <span className="relative inline-flex h-8 w-8 shrink-0 items-center justify-center overflow-hidden">
       <Image
         src="/vista-logo.png"
-        alt=""
+        alt="Vista by Lara logo"
         width={32}
         height={32}
         priority={priority}

@@ -4,7 +4,7 @@ import { SiteFooter } from "@/components/site-footer"
 import { jsonLd } from "@/lib/json-ld"
 
 export const metadata: Metadata = {
-  title: "Our Clients | Trusted by UAE & GCC Brands — Vista by Lara Dubai",
+  title: "Clients | UAE & GCC Brands | Vista by Lara",
   description:
     "Vista by Lara partners with leading businesses across Dubai, UAE, and the GCC. See the brands and companies we have transformed through design and strategy.",
   keywords: "branding clients Dubai, design clients UAE, Vista by Lara clients, trusted agency GCC",

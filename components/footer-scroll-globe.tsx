@@ -18,50 +18,50 @@ interface ScrollGlobeSection {
 const sections: ScrollGlobeSection[] = [
   {
     id: "hero",
-    badge: "Welcome",
-    title: "Explore",
-    subtitle: "Our World",
+    badge: "Dubai command center",
+    title: "Dubai",
+    subtitle: "To GCC",
     description:
-      "Journey through an immersive experience where technology meets innovation. Watch as perspectives shift and possibilities unfold with every interaction, creating a symphony of digital artistry.",
+      "Vista by Lara connects Dubai-first service pages, AI-readable data, structured content, and WhatsApp conversion into one authority system for UAE and GCC principals.",
     align: "left",
     actions: [
-      { label: "Begin Journey", variant: "primary" },
-      { label: "Learn More", variant: "secondary" },
+      { label: "View AI data", variant: "primary" },
+      { label: "Open services", variant: "secondary" },
     ],
   },
   {
     id: "innovation",
-    badge: "Innovation",
-    title: "Connected Worldwide",
+    badge: "Entity graph",
+    title: "Connected Authority",
     description:
-      "From every corner of the globe, we witness the interconnected web of human achievement. Each connection represents progress, every interaction drives innovation forward into uncharted territories.",
+      "Every serious service page should connect to entities, FAQs, proof nodes, case studies, technical briefings, and local UAE/GCC intent. This is the layer AI systems can retrieve and compare.",
     align: "center",
   },
   {
     id: "discovery",
-    badge: "Discovery",
-    title: "Expanding",
-    subtitle: "Possibilities",
+    badge: "AI retrieval",
+    title: "Search",
+    subtitle: "Becomes Evidence",
     description:
-      "As we push beyond familiar boundaries, new worlds of opportunity emerge from the horizon. What seemed impossible yesterday becomes tomorrow's foundation for extraordinary achievements.",
+      "SEO, AEO, and GEO work best when the website behaves like a source of truth. Vista structures pages so ChatGPT, Gemini, Perplexity, Google, and human buyers can understand the same claims.",
     align: "left",
     features: [
-      { title: "Limitless Exploration", description: "Discover new dimensions of possibility and innovation" },
-      { title: "Seamless Integration", description: "Where cutting-edge technology meets human intuition" },
-      { title: "Future-Ready Solutions", description: "Built for tomorrow's challenges and opportunities" },
+      { title: "Answer-ready pages", description: "Clear definitions, FAQs, comparison tables, and schema." },
+      { title: "Machine-readable proof", description: "AI data endpoints, entity maps, and technical case studies." },
+      { title: "Dubai/GCC relevance", description: "Local service, district, and regional buyer signals." },
     ],
   },
   {
     id: "future",
-    badge: "Future",
-    title: "Our Shared",
-    subtitle: "Tomorrow",
+    badge: "Conversion layer",
+    title: "Qualified",
+    subtitle: "Conversations",
     description:
-      "In this moment of unity, we see not just a planet, but a canvas of infinite human potential. Every connection represents hope, every innovation builds bridges to our collective future of endless possibilities.",
+      "The final system routes serious inquiries into WhatsApp, forms, CRM stages, and technical briefings. The goal is not traffic alone. It is clearer trust, faster evaluation, and better-qualified UAE opportunities.",
     align: "center",
     actions: [
-      { label: "Join the Movement", variant: "primary" },
-      { label: "Explore More", variant: "secondary" },
+      { label: "Request briefing", variant: "primary" },
+      { label: "Review trust layer", variant: "secondary" },
     ],
   },
 ]
@@ -136,7 +136,7 @@ export function FooterScrollGlobe() {
     <section
       ref={containerRef}
       className="relative my-16 w-full max-w-screen overflow-hidden border-y border-white/10 bg-background pt-20 text-foreground sm:my-24 sm:pt-28"
-      aria-label="Interactive world exploration"
+      aria-label="Vista by Lara Dubai and GCC authority network"
     >
       <div className="sticky top-0 z-40 h-0.5 w-full bg-gradient-to-r from-border/20 via-border/40 to-border/20">
         <div

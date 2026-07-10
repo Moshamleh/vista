@@ -14,7 +14,7 @@ const LOGO_ITEMS = [
   { name: "Shopify", mark: "S", tone: "text-emerald-300" },
   { name: "AWS", mark: "A", tone: "text-amber-300" },
   { name: "Figma", mark: "F", tone: "text-pink-300" },
-  { name: "Spline", mark: "3D", tone: "text-sky-300" },
+  { name: "3D Motion", mark: "3D", tone: "text-sky-300" },
   { name: "GSAP", mark: "G", tone: "text-lime-300" },
   { name: "Stripe", mark: "ST", tone: "text-indigo-300" },
   { name: "OpenAI", mark: "AI", tone: "text-teal-300" },
@@ -218,7 +218,7 @@ export function Clients() {
           )}
         >
           <a
-            href="#work"
+            href="#case-studies"
             className="inline-flex min-h-12 items-center justify-center gap-2 border border-accent/35 bg-accent px-6 font-heading text-sm font-semibold uppercase tracking-[0.04em] text-background shadow-[0_22px_55px_rgba(87,217,255,0.22)] transition-transform hover:scale-[1.02]"
           >
             Explore design systems

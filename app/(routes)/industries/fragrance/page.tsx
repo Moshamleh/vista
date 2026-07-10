@@ -2,11 +2,13 @@ import type { Metadata } from "next"
 import { ConversionPage } from "@/components/conversion-page"
 import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
+import { siteConfig } from "@/lib/site"
 
 export const metadata: Metadata = {
   title: "Fragrance Branding Dubai | Vista by Lara",
   description:
     "Fragrance branding and e-commerce website design in Dubai for perfume brands needing luxury identity, SEO, AEO, GEO, and UAE retail growth.",
+  alternates: { canonical: `${siteConfig.url}/industries/fragrance` },
 }
 
 export default function FragrancePage() {
