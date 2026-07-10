@@ -1,10 +1,12 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
 import { motion } from "framer-motion"
 import { ArrowDown, ArrowRight, Award, Bot, Sparkles, Star } from "lucide-react"
 
+import { SplineScene } from "@/components/ui/splite"
 import { getWhatsappLink, siteConfig } from "@/lib/site"
+
+const ROBOT_SCENE = "https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
 
 const heroSignals = [
   { label: "Public AI data", value: "/ai-data", detail: "crawlable entity graph" },
@@ -20,44 +22,9 @@ const robotSignals = [
 ]
 
 function LazyRobotFrame() {
-  const containerRef = useRef<HTMLDivElement>(null)
-  const [shouldLoad, setShouldLoad] = useState(false)
-
-  useEffect(() => {
-    const node = containerRef.current
-    if (!node || shouldLoad) return
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setShouldLoad(true)
-          observer.disconnect()
-        }
-      },
-      { rootMargin: "160px 0px", threshold: 0.12 },
-    )
-
-    observer.observe(node)
-    return () => observer.disconnect()
-  }, [shouldLoad])
-
   return (
-    <div ref={containerRef} className="relative h-full w-full bg-[#030408]">
-      {shouldLoad ? (
-        <iframe
-          src="/robot-frame?v=stable-isolated-robot"
-          title="Vista by Lara 3D AI robot"
-          className="h-full w-full border-0 bg-[#030408] brightness-110 contrast-110"
-          loading="eager"
-          allow="autoplay; fullscreen; xr-spatial-tracking"
-        />
-      ) : (
-        <div className="flex h-full w-full items-center justify-center bg-[radial-gradient(circle_at_center,rgba(87,217,255,0.18),rgba(3,4,8,0.92)_58%,#030408_100%)]">
-          <div className="rounded-full border border-accent/20 bg-accent/10 px-5 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-accent">
-            AI robot ready
-          </div>
-        </div>
-      )}
+    <div className="relative h-full w-full bg-[#030408]">
+      <SplineScene scene={ROBOT_SCENE} className="h-full w-full" />
     </div>
   )
 }

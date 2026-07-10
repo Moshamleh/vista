@@ -3,7 +3,10 @@ import Link from "next/link"
 import { ArrowUpLeft, Award, Bot, CheckCircle2, MessageCircle, Sparkles } from "lucide-react"
 import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
+import { SplineScene } from "@/components/ui/splite"
 import { siteConfig } from "@/lib/site"
+
+const ROBOT_SCENE = "https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
 
 export const metadata: Metadata = {
   title: "فيستا باي لارا | ظهور الذكاء الاصطناعي والمواقع عالية الأداء في دبي",
@@ -100,13 +103,7 @@ export default function ArabicHomePage() {
                   جاهز للذكاء الاصطناعي
                 </p>
               </div>
-              <iframe
-                src="/robot-frame?v=real-spline-robot"
-                title="روبوت Vista by Lara ثلاثي الأبعاد"
-                className="h-[460px] w-full border-0 bg-[#030408] brightness-110 contrast-110"
-                loading="eager"
-                allow="autoplay; fullscreen; xr-spatial-tracking"
-              />
+              <SplineScene scene={ROBOT_SCENE} className="h-[460px] w-full" />
             </div>
           </div>
         </section>
