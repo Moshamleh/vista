@@ -136,20 +136,19 @@ export default function RootLayout({
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('consent', 'default', {
-  ad_storage: 'denied',
-  analytics_storage: 'denied',
-  ad_user_data: 'denied',
-  ad_personalization: 'denied',
+  ad_storage: 'granted',
+  analytics_storage: 'granted',
+  ad_user_data: 'granted',
+  ad_personalization: 'granted',
   functionality_storage: 'granted',
-  security_storage: 'granted',
-  wait_for_update: 500
+  security_storage: 'granted'
 });
 window.dataLayer.push({
   event: 'gtm.init_consent',
-  ad_storage: 'denied',
-  analytics_storage: 'denied',
-  ad_user_data: 'denied',
-  ad_personalization: 'denied',
+  ad_storage: 'granted',
+  analytics_storage: 'granted',
+  ad_user_data: 'granted',
+  ad_personalization: 'granted',
   functionality_storage: 'granted',
   security_storage: 'granted'
 });

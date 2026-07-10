@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import { Database } from "lucide-react"
+import { AiDatasetSchema } from "@/components/structured-data"
 import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
 import { datasets } from "@/lib/knowledge-graph"
@@ -40,6 +41,7 @@ export default function DatasetsPage() {
           ))}
         </section>
       </main>
+      <AiDatasetSchema />
       <SiteFooter />
     </div>
   )

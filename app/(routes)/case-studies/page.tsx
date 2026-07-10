@@ -1,11 +1,13 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import { ArrowUpRight, Database, Layers3, ShieldCheck } from "lucide-react"
+import { ClientShowcase } from "@/components/client-showcase"
 import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
 import { caseStudies, caseStudyDomains } from "@/lib/case-studies"
 import { infrastructureHubs } from "@/lib/infrastructure-hubs"
 import { jsonLd } from "@/lib/json-ld"
+import { showcaseClients } from "@/lib/showcase-clients"
 import { siteConfig } from "@/lib/site"
 
 const pageUrl = `${siteConfig.url}/case-studies`
@@ -204,6 +206,18 @@ export default function CaseStudiesPage() {
                 </div>
               </Link>
             ))}
+          </div>
+        </section>
+
+        <section className="border-t border-white/10 bg-[#080b12]">
+          <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-24">
+            <div className="mb-10">
+              <p className="text-sm font-semibold uppercase tracking-[0.24em] text-accent">Client Roster</p>
+              <h2 className="mt-4 max-w-3xl font-heading text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
+                Brands Vista by Lara has worked with
+              </h2>
+            </div>
+            <ClientShowcase clients={showcaseClients} />
           </div>
         </section>
       </main>

@@ -309,43 +309,6 @@ export function StructuredData() {
         })),
       },
       {
-        "@type": "Dataset",
-        "@id": `${url}/ai-data#dataset`,
-        name: "Vista by Lara Public AI Data Index",
-        url: `${url}/ai-data`,
-        description:
-          "Public discovery dataset for Vista by Lara service entities, FAQs, research, tools, competitors, templates, glossary terms, and AI visibility records.",
-        creator: { "@id": orgId },
-        publisher: { "@id": orgId },
-        inLanguage: "en-AE",
-        spatialCoverage: areaServed.map((a) => ({ "@type": "Place", name: a })),
-        keywords: [
-          "AI visibility Dubai",
-          "GEO agency UAE",
-          "AEO agency Dubai",
-          "AI data endpoint",
-          "entity graph",
-          "Dubai digital marketing competitor map",
-        ],
-        distribution: [
-          {
-            "@type": "DataDownload",
-            encodingFormat: "application/json",
-            contentUrl: `${url}/ai-data`,
-          },
-          {
-            "@type": "DataDownload",
-            encodingFormat: "application/json",
-            contentUrl: `${url}/ai-data/competitors`,
-          },
-          {
-            "@type": "DataDownload",
-            encodingFormat: "application/json",
-            contentUrl: `${url}/ai-data/services`,
-          },
-        ],
-      },
-      {
         "@type": "ItemList",
         "@id": `${url}/#ai-visibility-service-clusters`,
         name: "Dubai AI Visibility Service Clusters",
@@ -407,4 +370,51 @@ export function StructuredData() {
   }
 
   return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(graph) }} />
+}
+
+export function AiDatasetSchema() {
+  const { url, areaServed } = siteConfig
+  const orgId = `${url}/#organization`
+
+  const dataset = {
+    "@context": "https://schema.org",
+    "@type": "Dataset",
+    "@id": `${url}/ai-data#dataset`,
+    name: "Vista by Lara Public AI Data Index",
+    url: `${url}/ai-data`,
+    description:
+      "Public discovery dataset for Vista by Lara service entities, FAQs, research, tools, competitors, templates, glossary terms, and AI visibility records.",
+    license: "https://creativecommons.org/licenses/by/4.0/",
+    creator: { "@id": orgId },
+    publisher: { "@id": orgId },
+    inLanguage: "en-AE",
+    spatialCoverage: areaServed.map((a) => ({ "@type": "Place", name: a })),
+    keywords: [
+      "AI visibility Dubai",
+      "GEO agency UAE",
+      "AEO agency Dubai",
+      "AI data endpoint",
+      "entity graph",
+      "Dubai digital marketing competitor map",
+    ],
+    distribution: [
+      {
+        "@type": "DataDownload",
+        encodingFormat: "application/json",
+        contentUrl: `${url}/ai-data`,
+      },
+      {
+        "@type": "DataDownload",
+        encodingFormat: "application/json",
+        contentUrl: `${url}/ai-data/competitors`,
+      },
+      {
+        "@type": "DataDownload",
+        encodingFormat: "application/json",
+        contentUrl: `${url}/ai-data/services`,
+      },
+    ],
+  }
+
+  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(dataset) }} />
 }

@@ -7,9 +7,9 @@ const contentSecurityPolicy = [
   "default-src 'self'",
   "base-uri 'self'",
   "object-src 'none'",
-  "frame-ancestors 'none'",
+  "frame-ancestors 'self'",
   "form-action 'self'",
-  "img-src 'self' data: blob: https://images.unsplash.com https://www.vistabylara.com https://api.qrserver.com https://www.googletagmanager.com https://www.google-analytics.com",
+  "img-src 'self' data: blob: https://images.unsplash.com https://www.vistabylara.com https://api.qrserver.com https://www.googletagmanager.com https://www.google-analytics.com https://www.google.com",
   "font-src 'self' data:",
   "style-src 'self' 'unsafe-inline'",
   [
