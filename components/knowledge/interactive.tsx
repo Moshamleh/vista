@@ -102,6 +102,8 @@ export function AIVisibilityCalculator() {
                 <span className="text-accent">{scores[field]}/5</span>
               </span>
               <input
+                id={`readiness-${field.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`}
+                name={`readiness-${field.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`}
                 type="range"
                 min="0"
                 max="5"
@@ -196,6 +198,8 @@ export function InteractiveChecklist({ title, items }: { title: string; items: s
           return (
             <label key={item} className="flex cursor-pointer items-start gap-3 border border-accent/10 bg-[#0d111f] p-4 text-base leading-6 text-muted-foreground">
               <input
+                id={`checklist-${item.toLowerCase().replace(/[^a-z0-9]+/g, "-").slice(0, 60)}`}
+                name={`checklist-${item.toLowerCase().replace(/[^a-z0-9]+/g, "-").slice(0, 60)}`}
                 type="checkbox"
                 checked={selected}
                 onChange={() => setChecked((current) => (selected ? current.filter((value) => value !== item) : [...current, item]))}

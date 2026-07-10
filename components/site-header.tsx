@@ -310,6 +310,8 @@ function HeaderServiceSearch({ isArabic, mobile = false, onNavigate }: { isArabi
             <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-accent" aria-hidden="true" />
             <input
               ref={inputRef}
+              id="site-header-search"
+              name="q"
               value={query}
               onChange={(event) => setQuery(event.target.value)}
               dir={isArabic ? "rtl" : "ltr"}

@@ -231,6 +231,8 @@ export function ServiceFinder() {
                 <span className="sr-only">{isArabic ? "ابحث عن خدمة" : "Search services"}</span>
                 <Search className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-accent" aria-hidden="true" />
                 <input
+                  id="service-finder-search"
+                  name="q"
                   value={query}
                   onChange={(event) => setQuery(event.target.value)}
                   dir={isArabic ? "rtl" : "ltr"}
@@ -274,7 +276,7 @@ export function ServiceFinder() {
                   <span className="mb-2 block text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">
                     {isArabic ? "الفئة" : "Category"}
                   </span>
-                  <select value={category} onChange={(event) => setCategory(event.target.value as ServiceCategory)} className="h-12 w-full border border-white/10 bg-black/35 px-3 text-sm text-foreground outline-none focus:border-accent">
+                  <select id="service-finder-category" name="category" value={category} onChange={(event) => setCategory(event.target.value as ServiceCategory)} className="h-12 w-full border border-white/10 bg-black/35 px-3 text-sm text-foreground outline-none focus:border-accent">
                     {categories.map((item) => (
                       <option key={item.value} value={item.value} className="bg-[#05070d]">
                         {isArabic ? item.labelAr : item.label}
@@ -287,7 +289,7 @@ export function ServiceFinder() {
                   <span className="mb-2 block text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">
                     {isArabic ? "السوق" : "Market"}
                   </span>
-                  <select value={location} onChange={(event) => setLocation(event.target.value as ServiceLocation)} className="h-12 w-full border border-white/10 bg-black/35 px-3 text-sm text-foreground outline-none focus:border-accent">
+                  <select id="service-finder-location" name="location" value={location} onChange={(event) => setLocation(event.target.value as ServiceLocation)} className="h-12 w-full border border-white/10 bg-black/35 px-3 text-sm text-foreground outline-none focus:border-accent">
                     {locations.map((item) => (
                       <option key={item.value} value={item.value} className="bg-[#05070d]">
                         {isArabic ? item.labelAr : item.label}
@@ -300,7 +302,7 @@ export function ServiceFinder() {
                   <span className="mb-2 block text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">
                     {isArabic ? "الهدف" : "Goal"}
                   </span>
-                  <select value={intent} onChange={(event) => setIntent(event.target.value as ServiceIntent)} className="h-12 w-full border border-white/10 bg-black/35 px-3 text-sm text-foreground outline-none focus:border-accent">
+                  <select id="service-finder-intent" name="intent" value={intent} onChange={(event) => setIntent(event.target.value as ServiceIntent)} className="h-12 w-full border border-white/10 bg-black/35 px-3 text-sm text-foreground outline-none focus:border-accent">
                     {intents.map((item) => (
                       <option key={item.value} value={item.value} className="bg-[#05070d]">
                         {isArabic ? item.labelAr : item.label}

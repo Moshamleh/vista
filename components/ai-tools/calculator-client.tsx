@@ -111,6 +111,7 @@ function Field({
   suffix?: string
 }) {
   const invalid = !Number.isFinite(value) || value < min
+  const fieldId = `calc-field-${label.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`
   return (
     <label className="block">
       <span className="flex items-center justify-between gap-3 text-sm font-semibold text-slate-200">
@@ -118,6 +119,8 @@ function Field({
         {suffix ? <span className="text-xs text-cyan-200">{suffix}</span> : null}
       </span>
       <input
+        id={fieldId}
+        name={fieldId}
         className={`mt-2 w-full rounded-xl border bg-slate-950/70 px-4 py-3 text-slate-50 outline-none transition focus:border-cyan-300 ${
           invalid ? "border-red-400/70" : "border-white/10"
         }`}
@@ -143,10 +146,13 @@ function SelectField<T extends string>({
   options: { value: T; label: string }[]
   onChange: (value: T) => void
 }) {
+  const fieldId = `calc-field-${label.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`
   return (
     <label className="block">
       <span className="text-sm font-semibold text-slate-200">{label}</span>
       <select
+        id={fieldId}
+        name={fieldId}
         className="mt-2 w-full rounded-xl border border-white/10 bg-slate-950/70 px-4 py-3 text-slate-50 outline-none transition focus:border-cyan-300"
         value={value}
         onChange={(event) => onChange(event.target.value as T)}

@@ -62,6 +62,8 @@ export default function CrmPage() {
 
         <form onSubmit={loadLeads} className="mt-8 flex flex-col gap-3 rounded-lg border border-white/10 bg-white/[0.025] p-5 sm:flex-row">
           <input
+            id="crm-admin-token"
+            name="token"
             value={token}
             onChange={(event) => setToken(event.target.value)}
             type="password"

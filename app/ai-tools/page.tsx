@@ -162,7 +162,7 @@ export default function AiToolsHubPage() {
           <div className="rounded-[1.5rem] border border-white/10 bg-white/[0.045] p-5">
             <label className="flex items-center gap-3 rounded-2xl border border-white/10 bg-slate-950/70 px-4 py-3">
               <Search className="h-5 w-5 text-cyan-200" />
-              <input className="w-full bg-transparent text-white outline-none" placeholder="Search VAT, Google Ads, ROAS, Meta Ads, SEO, Shopify, analytics..." aria-label="Search AI tools" />
+              <input id="ai-tools-search" name="q" className="w-full bg-transparent text-white outline-none" placeholder="Search VAT, Google Ads, ROAS, Meta Ads, SEO, Shopify, analytics..." aria-label="Search AI tools" />
             </label>
           </div>
         </section>

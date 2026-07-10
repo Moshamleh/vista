@@ -13,7 +13,7 @@ const contentSecurityPolicy = [
   "font-src 'self' data:",
   "style-src 'self' 'unsafe-inline'",
   [
-    "script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'",
+    "script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval'",
     "https://www.googletagmanager.com",
     "https://www.google-analytics.com",
     "https://www.googleadservices.com",
